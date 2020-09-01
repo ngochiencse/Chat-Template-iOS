@@ -891,10 +891,10 @@
 		0EF8414B24FCD67A00948E25 /* Photo */ = {
 			isa = PBXGroup;
 			children = (
-				0EF8414D24FCD67A00948E25 /* ChatDetailViewPhotoViewController.swift */,
-				0EF8414C24FCD67A00948E25 /* ChatDetailViewPhotoViewController.xib */,
 				0EF8415024FCD78B00948E25 /* ChatDetailViewPhotoViewModel.swift */,
 				0EF8415124FCD78B00948E25 /* ChatDetailViewPhotoViewModelImpl.swift */,
+				0EF8414D24FCD67A00948E25 /* ChatDetailViewPhotoViewController.swift */,
+				0EF8414C24FCD67A00948E25 /* ChatDetailViewPhotoViewController.xib */,
 			);
 			path = Photo;
 			sourceTree = "<group>";
