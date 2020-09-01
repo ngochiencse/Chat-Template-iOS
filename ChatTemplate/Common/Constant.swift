@@ -21,3 +21,9 @@ extension Notification.Name {
 extension Constant {
     static let TIMESTAMP_MAX_ERROR = 60 // In minutes
 }
+
+// MARK: Chat
+extension Constant {
+    static let NOTIFICATION_DESELECT_RANGE_TEXTVIEW : String = "NOTIFICATION_DESELECT_RANGE_TEXTVIEW"
+    static let MAX_LENGTH_CHAT_MESSAGE : Int = 3000
+}

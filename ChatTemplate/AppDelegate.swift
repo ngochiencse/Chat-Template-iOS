@@ -7,7 +7,9 @@
 //
 
 import UIKit
+#if FLEX_ENABLED
 import FLEX
+#endif
 import CocoaLumberjack
 import Firebase
 import FirebaseMessaging
@@ -38,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setUpWindow(window)
         setUpFirebase()
         setUpPush()
-        setUpOthers()
+        setUpOthers(window)
     }
 
     func setUpWindow(_ window: UIWindow?) {
@@ -54,15 +56,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         coordinator.start()
     }
     
-    func setUpOthers() {
+    func setUpOthers(_ window: UIWindow?) {
         // Setup SwiftDate region
         Date.setupDefautRegion()
         
         // Set up cocoalumberjack
         DDLog.add(DDOSLogger.sharedInstance) // Uses os_log
-
-        #if DEBUG
-        FLEXManager.shared().showExplorer()
+        
+        #if FLEX_ENABLED
+        FLEXManager.shared.showExplorer()
         let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(handleFingerQuadrupleTap(_:)))
         tap.numberOfTouchesRequired = 4
         window?.addGestureRecognizer(tap)
@@ -75,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Update device token service
         setUpUpdateDeviceToken()
     }
-    
+
     func setUpFirebase() {
         // Set up firebase
         FirebaseApp.configure()
@@ -130,9 +132,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     @objc fileprivate func handleFingerQuadrupleTap(_ tapRecognizer: UITapGestureRecognizer) {
-        #if DEBUG
+        #if FLEX_ENABLED
         if tapRecognizer.state == .recognized {
-            FLEXManager.shared().showExplorer()
+            FLEXManager.shared.showExplorer()
         }
         #endif
     }

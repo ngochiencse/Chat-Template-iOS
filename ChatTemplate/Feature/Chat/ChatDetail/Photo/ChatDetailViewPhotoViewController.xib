@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChatDetailViewPhotoViewController" customModule="without" customModuleProvider="target">
+            <connections>
+                <outlet property="imageView" destination="NxL-DW-Sdr" id="lKE-J9-xbM"/>
+                <outlet property="scv" destination="ilZ-CK-wod" id="H8f-1L-2ET"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ilZ-CK-wod">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NxL-DW-Sdr">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="NxL-DW-Sdr" firstAttribute="top" secondItem="ilZ-CK-wod" secondAttribute="top" id="3ZF-f7-CYy"/>
+                        <constraint firstItem="NxL-DW-Sdr" firstAttribute="width" secondItem="ilZ-CK-wod" secondAttribute="width" id="4N4-VA-8AU"/>
+                        <constraint firstItem="NxL-DW-Sdr" firstAttribute="leading" secondItem="ilZ-CK-wod" secondAttribute="leading" id="7yl-Vv-WnN"/>
+                        <constraint firstAttribute="trailing" secondItem="NxL-DW-Sdr" secondAttribute="trailing" id="B5M-Qz-T3U"/>
+                        <constraint firstItem="NxL-DW-Sdr" firstAttribute="height" secondItem="ilZ-CK-wod" secondAttribute="height" id="sJ7-A3-ROm"/>
+                        <constraint firstAttribute="bottom" secondItem="NxL-DW-Sdr" secondAttribute="bottom" id="uZJ-hT-cfj"/>
+                    </constraints>
+                </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUe-2h-gZi" userLabel="actionDownload">
+                    <rect key="frame" x="16" y="619" width="32" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="bi9-66-weE"/>
+                        <constraint firstAttribute="width" constant="32" id="xM2-4v-Ej6"/>
+                    </constraints>
+                    <state key="normal" image="icon24Download"/>
+                    <connections>
+                        <action selector="actionDownload:" destination="-1" eventType="touchUpInside" id="bw5-po-h3v"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EOK-dd-qfX" userLabel="actionBack">
+                    <rect key="frame" x="16" y="12" width="32" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="55q-0c-Hca"/>
+                        <constraint firstAttribute="width" constant="32" id="7Xw-71-ZLS"/>
+                    </constraints>
+                    <state key="normal" image="icon24X"/>
+                    <connections>
+                        <action selector="actionBack:" destination="-1" eventType="touchUpInside" id="L18-Jx-K2a"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="あなたの" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UhR-b0-6kn">
+                    <rect key="frame" x="155" y="13" width="65.5" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="RUe-2h-gZi" secondAttribute="bottom" constant="16" id="5Q0-Cl-dAd"/>
+                <constraint firstItem="EOK-dd-qfX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="9ik-B0-mO5"/>
+                <constraint firstItem="ilZ-CK-wod" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="BJQ-9t-830"/>
+                <constraint firstItem="RUe-2h-gZi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="QZC-VU-GbY"/>
+                <constraint firstItem="ilZ-CK-wod" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="QoW-It-xHd"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ilZ-CK-wod" secondAttribute="trailing" id="UpV-Pm-lDA"/>
+                <constraint firstItem="UhR-b0-6kn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="jE8-1O-wac"/>
+                <constraint firstItem="UhR-b0-6kn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="13" id="rUw-uq-BJq"/>
+                <constraint firstItem="ilZ-CK-wod" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="uKB-ef-sle"/>
+                <constraint firstItem="EOK-dd-qfX" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="wzb-oN-dGg"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="132" y="103.89805097451276"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon24Download" width="24" height="24"/>
+        <image name="icon24X" width="24" height="24"/>
+    </resources>
+</document>

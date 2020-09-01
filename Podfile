@@ -7,7 +7,7 @@ source 'https://bsvframeworks@bitbucket.org/bravesoftvietnam/cocoapods-specs.git
 def pods
   # Common
   pod 'SDWebImage'
-  pod 'FLEX', '~> 2.0', :configurations => ['Debug']
+  pod 'FLEX', :configurations => ['Debug']
   pod 'TPKeyboardAvoiding'
   pod 'SVPullToRefresh', :git => 'https://github.com/hienphambravesoft/SVPullToRefresh.git'
   pod 'BSTabbarController'
@@ -25,6 +25,9 @@ def pods
   pod 'Firebase/Messaging'
   pod 'SwiftDate', '~> 5.0'
   pod 'FSPagerView'
+  pod 'RSKGrowingTextView'
+  pod 'Tatsi'
+  pod 'Toast-Swift', '~> 5.0.1'
 end
 
 target 'ChatTemplate' do

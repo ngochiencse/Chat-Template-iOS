@@ -51,7 +51,7 @@ PODS:
     - GoogleUtilities/Reachability (~> 6.7)
     - GoogleUtilities/UserDefaults (~> 6.7)
     - Protobuf (>= 3.9.2, ~> 3.9)
-  - FLEX (2.4.0)
+  - FLEX (4.1.1)
   - FSPagerView (0.8.3)
   - GoogleAppMeasurement (6.7.2):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
@@ -98,6 +98,9 @@ PODS:
   - PromisesObjC (1.2.10)
   - Protobuf (3.12.0)
   - RoundedUI (1.1.2)
+  - RSKGrowingTextView (6.0.3):
+    - RSKPlaceholderTextView (= 6.0.3)
+  - RSKPlaceholderTextView (6.0.3)
   - RxBiBinding (0.2.5):
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
@@ -113,6 +116,8 @@ PODS:
   - SnapKit (5.0.1)
   - SVPullToRefresh (0.4.1)
   - SwiftDate (5.1.0)
+  - Tatsi (1.2.1)
+  - Toast-Swift (5.0.1)
   - TPKeyboardAvoiding (1.3.4)
 
 DEPENDENCIES:
@@ -121,19 +126,22 @@ DEPENDENCIES:
   - Eureka
   - Firebase/Analytics
   - Firebase/Messaging
-  - FLEX (~> 2.0)
+  - FLEX
   - FSPagerView
   - ImageRow (~> 4.0)
   - MBProgressHUD (~> 1.1.0)
   - Moya/RxSwift (~> 14.0)
   - "NSObject+Rx"
   - RoundedUI
+  - RSKGrowingTextView
   - RxBiBinding
   - RxCocoa
   - SDWebImage
   - SnapKit (~> 5.0.0)
   - SVPullToRefresh (from `https://github.com/hienphambravesoft/SVPullToRefresh.git`)
   - SwiftDate (~> 5.0)
+  - Tatsi
+  - Toast-Swift (~> 5.0.1)
   - TPKeyboardAvoiding
 
 SPEC REPOS:
@@ -163,6 +171,8 @@ SPEC REPOS:
     - "NSObject+Rx"
     - PromisesObjC
     - Protobuf
+    - RSKGrowingTextView
+    - RSKPlaceholderTextView
     - RxBiBinding
     - RxCocoa
     - RxRelay
@@ -170,6 +180,8 @@ SPEC REPOS:
     - SDWebImage
     - SnapKit
     - SwiftDate
+    - Tatsi
+    - Toast-Swift
     - TPKeyboardAvoiding
 
 EXTERNAL SOURCES:
@@ -193,7 +205,7 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 45f9d44d3a8d6f780fa337ee8987dad87210fcbc
   FirebaseInstanceID: c4ad474b87787afd27d09541800620993b457d6f
   FirebaseMessaging: 942cfe05b4f53c95ab8959395ca35c200398b2f0
-  FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
+  FLEX: 81096107977a09836eb440173010ceeef01105d6
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   GoogleAppMeasurement: 3def7652b1f5b5a576178dc332e2a36a260fbef6
   GoogleDataTransport: 672fb0ce96fe7f7f31d43672fca62ad2c9c86f7b
@@ -206,6 +218,8 @@ SPEC CHECKSUMS:
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
   RoundedUI: 2f2a5af53e4d37d9a56b763726a71c7a131a495e
+  RSKGrowingTextView: 0718482ee121892b1eb9fe72e9eebd3ef46b81f0
+  RSKPlaceholderTextView: fc8c8932546298ec9d5e5572284aa42adb87b066
   RxBiBinding: 6cc627d9e0dfa0b2ce8470cd7e539f3cb100f782
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
@@ -214,8 +228,10 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   SwiftDate: 6329e58969a2de31cea7f1ee1143b247693196e7
+  Tatsi: 12ac525e0e8477645d707d4f356f85cb60182f80
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   TPKeyboardAvoiding: 7c2187e2338052b2c5be4a8052f297fdb124e261
 
-PODFILE CHECKSUM: 6f3ccc1f4c43de7b4e7dd114397b1845d5a07cd8
+PODFILE CHECKSUM: 896527efa66af6f954df752b9e107222634e1938
 
 COCOAPODS: 1.9.3

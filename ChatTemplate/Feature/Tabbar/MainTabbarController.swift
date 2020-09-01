@@ -60,7 +60,7 @@ class MainTabbarController: BSTabbarController {
     
     func setUp() {        
         var viewControllers : Array<UIViewController> = Array();
-        for i in 0...5 {
+        for i in 0..<5 {
             var vc : BaseViewController
             switch (i) {
             case 0:
@@ -79,6 +79,9 @@ class MainTabbarController: BSTabbarController {
                 vc = APIMultipleViewController()
                 vc.title = "API Multiple Demo"
                 break;
+            case 4:
+                vc = ChatListViewController()
+                vc.title = "Chat"
             default:
                 vc = BaseViewController();
                 vc.view.backgroundColor = UIColor(red: CGFloat(Float(arc4random()) / Float(UINT32_MAX)), green: CGFloat(Float(arc4random()) / Float(UINT32_MAX)), blue: CGFloat(Float(arc4random()) / Float(UINT32_MAX)), alpha: 1);
