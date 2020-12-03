@@ -296,7 +296,7 @@ extension ChatScreenViewModelMock {
                 let uiViewModel: MessageTextCellViewModel =
                     MessageTextCellViewModelImpl(senderAvatar: otherAvatar,
                                                  createdAtStr: createdAt.toFormat("hh:mm"),
-                                                 text: "Glad you enjoy it ^^!")
+                                                 text: "Glad you enjoy it ^^! https://ssd.userbenchmark.com/")
                 let message: MessageCellDetailViewModel =
                     MessageCellDetailViewModelImpl(messageId: "3",
                                                    senderId: self.userOtherId,
