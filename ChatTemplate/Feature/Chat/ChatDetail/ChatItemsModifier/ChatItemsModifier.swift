@@ -9,6 +9,7 @@
 import Foundation
 
 protocol ChatItemsModifier: class {
-    func checkAndInsertTimeIfNeeded(_ chatItems: [ChatItemCellViewModel], insertTimeAtHead: Bool) -> [ChatItemCellViewModel]
-    func updateMessageBlockPosition(_ chatItems: [ChatItemCellViewModel])
+    func checkAndInsertTimeIfNeeded(_ chatItemDetails: [ChatItemDetailViewModel],
+                                    insertTimeAtHead: Bool) -> [ChatItemDetailViewModel]
+    func updateMessageBlockPosition(_ chatItemDetails: [ChatItemDetailViewModel])
 }

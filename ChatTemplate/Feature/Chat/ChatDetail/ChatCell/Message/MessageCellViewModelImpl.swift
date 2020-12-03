@@ -11,59 +11,32 @@ import RxSwift
 import RxCocoa
 import CocoaLumberjack
 
-class MessageCellViewModelImpl: NSObject, MessageCellViewModel {
-    private(set) var messageId: MessageId?
-    private(set) var localId: Int?
-    private(set) var messageIdBefore: MessageId?
-    var messageType: MessageTypeNew {
+class MessageCellViewModelImpl: NSObject, MessageCellViewModel {    
+//    private(set) var messageId: MessageId?
+//    private(set) var localId: Int?
+//    private(set) var messageIdBefore: MessageId?
+    var messageType: MessageCellType {
         fatalError("Not implemented")
     }
-    let sender: ChatUser
-    var isMyMessage: Bool {
-        return sender.id == myUserId
-    }
-    let myUserId: ChatUserId?
+//    let senderId: ChatUserId
+//    let myUserId: ChatUserId?
     var itemType: ChatItemType {
         return .message
     }
     
-    let createdAt: Date?
-    let isLikeBS: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    var isLike: Bool {
-        get {
-            return isLikeBS.value
-        }
-        set {
-            isLikeBS.accept(newValue)
-        }
-    }
-    var isLikeObs: Observable<Bool> {
-        return isLikeBS.asObservable()
-    }
-    let blockPosition: BehaviorRelay<MessageBlockPosition?> = BehaviorRelay(value: nil)
-    private let onToggleLikePS: PublishSubject<Bool> = PublishSubject()
-    var onToggleLike: Observable<Bool> {
-        return onToggleLikePS.asObservable()
-    }
+    let createdAtStr: String?
     
+    let isSenderAvatarImageHidden: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    let isSenderAvatarSpaceHidden: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    let roundCorners: BehaviorRelay<UIRectCorner> = BehaviorRelay(value: [.topLeft, .topRight, .bottomRight])
+    let displaySide: BehaviorRelay<MessageDisplaySide> = BehaviorRelay(value: .left)
+    let senderAvatar: AvatarImageViewModel?
+        
     var data: Any?
     
-    init(messageId: MessageId?, localId: Int?, messageIdBefore: MessageId?,
-         sender: ChatUser, createdAt: Date?, myUserId: ChatUserId?) {
-        self.messageId = messageId
-        self.localId = localId
-        self.messageIdBefore = messageIdBefore
-        self.sender = sender
-        self.myUserId = myUserId
-        self.createdAt = createdAt
+    init(senderAvatar: AvatarImageViewModel?, createdAtStr: String?) {
+        self.senderAvatar = senderAvatar
+        self.createdAtStr = createdAtStr
         super.init()
     }
-    
-    func toggleLike() {
-        isLikeBS.accept(!isLikeBS.value)
-    }
-    
-    func didSendMessageSuccess(messageId: MessageId) {
-        self.messageId = messageId
-    }    
 }

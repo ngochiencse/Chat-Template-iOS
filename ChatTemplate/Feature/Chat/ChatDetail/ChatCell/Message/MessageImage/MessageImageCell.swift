@@ -45,6 +45,17 @@ class MessageImageCell: MessageCell {
             disposable.disposed(by: rx.disposeBag)
             disposables.append(disposable)
         }
+        
+        do {
+            let disposable = viewModel.displaySide.observeOn(MainScheduler.instance).subscribe(onNext: {[weak self] (displaySide) in
+                guard let self = self else { return }
+                
+                self.indicatorView.transform = displaySide == .right ? CGAffineTransform(scaleX: -1, y: 1) : CGAffineTransform.identity
+                self.messageImage.transform = displaySide == .right ? CGAffineTransform(scaleX: -1, y: 1) : CGAffineTransform.identity
+            })
+            disposable.disposed(by: rx.disposeBag)
+            disposables.append(disposable)
+        }
     }
     
     private func refreshDisplay() {
@@ -72,9 +83,6 @@ class MessageImageCell: MessageCell {
             self.indicatorView.startAnimating()
             self.indicatorView.isHidden = false
         }
-        
-        self.indicatorView.transform = viewModel.isMyMessage == true ? CGAffineTransform(scaleX: -1, y: 1) : CGAffineTransform.identity
-        self.messageImage.transform = viewModel.isMyMessage == true ? CGAffineTransform(scaleX: -1, y: 1) : CGAffineTransform.identity
     }
     
     private func unbindFromViewModel() {

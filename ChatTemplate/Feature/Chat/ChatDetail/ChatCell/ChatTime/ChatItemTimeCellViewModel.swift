@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol ChatItemTimeCellViewModel: ChatItemCellViewModel {
+protocol ChatItemTimeCellViewModel: ChatItemCellViewModel, ChatItemDetailViewModel {
     var time: Date? { get }
 }

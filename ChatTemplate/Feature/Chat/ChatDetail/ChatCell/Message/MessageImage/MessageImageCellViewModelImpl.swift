@@ -12,24 +12,21 @@ import RxSwift
 import RxCocoa
 
 class MessageImageCellViewModelImpl: MessageCellViewModelImpl, MessageImageCellViewModel {
-    private(set) var imageSize: CGSize?
-    private(set) var uploadingImage: BehaviorRelay<UIImage?>
-    private var imagePath: BehaviorRelay<String?>
-    private(set) var imageUrl: BehaviorRelay<String?> = BehaviorRelay(value: nil)
+    let imageSize: CGSize?
+    let uploadingImage: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
+    private let imagePath: BehaviorRelay<String?> = BehaviorRelay(value: nil)
+    let imageUrl: BehaviorRelay<String?> = BehaviorRelay(value: nil)
     let imageDomain: String?
     
-    override var messageType: MessageTypeNew {
+    override var messageType: MessageCellType {
         return .image
     }
     
-    init(imageSize: CGSize?, uploadingImage: UIImage?, imagePath: String?,
-         messageId: MessageId?, localId: Int?, messageIdBefore: MessageId?,
-         sender: ChatUser, createdAt: Date?, myUserId: ChatUserId?, imageDomain: String?) {
+    init(senderAvatar: AvatarImageViewModel?, createdAtStr: String?,
+         imageSize: CGSize?, imageDomain: String?) {
         self.imageSize = imageSize
-        self.uploadingImage = BehaviorRelay(value: uploadingImage)
         self.imageDomain = imageDomain
-        self.imagePath = BehaviorRelay(value: imagePath)
-        super.init(messageId: messageId, localId: localId, messageIdBefore: messageIdBefore, sender: sender, createdAt: createdAt, myUserId: myUserId)
+        super.init(senderAvatar: senderAvatar, createdAtStr: createdAtStr)
         bindToEvents()
     }
     
@@ -44,9 +41,9 @@ class MessageImageCellViewModelImpl: MessageCellViewModelImpl, MessageImageCellV
         }).disposed(by: rx.disposeBag)
     }
     
-    func didSendMessageSuccess(messageId: MessageId, imageSize: CGSize?, imageUrl: String?) {
-        self.imageSize = imageSize
-        self.imageUrl.accept(imageUrl)
-        super.didSendMessageSuccess(messageId: messageId)
-    }
+//    func didSendMessageSuccess(messageId: MessageId, imageSize: CGSize?, imageUrl: String?) {
+//        self.imageSize = imageSize
+//        self.imageUrl.accept(imageUrl)
+//        super.didSendMessageSuccess(messageId: messageId)
+//    }
 }

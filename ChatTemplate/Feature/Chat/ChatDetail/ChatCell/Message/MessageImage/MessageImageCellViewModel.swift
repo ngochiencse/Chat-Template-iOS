@@ -15,6 +15,4 @@ protocol MessageImageCellViewModel: MessageCellViewModel {
     var imageSize: CGSize? { get }
     var uploadingImage: BehaviorRelay<UIImage?> { get }
     var imageUrl: BehaviorRelay<String?> { get }
-    
-    func didSendMessageSuccess(messageId: MessageId, imageSize: CGSize?, imageUrl: String?)
 }

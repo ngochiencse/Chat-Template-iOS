@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum MessageTypeNew: Int {
+enum MessageCellType: Int {
     case text = 0
     case image
 }

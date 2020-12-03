@@ -9,21 +9,22 @@
 import Foundation
 
 class ChatItemsModifierImpl: NSObject, ChatItemsModifier {
-    func checkAndInsertTimeIfNeeded(_ chatItems: [ChatItemCellViewModel], insertTimeAtHead: Bool) -> [ChatItemCellViewModel] {
-        var result: [ChatItemCellViewModel] = Array(chatItems)
-        for i in 0..<chatItems.count {
-            let currentObject = chatItems[i]
+    func checkAndInsertTimeIfNeeded(_ chatItemDetails: [ChatItemDetailViewModel],
+                                    insertTimeAtHead: Bool) -> [ChatItemDetailViewModel] {
+        var result: [ChatItemDetailViewModel] = Array(chatItemDetails)
+        for i in 0..<chatItemDetails.count {
+            let currentObject = chatItemDetails[i]
             
-            let nextObject = (i + 1 < chatItems.count) ? chatItems[i + 1] : nil
+            let nextObject = (i + 1 < chatItemDetails.count) ? chatItemDetails[i + 1] : nil
             
-            guard let currentMessage = currentObject as? MessageCellViewModel else {
+            guard let currentMessage = currentObject as? MessageCellDetailViewModel else {
                 continue
             }
             if i == 0 {
                 result.insert(ChatItemTimeCellViewModelImpl(time: currentMessage.createdAt), at: 0)
                 continue
             }
-            guard let nextMessage = nextObject as? MessageCellViewModel else {
+            guard let nextMessage = nextObject as? MessageCellDetailViewModel else {
                 continue
             }
             guard let currentTime = currentMessage.createdAt else {
@@ -44,20 +45,20 @@ class ChatItemsModifierImpl: NSObject, ChatItemsModifier {
             }
         }
         
-        if insertTimeAtHead == true, let message = result.first as? MessageCellViewModel {
+        if insertTimeAtHead == true, let message = result.first as? MessageCellDetailViewModel {
             result.insert(ChatItemTimeCellViewModelImpl(time: message.createdAt), at: 0)
         }
         
         return result
     }
     
-    func updateMessageBlockPosition(_ chatItems: [ChatItemCellViewModel]) {
-        for i in 0..<chatItems.count {
-            let currentObject = chatItems[i]
-            let prevObject = (i - 1 < chatItems.count && i - 1 >= 0) ? chatItems[i - 1] : nil
-            let nextObject = (i + 1 < chatItems.count) ? chatItems[i + 1] : nil
+    func updateMessageBlockPosition(_ chatItemDetails: [ChatItemDetailViewModel]) {
+        for i in 0..<chatItemDetails.count {
+            let currentObject = chatItemDetails[i]
+            let prevObject = (i - 1 < chatItemDetails.count && i - 1 >= 0) ? chatItemDetails[i - 1] : nil
+            let nextObject = (i + 1 < chatItemDetails.count) ? chatItemDetails[i + 1] : nil
             
-            guard let currentMessage = currentObject as? MessageCellViewModel else {
+            guard let currentMessage = currentObject as? MessageCellDetailViewModel else {
                 continue
             }
             
@@ -65,13 +66,29 @@ class ChatItemsModifierImpl: NSObject, ChatItemsModifier {
             let sameSenderWithNext = isMessageAndSameSender(nextObject, currentMessage)
 
             if sameSenderWithPrevious && sameSenderWithNext {
-                currentMessage.blockPosition.accept(.middle)
+                // Middle
+                currentMessage.uiViewModel.roundCorners.accept(.allCorners)
+                if currentMessage.uiViewModel.displaySide.value == .left {
+                    currentMessage.uiViewModel.isSenderAvatarImageHidden.accept(true)
+                }
             } else if sameSenderWithPrevious {
-                currentMessage.blockPosition.accept(.bottom)
+                // Bottom
+                currentMessage.uiViewModel.roundCorners.accept([.topRight, .bottomRight, .bottomLeft])
+                if currentMessage.uiViewModel.displaySide.value == .left {
+                    currentMessage.uiViewModel.isSenderAvatarImageHidden.accept(false)
+                }
             } else if sameSenderWithNext {
-                currentMessage.blockPosition.accept(.top)
+                // Top
+                currentMessage.uiViewModel.roundCorners.accept([.topLeft, .topRight, .bottomRight])
+                if currentMessage.uiViewModel.displaySide.value == .left {
+                    currentMessage.uiViewModel.isSenderAvatarImageHidden.accept(true)
+                }
             } else {
-                currentMessage.blockPosition.accept(.top)
+                // Single
+                currentMessage.uiViewModel.roundCorners.accept([.topLeft, .topRight, .bottomRight])
+                if currentMessage.uiViewModel.displaySide.value == .left {
+                    currentMessage.uiViewModel.isSenderAvatarImageHidden.accept(false)
+                }
             }
         }
     }

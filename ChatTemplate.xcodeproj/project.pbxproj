@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E46166F256E302200D9A9C9 /* AvatarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E461669256E302200D9A9C9 /* AvatarButton.swift */; };
+		0E461670256E302200D9A9C9 /* AvatarImageViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E46166A256E302200D9A9C9 /* AvatarImageViewModelImpl.swift */; };
+		0E461671256E302200D9A9C9 /* AvatarImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E46166B256E302200D9A9C9 /* AvatarImageViewModel.swift */; };
+		0E461673256E302200D9A9C9 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E46166D256E302200D9A9C9 /* AvatarImageView.swift */; };
+		0E46167C256E3CE700D9A9C9 /* CustomUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E46167B256E3CE700D9A9C9 /* CustomUIView.swift */; };
+		0E461684256E41FD00D9A9C9 /* UIBezierPathUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E461683256E41FD00D9A9C9 /* UIBezierPathUtils.swift */; };
+		0EB444E725779E8700986A45 /* MessageCellDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB444E625779E8700986A45 /* MessageCellDetailViewModel.swift */; };
+		0EDE5C90257883AB00FBBAA9 /* ChatItemDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE5C8F257883AB00FBBAA9 /* ChatItemDetailViewModel.swift */; };
+		0EDE5C9E257889A700FBBAA9 /* MessageCellDetailViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE5C9D257889A700FBBAA9 /* MessageCellDetailViewModelImpl.swift */; };
 		0EF83EFF24FCA3ED00948E25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83EFE24FCA3ED00948E25 /* AppDelegate.swift */; };
 		0EF83F0124FCA3ED00948E25 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F0024FCA3ED00948E25 /* SceneDelegate.swift */; };
 		0EF83F0824FCA3EE00948E25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EF83F0724FCA3EE00948E25 /* Assets.xcassets */; };
@@ -185,6 +194,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E461669256E302200D9A9C9 /* AvatarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarButton.swift; sourceTree = "<group>"; };
+		0E46166A256E302200D9A9C9 /* AvatarImageViewModelImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageViewModelImpl.swift; sourceTree = "<group>"; };
+		0E46166B256E302200D9A9C9 /* AvatarImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageViewModel.swift; sourceTree = "<group>"; };
+		0E46166D256E302200D9A9C9 /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
+		0E46167B256E3CE700D9A9C9 /* CustomUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIView.swift; sourceTree = "<group>"; };
+		0E461683256E41FD00D9A9C9 /* UIBezierPathUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathUtils.swift; sourceTree = "<group>"; };
+		0EB444E625779E8700986A45 /* MessageCellDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellDetailViewModel.swift; sourceTree = "<group>"; };
+		0EDE5C8F257883AB00FBBAA9 /* ChatItemDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatItemDetailViewModel.swift; sourceTree = "<group>"; };
+		0EDE5C9D257889A700FBBAA9 /* MessageCellDetailViewModelImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellDetailViewModelImpl.swift; sourceTree = "<group>"; };
 		0EF83EFB24FCA3ED00948E25 /* ChatTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EF83EFE24FCA3ED00948E25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0EF83F0024FCA3ED00948E25 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -386,6 +404,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E461668256E302200D9A9C9 /* AvatarImageView */ = {
+			isa = PBXGroup;
+			children = (
+				0E461669256E302200D9A9C9 /* AvatarButton.swift */,
+				0E46166A256E302200D9A9C9 /* AvatarImageViewModelImpl.swift */,
+				0E46166B256E302200D9A9C9 /* AvatarImageViewModel.swift */,
+				0E46166D256E302200D9A9C9 /* AvatarImageView.swift */,
+			);
+			path = AvatarImageView;
+			sourceTree = "<group>";
+		};
 		0EF83EF224FCA3ED00948E25 = {
 			isa = PBXGroup;
 			children = (
@@ -566,6 +595,7 @@
 				0EF8414524FCD43700948E25 /* UIView+Utils.swift */,
 				0EF8414724FCD4B000948E25 /* UIScrollView+Utils.swift */,
 				0EF8414824FCD4B000948E25 /* UITableView+Utils.swift */,
+				0E461683256E41FD00D9A9C9 /* UIBezierPathUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -768,6 +798,7 @@
 		0EF840D324FCB6E300948E25 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				0E461668256E302200D9A9C9 /* AvatarImageView */,
 				0EF8415424FCDA3300948E25 /* ChatList */,
 				0EF840E324FCB6E300948E25 /* ChatDetail */,
 			);
@@ -798,6 +829,7 @@
 				0EF840EF24FCB6E300948E25 /* Message */,
 				0EF8410024FCB6E300948E25 /* ChatCell.swift */,
 				0EF8410124FCB6E300948E25 /* ChatCellViewModel.swift */,
+				0EDE5C8F257883AB00FBBAA9 /* ChatItemDetailViewModel.swift */,
 			);
 			path = ChatCell;
 			sourceTree = "<group>";
@@ -827,8 +859,11 @@
 			children = (
 				0EF840F124FCB6E300948E25 /* Message.swift */,
 				0EF840FD24FCB6E300948E25 /* ChatUser.swift */,
+				0E46167B256E3CE700D9A9C9 /* CustomUIView.swift */,
 				0EF840F024FCB6E300948E25 /* MessageCellViewModel.swift */,
 				0EF840FF24FCB6E300948E25 /* MessageCellViewModelImpl.swift */,
+				0EB444E625779E8700986A45 /* MessageCellDetailViewModel.swift */,
+				0EDE5C9D257889A700FBBAA9 /* MessageCellDetailViewModelImpl.swift */,
 				0EF840FE24FCB6E300948E25 /* MessageCell.swift */,
 				0EF8414324FCD16600948E25 /* MessageBackgroundView.swift */,
 				0EF840F224FCB6E300948E25 /* MessageImage */,
@@ -840,11 +875,11 @@
 		0EF840F224FCB6E300948E25 /* MessageImage */ = {
 			isa = PBXGroup;
 			children = (
-				0EF840F324FCB6E300948E25 /* MessageImageCell.swift */,
 				0EF840F424FCB6E300948E25 /* MessageImageCellViewModel.swift */,
-				0EF840F524FCB6E300948E25 /* MessageImageCell.xib */,
 				0EF840F624FCB6E300948E25 /* MessageImageCellViewModelImpl.swift */,
 				0EF840F724FCB6E300948E25 /* MessageImageCellViewModelMock.swift */,
+				0EF840F324FCB6E300948E25 /* MessageImageCell.swift */,
+				0EF840F524FCB6E300948E25 /* MessageImageCell.xib */,
 			);
 			path = MessageImage;
 			sourceTree = "<group>";
@@ -853,9 +888,9 @@
 			isa = PBXGroup;
 			children = (
 				0EF840F924FCB6E300948E25 /* MessageTextCellViewModel.swift */,
-				0EF840FA24FCB6E300948E25 /* MessageTextCell.xib */,
 				0EF840FB24FCB6E300948E25 /* MessageTextCellViewModelImpl.swift */,
 				0EF840FC24FCB6E300948E25 /* MessageTextCell.swift */,
+				0EF840FA24FCB6E300948E25 /* MessageTextCell.xib */,
 			);
 			path = MessageText;
 			sourceTree = "<group>";
@@ -1206,6 +1241,7 @@
 				0EF8412924FCB6E300948E25 /* MessageImageCellViewModel.swift in Sources */,
 				0EF8401A24FCA50E00948E25 /* ArticleViewModelImpl.swift in Sources */,
 				0EF8413724FCB6E300948E25 /* ChatScreenViewModel.swift in Sources */,
+				0E461671256E302200D9A9C9 /* AvatarImageViewModel.swift in Sources */,
 				0EF83FE024FCA50E00948E25 /* UIActivityIndicatorUtils.swift in Sources */,
 				0EF83FF224FCA50E00948E25 /* SplashScreenViewModel.swift in Sources */,
 				0EF83FFF24FCA50E00948E25 /* PostArticleFormViewModelImpl.swift in Sources */,
@@ -1225,6 +1261,7 @@
 				0EF83FC024FCA50E00948E25 /* PointTarget.swift in Sources */,
 				0EF8400724FCA50E00948E25 /* MainCoordinator.swift in Sources */,
 				0EF8415224FCD78B00948E25 /* ChatDetailViewPhotoViewModel.swift in Sources */,
+				0E461673256E302200D9A9C9 /* AvatarImageView.swift in Sources */,
 				0EF8402324FCA50E00948E25 /* LoginViewModelImpl.swift in Sources */,
 				0EF83FC824FCA50E00948E25 /* ProviderAPIBasic.swift in Sources */,
 				0EF83FE324FCA50E00948E25 /* DateUtils.swift in Sources */,
@@ -1245,13 +1282,17 @@
 				0EF8412624FCB6E300948E25 /* MessageCellViewModel.swift in Sources */,
 				0EF83FF424FCA50E00948E25 /* TutorialViewModel.swift in Sources */,
 				0EF83FE424FCA50E00948E25 /* UIViewControllerUtils.swift in Sources */,
+				0E46166F256E302200D9A9C9 /* AvatarButton.swift in Sources */,
+				0EDE5C90257883AB00FBBAA9 /* ChatItemDetailViewModel.swift in Sources */,
 				0EF8400A24FCA50E00948E25 /* AlertModel.swift in Sources */,
 				0EF83EFF24FCA3ED00948E25 /* AppDelegate.swift in Sources */,
+				0E461670256E302200D9A9C9 /* AvatarImageViewModelImpl.swift in Sources */,
 				0EF83FC324FCA50E00948E25 /* UserTarget.swift in Sources */,
 				0EF8415724FCDA4600948E25 /* ChatListViewController.swift in Sources */,
 				0EF83FDD24FCA50E00948E25 /* Constant.swift in Sources */,
 				0EF8413524FCB6E300948E25 /* ChatCellViewModel.swift in Sources */,
 				0EF8402124FCA50E00948E25 /* AppCoordinatorServiceImpl.swift in Sources */,
+				0EB444E725779E8700986A45 /* MessageCellDetailViewModel.swift in Sources */,
 				0EF8401F24FCA50E00948E25 /* UpdateDeviceTokenService.swift in Sources */,
 				0EF8413A24FCB6E300948E25 /* ChatItemsModifier.swift in Sources */,
 				0EF83FD124FCA50E00948E25 /* AsyncOperation.swift in Sources */,
@@ -1272,6 +1313,7 @@
 				0EF8401524FCA50E00948E25 /* RootViewController.swift in Sources */,
 				0EF8412D24FCB6E300948E25 /* MessageTextCellViewModel.swift in Sources */,
 				0EF8401024FCA50E00948E25 /* WebViewController.swift in Sources */,
+				0EDE5C9E257889A700FBBAA9 /* MessageCellDetailViewModelImpl.swift in Sources */,
 				0EF83FD024FCA50E00948E25 /* APIOperation.swift in Sources */,
 				0EF83FC224FCA50E00948E25 /* AuthTarget.swift in Sources */,
 				0EF83FCD24FCA50E00948E25 /* ProviderPlain.swift in Sources */,
@@ -1310,6 +1352,8 @@
 				0EF8412824FCB6E300948E25 /* MessageImageCell.swift in Sources */,
 				0EF83FC124FCA50E00948E25 /* SampleTarget.swift in Sources */,
 				0EF8412F24FCB6E300948E25 /* MessageTextCellViewModelImpl.swift in Sources */,
+				0E46167C256E3CE700D9A9C9 /* CustomUIView.swift in Sources */,
+				0E461684256E41FD00D9A9C9 /* UIBezierPathUtils.swift in Sources */,
 				0EF8400C24FCA50E00948E25 /* AlertPresentableViewModel.swift in Sources */,
 				0EF83FC924FCA50E00948E25 /* TokenRefresherImpl.swift in Sources */,
 				0EF8414924FCD4B100948E25 /* UIScrollView+Utils.swift in Sources */,

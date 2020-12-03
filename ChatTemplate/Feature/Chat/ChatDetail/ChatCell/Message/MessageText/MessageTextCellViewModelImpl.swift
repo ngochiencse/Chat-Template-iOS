@@ -10,15 +10,12 @@ import Foundation
 
 class MessageTextCellViewModelImpl: MessageCellViewModelImpl, MessageTextCellViewModel {
     private(set) var text: String?
-    
-    override var messageType: MessageTypeNew {
+    override var messageType: MessageCellType {
         return .text
     }
-        
-    init(text: String?, messageId: MessageId?, localId: Int?, messageIdBefore: MessageId?,
-         sender: ChatUser, createdAt: Date?, myUserId: ChatUserId?) {
+    
+    init(senderAvatar: AvatarImageViewModel?, createdAtStr: String?, text: String?) {
         self.text = text
-        super.init(messageId: messageId, localId: localId, messageIdBefore: messageIdBefore,
-                   sender: sender, createdAt: createdAt, myUserId: myUserId)
+        super.init(senderAvatar: senderAvatar, createdAtStr: createdAtStr)
     }
 }

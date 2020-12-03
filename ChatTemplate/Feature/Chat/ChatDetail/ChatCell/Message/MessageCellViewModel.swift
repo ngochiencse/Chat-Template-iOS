@@ -10,26 +10,36 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol MessageCellViewModel: ChatItemCellViewModel {
-    var messageId: MessageId? { get }
-    
-    // Only use for local message
-    var localId: Int? { get }
-    
-    // Id of the remote message which lies before the local message. Use to identify position display in chat screen.
-    var messageIdBefore: MessageId? { get }
-    
-    var messageType: MessageTypeNew { get }
-    var sender: ChatUser { get }
-    
-    var isMyMessage: Bool { get }
-    var createdAt: Date? { get }
-    var blockPosition: BehaviorRelay<MessageBlockPosition?> { get }
-    func didSendMessageSuccess(messageId: MessageId)
+enum MessageDisplaySide {
+    case left
+    case right
 }
 
-extension MessageCellViewModel {
-    func isTheSameSender(with other: MessageCellViewModel) -> Bool {
-        return sender.id == other.sender.id
-    }
+protocol MessageCellViewModel: ChatItemCellViewModel {
+//    var messageId: MessageId? { get }
+//
+//    // Only use for local message
+//    var localId: Int? { get }
+//
+//    // Id of the remote message which lies before the local message. Use to identify position display in chat screen.
+//    var messageIdBefore: MessageId? { get }
+    
+    var messageType: MessageCellType { get }
+//    var senderId: ChatUserId { get }
+    
+    var createdAtStr: String? { get }
+    var senderAvatar: AvatarImageViewModel? { get }
+    var displaySide: BehaviorRelay<MessageDisplaySide> { get }
+    var isSenderAvatarImageHidden: BehaviorRelay<Bool> { get }
+    var isSenderAvatarSpaceHidden: BehaviorRelay<Bool> { get }
+    var roundCorners: BehaviorRelay<UIRectCorner> { get }
+
+//    func didSendMessageSuccess(messageId: MessageId)
+    
+//    // Like
+//    var isLike: Bool { get }
+//    var isLikeObs: Observable<Bool> { get }
+//    func toggleLike()
+    
+    var data: Any? { get set }
 }

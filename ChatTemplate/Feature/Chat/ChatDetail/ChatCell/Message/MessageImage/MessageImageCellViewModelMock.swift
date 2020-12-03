@@ -12,26 +12,16 @@ import RxSwift
 import RxCocoa
 
 class MessageImageCellViewModelMock: MessageCellViewModelImpl, MessageImageCellViewModel {
-    private(set) var imageSize: CGSize?
-    private(set) var uploadingImage: BehaviorRelay<UIImage?>
-    private(set) var imageUrl: BehaviorRelay<String?>
+    let imageSize: CGSize?
+    let uploadingImage: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
+    let imageUrl: BehaviorRelay<String?> = BehaviorRelay(value: nil)
     
-    override var messageType: MessageTypeNew {
+    override var messageType: MessageCellType {
         return .image
     }
         
-    init(imageSize: CGSize?, uploadingImage: UIImage?, imageUrl: String?,
-         messageId: MessageId?, localId: Int?, messageIdBefore: MessageId?,
-         sender: ChatUser, createdAt: Date?, myUserId: ChatUserId?) {
+    init(senderAvatar: AvatarImageViewModel?, createdAtStr: String?, imageSize: CGSize?) {
         self.imageSize = imageSize
-        self.uploadingImage = BehaviorRelay(value: uploadingImage)
-        self.imageUrl = BehaviorRelay(value: imageUrl)
-        super.init(messageId: messageId, localId: localId, messageIdBefore: messageIdBefore, sender: sender, createdAt: createdAt, myUserId: myUserId)
-    }
-        
-    func didSendMessageSuccess(messageId: MessageId, imageSize: CGSize?, imageUrl: String?) {
-        self.imageSize = imageSize
-        self.imageUrl.accept(imageUrl)
-        super.didSendMessageSuccess(messageId: messageId)
+        super.init(senderAvatar: senderAvatar, createdAtStr: createdAtStr)
     }
 }

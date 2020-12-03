@@ -70,11 +70,7 @@ class ChatScreenViewController: BaseViewController {
         bindToViewModel()
         viewModel.getMessages(loadMore: false)
     }
-    
-    private func displayBasicInfo(_ otherUser: User?) {
-        friendlyNameLabel.text = viewModel.roomName
-    }
-        
+            
     // MARK: - Set up
     
     private func setUpChatScreen() {
@@ -221,11 +217,6 @@ class ChatScreenViewController: BaseViewController {
             guard let self = self else { return }
             let cleanedText: String? = text?.trimmingCharacters(in: .whitespacesAndNewlines)
             self.sendMessageButton.isEnabled = !(cleanedText?.isEmpty ?? true)
-        }).disposed(by: rx.disposeBag)
-        
-        viewModel.otherUser.observeOn(MainScheduler.instance).subscribe(onNext: {[weak self] (otherUser) in
-            guard let self = self else { return }
-            self.displayBasicInfo(otherUser)
         }).disposed(by: rx.disposeBag)
     }
     

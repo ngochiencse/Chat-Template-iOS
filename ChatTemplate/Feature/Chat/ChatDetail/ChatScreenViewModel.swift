@@ -30,8 +30,4 @@ protocol ChatScreenViewModel: class {
     
     // Receive message
     var onReceiveMessages: PublishSubject<Void> { get }
-    
-    // Others
-    var roomName: String? { get }
-    var otherUser: BehaviorRelay<User?> { get }
 }

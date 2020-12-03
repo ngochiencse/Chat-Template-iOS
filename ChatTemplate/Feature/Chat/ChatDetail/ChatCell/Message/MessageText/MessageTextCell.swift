@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class MessageTextCell: MessageCell {
-    @IBOutlet weak private var contentLabel : UILabel!
+    @IBOutlet weak var tvContent: UITextView!
+    
     override var viewModel: ChatItemCellViewModel? {
+        willSet {
+            unbindFromViewModel()
+        }
+        
         didSet {
             if viewModel != nil && (viewModel is MessageTextCellViewModel) == false {
                 fatalError("Wrong viewModel type! Current is:\(String(describing: type(of: viewModel))). Must be: MessageTextCellViewModel")
@@ -18,9 +25,11 @@ class MessageTextCell: MessageCell {
             
             let viewModel = self.viewModel as? MessageTextCellViewModel
             displayWithViewModel(viewModel)
+            bindToViewModel()
         }
     }
-        
+    private var disposables: [Disposable] = []
+    
     private func displayWithViewModel(_ viewModel: MessageTextCellViewModel?) {
         var trimmedString : String
         if let unwrapped = viewModel?.text {
@@ -34,36 +43,43 @@ class MessageTextCell: MessageCell {
         } else {
             trimmedString = ""
         }
-        self.contentLabel.attributedText = self.refreshString(string: trimmedString, lineSpacing: 6)
         
-        // Set line spacing to 0 if content label display only 1 line
-        do {
-            var frame : CGRect = self.frame
-            frame.size.width = UIScreen.main.bounds.size.width
-            self.frame = frame
-            self.layoutIfNeeded()
-        }
-        
-//        if self.contentLabel.lineCount() <= 1 {
-//            self.contentLabel.attributedText = self.refreshString(string: trimmedString, lineSpacing: 0)
-//        }
-        
-        if viewModel?.isMyMessage == true {
-            contentLabel.transform = CGAffineTransform(scaleX: -1, y: 1)
-            contentLabel.textColor = UIColor.white
-        } else {
-            contentLabel.transform = CGAffineTransform.identity
-            contentLabel.textColor = UIColor.black
-        }
+        self.tvContent.attributedText = self.refreshString(string: trimmedString, lineSpacing: 6)
     }
     
+    private func bindToViewModel() {
+        guard let viewModel = self.viewModel as? MessageCellViewModel else { return }
+    
+        do {
+            let disposable = viewModel.displaySide.observeOn(MainScheduler.instance).subscribe(onNext: {[weak self] (displaySide) in
+                guard let self = self else { return }
+                
+                if displaySide == .right {
+                    self.tvContent.transform = CGAffineTransform(scaleX: -1, y: 1)
+                } else {
+                    self.tvContent.transform = CGAffineTransform.identity
+                }
+            })
+            disposable.disposed(by: rx.disposeBag)
+            disposables.append(disposable)
+        }
+    }
+
+    private func unbindFromViewModel() {
+        disposables.forEach { (ele) in
+            ele.dispose()
+        }
+        disposables.removeAll()
+    }
+
     private func refreshString(string: String, lineSpacing: CGFloat) -> NSAttributedString {
         let paragraphStyle : NSMutableParagraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
         paragraphStyle.lineSpacing = lineSpacing
-        let attrsDictionary : [NSAttributedString.Key: Any] = [.font : self.contentLabel.font ?? UIFont.systemFont(ofSize: 14),
+        let attrsDictionary : [NSAttributedString.Key: Any] = [.font : self.tvContent.font ?? UIFont.systemFont(ofSize: 14),
                                                                         .paragraphStyle : paragraphStyle,
-                                                                        .foregroundColor : self.contentLabel.textColor ?? UIColor.darkGray]
-        let myString : NSAttributedString = NSAttributedString(string: string, attributes: attrsDictionary)
-        return myString;
+                                                                        .foregroundColor : UIColor.black]
+    
+        let myString : NSMutableAttributedString = NSMutableAttributedString(string: string, attributes: attrsDictionary)
+        return myString
     }
 }
