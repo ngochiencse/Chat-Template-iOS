@@ -8,5 +8,5 @@
 
 import Foundation
 
-protocol ChatItemDetailViewModel: class {
+protocol ChatItemAdvancedViewModel: class {
 }

@@ -18,8 +18,8 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
     let itemsModifier: ChatItemsModifier
     var chatItems: [ChatItemCellViewModel] {
         return chatItemsDetail.map { (ele) -> ChatItemCellViewModel in
-            if let unwrapped = ele as? MessageCellDetailViewModel {
-                return unwrapped.uiViewModel
+            if let unwrapped = ele as? MessageCellAdvancedViewModel {
+                return unwrapped.cell
             } else {
                 let unwrapped = ele as! ChatItemTimeCellViewModel
                 return unwrapped
@@ -27,7 +27,7 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
         }
     }
     var chatItemsDetail: [Any] {
-        var chatItems: [ChatItemDetailViewModel] = messagesRemote + messagesSending
+        var chatItems: [ChatItemAdvancedViewModel] = messagesRemote + messagesSending
         chatItems = itemsModifier.checkAndInsertTimeIfNeeded(messagesRemote + messagesSending, insertTimeAtHead: !showsInfiniteScrolling.value)
         itemsModifier.updateMessageBlockPosition(chatItems)
         return chatItems
@@ -42,8 +42,8 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
     var onUpdateMessagesFinish: PublishSubject<Void> = PublishSubject()
 
     private(set) var isLoading: Bool = false
-    private var messagesRemote: [MessageCellDetailViewModel] = []
-    private var messagesSending: [MessageCellDetailViewModel] = []
+    private var messagesRemote: [MessageCellAdvancedViewModel] = []
+    private var messagesSending: [MessageCellAdvancedViewModel] = []
 
     let userOtherId: ChatUserId = "8"
     let userMeId: ChatUserId = "19"
@@ -70,8 +70,8 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
             let uiViewModel: MessageCellViewModel = MessageTextCellViewModelImpl(senderAvatar: otherAvatar,
                                                                              createdAtStr: Date().toFormat("hh:mm"),
                                                                              text: "Hello")
-            let message: MessageCellDetailViewModel =
-                MessageCellDetailViewModelImpl(messageId: "123",
+            let message: MessageCellAdvancedViewModel =
+                MessageCellAdvancedViewModelImpl(messageId: "123",
                                                senderId: self.userOtherId,
                                                localId: nil,
                                                messageIdBefore: nil,
@@ -84,13 +84,13 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
         timerImage = Timer.scheduledTimer(withTimeInterval: 7, repeats: true) {[weak self] _ in
             guard let self = self else { return }
             let uiViewModel: MessageImageCellViewModel =
-                MessageImageCellViewModelMock(senderAvatar: otherAvatar,
+                MessageImageCellViewModelImpl(senderAvatar: otherAvatar,
                                               createdAtStr: Date().toFormat("hh:mm"),
                                               imageSize: CGSize(width: 1067, height: 800))
             uiViewModel.imageUrl.accept("https://hoidulich.net/wp-content/uploads/2019/11/71118571_400051820571391_381023500722296458_n-1067x800.jpg")
             
-            let message: MessageCellDetailViewModel =
-                MessageCellDetailViewModelImpl(messageId: "456",
+            let message: MessageCellAdvancedViewModel =
+                MessageCellAdvancedViewModelImpl(messageId: "456",
                                                senderId: self.userOtherId,
                                                localId: nil,
                                                messageIdBefore: nil,
@@ -142,8 +142,8 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
         uiViewModel.isSenderAvatarImageHidden.accept(true)
         uiViewModel.isSenderAvatarSpaceHidden.accept(true)
         
-        let message: MessageCellDetailViewModel =
-            MessageCellDetailViewModelImpl(messageId: nil,
+        let message: MessageCellAdvancedViewModel =
+            MessageCellAdvancedViewModelImpl(messageId: nil,
                                            senderId: self.userOtherId,
                                            localId: localId,
                                            messageIdBefore: remoteIdBefore,
@@ -170,7 +170,7 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
         
     }
 
-    private func handleCompleteMessageOperation(_ operation: MessageOperationMock, onSuccess success:((_ cellViewModel: MessageCellDetailViewModel) -> Void)?) {
+    private func handleCompleteMessageOperation(_ operation: MessageOperationMock, onSuccess success:((_ cellViewModel: MessageCellAdvancedViewModel) -> Void)?) {
         let localId = operation.localId
         let remoteIdBefore = operation.remoteIdBefore
 
@@ -199,13 +199,13 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
         let localId: Int = (messagesSending.last?.localId ?? 0) + 1
 
         // Set up view model
-        let uiViewModel: MessageImageCellViewModel = MessageImageCellViewModelMock(senderAvatar: nil, createdAtStr: Date().toFormat("hh:mm"), imageSize: image.size)
+        let uiViewModel: MessageImageCellViewModel = MessageImageCellViewModelImpl(senderAvatar: nil, createdAtStr: Date().toFormat("hh:mm"), imageSize: image.size)
         uiViewModel.uploadingImage.accept(image)
         uiViewModel.displaySide.accept(.right)
         uiViewModel.isSenderAvatarImageHidden.accept(true)
         uiViewModel.isSenderAvatarSpaceHidden.accept(true)
-        let message: MessageCellDetailViewModel =
-            MessageCellDetailViewModelImpl(messageId: nil,
+        let message: MessageCellAdvancedViewModel =
+            MessageCellAdvancedViewModelImpl(messageId: nil,
                                            senderId: self.userOtherId,
                                            localId: localId,
                                            messageIdBefore: remoteIdBefore,
@@ -221,7 +221,7 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
             self.handleCompleteMessageOperation(operation) { (cellViewModel) in
                 guard let remoteId = operation.remoteId else { return }
                 cellViewModel.messageId = remoteId
-                guard let uiViewModel = cellViewModel.uiViewModel as? MessageImageCellViewModel else { return }
+                guard let uiViewModel = cellViewModel.cell as? MessageImageCellViewModel else { return }
                 uiViewModel.imageUrl.accept(operation.remoteImageUrl)
             }
         }
@@ -254,8 +254,8 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
 }
 
 extension ChatScreenViewModelMock {
-    func mockData() -> [MessageCellDetailViewModel] {
-        var newMessages: [MessageCellDetailViewModel] = Array()
+    func mockData() -> [MessageCellAdvancedViewModel] {
+        var newMessages: [MessageCellAdvancedViewModel] = Array()
         for i in 0..<5 {
             let createdAt = Date() - (i + 1).days
             
@@ -267,8 +267,8 @@ extension ChatScreenViewModelMock {
                     MessageTextCellViewModelImpl(senderAvatar: nil,
                                                  createdAtStr: createdAt.toFormat("hh:mm"),
                                                  text: "Lovely girls, they were very communicative\nand left the place clean.\nI'd definitely recommend them as guests!")
-                let message: MessageCellDetailViewModel =
-                    MessageCellDetailViewModelImpl(messageId: "1",
+                let message: MessageCellAdvancedViewModel =
+                    MessageCellAdvancedViewModelImpl(messageId: "1",
                                                    senderId: self.userMeId,
                                                    localId: nil,
                                                    messageIdBefore: nil,
@@ -282,8 +282,8 @@ extension ChatScreenViewModelMock {
                     MessageTextCellViewModelImpl(senderAvatar: otherAvatar,
                                                  createdAtStr: createdAt.toFormat("hh:mm"),
                                                  text: "Good!")
-                let message: MessageCellDetailViewModel =
-                    MessageCellDetailViewModelImpl(messageId: "2",
+                let message: MessageCellAdvancedViewModel =
+                    MessageCellAdvancedViewModelImpl(messageId: "2",
                                                    senderId: self.userOtherId,
                                                    localId: nil,
                                                    messageIdBefore: nil,
@@ -297,8 +297,8 @@ extension ChatScreenViewModelMock {
                     MessageTextCellViewModelImpl(senderAvatar: otherAvatar,
                                                  createdAtStr: createdAt.toFormat("hh:mm"),
                                                  text: "Glad you enjoy it ^^! https://ssd.userbenchmark.com/")
-                let message: MessageCellDetailViewModel =
-                    MessageCellDetailViewModelImpl(messageId: "3",
+                let message: MessageCellAdvancedViewModel =
+                    MessageCellAdvancedViewModelImpl(messageId: "3",
                                                    senderId: self.userOtherId,
                                                    localId: nil,
                                                    messageIdBefore: nil,
@@ -309,12 +309,12 @@ extension ChatScreenViewModelMock {
             
             do {
                 let uiViewModel: MessageImageCellViewModel =
-                    MessageImageCellViewModelMock(senderAvatar: nil,
+                    MessageImageCellViewModelImpl(senderAvatar: nil,
                                                   createdAtStr: Date().toFormat("hh:mm"),
                                                   imageSize: CGSize(width: 1067, height: 800))
                 uiViewModel.imageUrl.accept("https://hoidulich.net/wp-content/uploads/2019/11/71118571_400051820571391_381023500722296458_n-1067x800.jpg")
-                let message: MessageCellDetailViewModel =
-                    MessageCellDetailViewModelImpl(messageId: "4",
+                let message: MessageCellAdvancedViewModel =
+                    MessageCellAdvancedViewModelImpl(messageId: "4",
                                                    senderId: self.userMeId,
                                                    localId: nil,
                                                    messageIdBefore: nil,
@@ -328,8 +328,8 @@ extension ChatScreenViewModelMock {
                     MessageTextCellViewModelImpl(senderAvatar: nil,
                                                  createdAtStr: createdAt.toFormat("hh:mm"),
                                                  text: "Here is a picture of us ^^")
-                let message: MessageCellDetailViewModel =
-                    MessageCellDetailViewModelImpl(messageId: "5",
+                let message: MessageCellAdvancedViewModel =
+                    MessageCellAdvancedViewModelImpl(messageId: "5",
                                                    senderId: self.userMeId,
                                                    localId: nil,
                                                    messageIdBefore: nil,
@@ -343,8 +343,8 @@ extension ChatScreenViewModelMock {
                     MessageTextCellViewModelImpl(senderAvatar: nil,
                                                  createdAtStr: createdAt.toFormat("hh:mm"),
                                                  text: "Oh it was so beautiful!")
-                let message: MessageCellDetailViewModel =
-                    MessageCellDetailViewModelImpl(messageId: "6",
+                let message: MessageCellAdvancedViewModel =
+                    MessageCellAdvancedViewModelImpl(messageId: "6",
                                                    senderId: self.userMeId,
                                                    localId: nil,
                                                    messageIdBefore: nil,
@@ -356,9 +356,9 @@ extension ChatScreenViewModelMock {
         
         newMessages.forEach { (ele) in
             let isMyMessage: Bool = ele.senderId == userMeId
-            ele.uiViewModel.displaySide.accept(isMyMessage ? .right : .left)
-            ele.uiViewModel.isSenderAvatarImageHidden.accept(isMyMessage)
-            ele.uiViewModel.isSenderAvatarSpaceHidden.accept(isMyMessage)
+            ele.cell.displaySide.accept(isMyMessage ? .right : .left)
+            ele.cell.isSenderAvatarImageHidden.accept(isMyMessage)
+            ele.cell.isSenderAvatarSpaceHidden.accept(isMyMessage)
         }
         
         return newMessages

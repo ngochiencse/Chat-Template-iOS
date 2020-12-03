@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol MessageCellDetailViewModel: ChatItemDetailViewModel {
+protocol MessageCellAdvancedViewModel: ChatItemAdvancedViewModel {
     var messageId: MessageId? { get set }
     
     var senderId: ChatUserId? { get }
@@ -21,5 +21,5 @@ protocol MessageCellDetailViewModel: ChatItemDetailViewModel {
     
     var createdAt: Date? { get }
     
-    var uiViewModel: MessageCellViewModel { get }
+    var cell: MessageCellViewModel { get }
 }

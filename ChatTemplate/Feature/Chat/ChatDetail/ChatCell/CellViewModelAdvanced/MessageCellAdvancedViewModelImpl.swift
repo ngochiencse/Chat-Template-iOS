@@ -8,13 +8,13 @@
 
 import Foundation
 
-class MessageCellDetailViewModelImpl: NSObject, MessageCellDetailViewModel {
+class MessageCellAdvancedViewModelImpl: NSObject, MessageCellAdvancedViewModel {
     var messageId: MessageId?
     let senderId: ChatUserId?
     let localId: Int?
     let messageIdBefore: MessageId?
     let createdAt: Date?
-    let uiViewModel: MessageCellViewModel
+    let cell: MessageCellViewModel
     
     init(messageId: MessageId?, senderId: ChatUserId?, localId: Int?,
          messageIdBefore: MessageId?, createdAt: Date?, uiViewModel: MessageCellViewModel) {
@@ -23,7 +23,7 @@ class MessageCellDetailViewModelImpl: NSObject, MessageCellDetailViewModel {
         self.localId = localId
         self.messageIdBefore = messageIdBefore
         self.createdAt = createdAt
-        self.uiViewModel = uiViewModel
+        self.cell = uiViewModel
         super.init()
     }
 }
