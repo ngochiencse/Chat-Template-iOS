@@ -1,6 +1,6 @@
 //
 //  InputLayoutViewController.swift
-//  WITHOUT_IOS
+//  ChatTemplate
 //
 //  Created by Hien Pham on 6/26/20.
 //  Copyright © 2020 WITHOUT. All rights reserved.

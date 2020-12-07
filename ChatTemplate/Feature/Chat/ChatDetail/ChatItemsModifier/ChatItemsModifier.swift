@@ -1,6 +1,6 @@
 //
 //  ChatItemsModifier.swift
-//  WITHOUT_IOS
+//  ChatTemplate
 //
 //  Created by Hien Pham on 7/7/20.
 //  Copyright © 2020 WITHOUT. All rights reserved.

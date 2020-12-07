@@ -1,6 +1,6 @@
 //
 //  ChatDetailViewPhotoViewModel.swift
-//  WITHOUT_IOS
+//  ChatTemplate
 //
 //  Created by Tai Ma on 7/3/20.
 //  Copyright © 2020 WITHOUT. All rights reserved.

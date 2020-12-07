@@ -1,6 +1,6 @@
 //
 //  MessageImageCellViewModelMock.swift
-//  WITHOUT_IOS
+//  ChatTemplate
 //
 //  Created by Hien Pham on 7/1/20.
 //  Copyright © 2020 WITHOUT. All rights reserved.
