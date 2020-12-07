@@ -58,15 +58,4 @@ class MessageTextCell: MessageCell {
         }
         disposables.removeAll()
     }
-
-    private func refreshString(string: String, lineSpacing: CGFloat) -> NSAttributedString {
-        let paragraphStyle : NSMutableParagraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-        paragraphStyle.lineSpacing = lineSpacing
-        let attrsDictionary : [NSAttributedString.Key: Any] = [.font : self.tvContent.font ?? UIFont.systemFont(ofSize: 14),
-                                                                        .paragraphStyle : paragraphStyle,
-                                                                        .foregroundColor : UIColor.black]
-    
-        let myString : NSMutableAttributedString = NSMutableAttributedString(string: string, attributes: attrsDictionary)
-        return myString
-    }
 }
