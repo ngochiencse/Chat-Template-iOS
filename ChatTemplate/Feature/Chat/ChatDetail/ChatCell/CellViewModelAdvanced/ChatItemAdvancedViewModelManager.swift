@@ -9,4 +9,5 @@
 import Foundation
 
 protocol ChatItemAdvancedViewModel: class {
+    var item: ChatItemCellViewModel { get }
 }

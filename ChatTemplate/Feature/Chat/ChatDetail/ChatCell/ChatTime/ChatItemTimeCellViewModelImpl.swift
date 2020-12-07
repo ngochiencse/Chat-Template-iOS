@@ -18,4 +18,8 @@ class ChatItemTimeCellViewModelImpl: NSObject, ChatItemTimeCellViewModel {
         self.time = time
         super.init()
     }
+    
+    var item: ChatItemCellViewModel {
+        return self
+   }
 }

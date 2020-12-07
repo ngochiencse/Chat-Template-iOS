@@ -83,6 +83,11 @@
                                                 <color key="textColor" white="0.34507042249999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzT-g7-bw7">
+                                                <rect key="frame" x="110" y="2" width="16" height="22"/>
+                                                <state key="normal" image="heart"/>
+                                                <state key="selected" image="icon16HeartSolidColoured"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -92,7 +97,9 @@
                                             <constraint firstAttribute="bottom" secondItem="kr4-v5-6PH" secondAttribute="bottom" constant="2" id="QwZ-DI-Hhm"/>
                                             <constraint firstItem="VWQ-ts-Frt" firstAttribute="leading" secondItem="kr4-v5-6PH" secondAttribute="trailing" constant="4" id="ZCa-tE-737"/>
                                             <constraint firstItem="VWQ-ts-Frt" firstAttribute="bottom" secondItem="kr4-v5-6PH" secondAttribute="bottom" id="d7o-9g-TUr"/>
+                                            <constraint firstItem="qzT-g7-bw7" firstAttribute="top" secondItem="kr4-v5-6PH" secondAttribute="top" id="dT5-u1-1NS"/>
                                             <constraint firstItem="kr4-v5-6PH" firstAttribute="top" secondItem="nWq-Ha-2ET" secondAttribute="top" constant="2" id="pcM-Bh-7fz"/>
+                                            <constraint firstItem="qzT-g7-bw7" firstAttribute="leading" secondItem="kr4-v5-6PH" secondAttribute="trailing" constant="4" id="qXw-zH-t08"/>
                                             <constraint firstItem="Zx2-Nb-VLk" firstAttribute="leading" secondItem="nWq-Ha-2ET" secondAttribute="leading" constant="16" id="uVt-HL-d77"/>
                                         </constraints>
                                     </view>
@@ -118,6 +125,7 @@
             <viewLayoutGuide key="safeArea" id="CVP-Gh-moi"/>
             <connections>
                 <outlet property="background" destination="kr4-v5-6PH" id="14G-7A-r0O"/>
+                <outlet property="btnHeart" destination="qzT-g7-bw7" id="G0z-4r-hjE"/>
                 <outlet property="cellContentView" destination="kr4-v5-6PH" id="gqv-QN-7BE"/>
                 <outlet property="createdTimeLabel" destination="VWQ-ts-Frt" id="Q0L-nm-y4f"/>
                 <outlet property="leftConstraintBackground" destination="IC7-OH-EGz" id="Myg-B2-V63"/>
@@ -134,6 +142,8 @@
     </designables>
     <resources>
         <image name="avatar_placeholder" width="162" height="162"/>
+        <image name="heart" width="16" height="16"/>
+        <image name="icon16HeartSolidColoured" width="16" height="16"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

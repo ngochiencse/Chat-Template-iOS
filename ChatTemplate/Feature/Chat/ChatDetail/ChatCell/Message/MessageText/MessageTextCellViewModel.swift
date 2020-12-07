@@ -9,5 +9,5 @@
 import Foundation
 
 protocol MessageTextCellViewModel: MessageCellViewModel {
-    var text: String? { get }
+    var attributedText: NSAttributedString? { get }
 }
