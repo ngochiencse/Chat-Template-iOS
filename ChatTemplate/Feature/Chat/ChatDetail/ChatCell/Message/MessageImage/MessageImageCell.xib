@@ -87,15 +87,22 @@
                                                 <color key="textColor" white="0.34507042253521125" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJ7-G6-egp">
+                                                <rect key="frame" x="145" y="2" width="16" height="22"/>
+                                                <state key="normal" image="heart"/>
+                                                <state key="selected" image="icon16HeartSolidColoured"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="u0d-Ec-fIe" firstAttribute="bottom" secondItem="h7u-Jx-phX" secondAttribute="bottom" id="2tL-Tu-n9x"/>
                                             <constraint firstItem="n47-kb-3gW" firstAttribute="bottom" secondItem="h7u-Jx-phX" secondAttribute="bottom" id="IQh-X4-d9o"/>
+                                            <constraint firstItem="KJ7-G6-egp" firstAttribute="leading" secondItem="BE8-kx-WUW" secondAttribute="trailing" constant="4" id="Kp1-de-WEs"/>
                                             <constraint firstItem="n47-kb-3gW" firstAttribute="leading" secondItem="h7u-Jx-phX" secondAttribute="trailing" constant="4" id="Oqb-8K-AZV"/>
                                             <constraint firstItem="h7u-Jx-phX" firstAttribute="top" secondItem="xSi-f2-aYx" secondAttribute="top" constant="2" id="P6n-pc-n7X"/>
                                             <constraint firstAttribute="bottom" secondItem="h7u-Jx-phX" secondAttribute="bottom" constant="2" id="RkK-Wi-6ZA"/>
                                             <constraint firstItem="u0d-Ec-fIe" firstAttribute="leading" secondItem="xSi-f2-aYx" secondAttribute="leading" constant="16" id="Vc6-8h-wao"/>
+                                            <constraint firstItem="KJ7-G6-egp" firstAttribute="top" secondItem="BE8-kx-WUW" secondAttribute="top" id="qrM-ul-OT4"/>
                                             <constraint firstItem="h7u-Jx-phX" firstAttribute="leading" secondItem="xSi-f2-aYx" secondAttribute="leading" constant="56" id="tuj-Uc-PF6"/>
                                         </constraints>
                                     </view>
@@ -122,6 +129,7 @@
             <connections>
                 <outlet property="background" destination="h7u-Jx-phX" id="VVU-VU-g5P"/>
                 <outlet property="blurView" destination="BE8-kx-WUW" id="bmy-o9-9zx"/>
+                <outlet property="btnHeart" destination="KJ7-G6-egp" id="K1q-uG-7uZ"/>
                 <outlet property="cellContentView" destination="h7u-Jx-phX" id="6yJ-hV-c2E"/>
                 <outlet property="createdTimeLabel" destination="n47-kb-3gW" id="Ehu-re-6o1"/>
                 <outlet property="heightImageView" destination="SCn-gp-OMv" id="JcS-Fv-fy0"/>
@@ -141,6 +149,8 @@
     </designables>
     <resources>
         <image name="avatar_placeholder" width="162" height="162"/>
+        <image name="heart" width="16" height="16"/>
+        <image name="icon16HeartSolidColoured" width="16" height="16"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

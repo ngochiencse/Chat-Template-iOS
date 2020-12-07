@@ -31,20 +31,7 @@ class MessageTextCell: MessageCell {
     private var disposables: [Disposable] = []
     
     private func displayWithViewModel(_ viewModel: MessageTextCellViewModel?) {
-        var trimmedString : String
-        if let unwrapped = viewModel?.text {
-            if (unwrapped.count > Constant.MAX_LENGTH_CHAT_MESSAGE) {
-                let start = unwrapped.startIndex
-                let end = unwrapped.index(start, offsetBy: Constant.MAX_LENGTH_CHAT_MESSAGE)
-                trimmedString = String(unwrapped[start..<end])
-            } else {
-                trimmedString = unwrapped
-            }
-        } else {
-            trimmedString = ""
-        }
-        
-        self.tvContent.attributedText = self.refreshString(string: trimmedString, lineSpacing: 6)
+        self.tvContent.attributedText = viewModel?.attributedText
     }
     
     private func bindToViewModel() {

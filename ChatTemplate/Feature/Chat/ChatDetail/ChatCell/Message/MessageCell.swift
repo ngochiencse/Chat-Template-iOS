@@ -35,6 +35,7 @@ class MessageCell: ChatCell {
     @IBOutlet weak var leftConstraintBackground: NSLayoutConstraint?
     @IBOutlet weak var cellContentView: UIView!
     @IBOutlet weak var createdTimeLabel: UILabel!
+    @IBOutlet weak var btnHeart: UIButton!
 
     private func bindToViewModel() {
         guard let viewModel = self.viewModel as? MessageCellViewModel else { return }
@@ -104,6 +105,21 @@ class MessageCell: ChatCell {
             disposable.disposed(by: rx.disposeBag)
             disposables.append(disposable)
         }
+        
+        do {
+            let disposable = viewModel.isLike.map { (isLike) -> UIImage? in
+                let imageName: String = (isLike == true) ? "icon16HeartSolidColoured" : "heart"
+                return UIImage(named: imageName)
+            }.bind(to: btnHeart.rx.image(for: .normal))
+            disposable.disposed(by: rx.disposeBag)
+            disposables.append(disposable)
+        }
+        
+        do {
+            let disposable = viewModel.isButtonLikeHidden.bind(to: btnHeart.rx.isHidden)
+            disposable.disposed(by: rx.disposeBag)
+            disposables.append(disposable)
+        }
     }
 
     private func unbindFromViewModel() {
@@ -121,6 +137,14 @@ class MessageCell: ChatCell {
         let gesture : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchCellContent(sender:)))
         cellContentView.addGestureRecognizer(gesture)
         gesture.delegate = self
+        
+        btnHeart.addTarget(self, action: #selector(actionHeart(_:)), for: .touchUpInside)
+    }
+
+    @IBAction func actionHeart(_ sender: Any) {
+        if let viewModel = self.viewModel as? MessageCellViewModel {
+            viewModel.toggleLike()
+        }
     }
 
     @objc private func touchCellContent(sender: Any?) {

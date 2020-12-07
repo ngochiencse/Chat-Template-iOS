@@ -16,16 +16,7 @@ enum MessageDisplaySide {
 }
 
 protocol MessageCellViewModel: ChatItemCellViewModel {
-//    var messageId: MessageId? { get }
-//
-//    // Only use for local message
-//    var localId: Int? { get }
-//
-//    // Id of the remote message which lies before the local message. Use to identify position display in chat screen.
-//    var messageIdBefore: MessageId? { get }
-    
     var messageType: MessageCellType { get }
-//    var senderId: ChatUserId { get }
     
     var createdAtStr: String? { get }
     var senderAvatar: AvatarImageViewModel? { get }
@@ -34,12 +25,9 @@ protocol MessageCellViewModel: ChatItemCellViewModel {
     var isSenderAvatarSpaceHidden: BehaviorRelay<Bool> { get }
     var roundCorners: BehaviorRelay<UIRectCorner> { get }
 
-//    func didSendMessageSuccess(messageId: MessageId)
-    
-//    // Like
-//    var isLike: Bool { get }
-//    var isLikeObs: Observable<Bool> { get }
-//    func toggleLike()
-    
-    var data: Any? { get set }
+    // Like
+    var isButtonLikeHidden: BehaviorRelay<Bool> { get }
+    var isLike: BehaviorRelay<Bool> { get }
+    var onToggleLike: Observable<Void> { get }
+    func toggleLike()
 }

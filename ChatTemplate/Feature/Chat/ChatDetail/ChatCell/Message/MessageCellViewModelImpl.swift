@@ -11,15 +11,10 @@ import RxSwift
 import RxCocoa
 import CocoaLumberjack
 
-class MessageCellViewModelImpl: NSObject, MessageCellViewModel {    
-//    private(set) var messageId: MessageId?
-//    private(set) var localId: Int?
-//    private(set) var messageIdBefore: MessageId?
+class MessageCellViewModelImpl: NSObject, MessageCellViewModel {
     var messageType: MessageCellType {
         fatalError("Not implemented")
     }
-//    let senderId: ChatUserId
-//    let myUserId: ChatUserId?
     var itemType: ChatItemType {
         return .message
     }
@@ -31,12 +26,21 @@ class MessageCellViewModelImpl: NSObject, MessageCellViewModel {
     let roundCorners: BehaviorRelay<UIRectCorner> = BehaviorRelay(value: [.topLeft, .topRight, .bottomRight])
     let displaySide: BehaviorRelay<MessageDisplaySide> = BehaviorRelay(value: .left)
     let senderAvatar: AvatarImageViewModel?
-        
-    var data: Any?
-    
+    var isButtonLikeHidden: BehaviorRelay<Bool> = BehaviorRelay(value: true)
+    let isLike: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    let onToggleLikePS: PublishSubject<Void> = PublishSubject()
+    var onToggleLike: Observable<Void> {
+        return onToggleLikePS.asObservable()
+    }
+
     init(senderAvatar: AvatarImageViewModel?, createdAtStr: String?) {
         self.senderAvatar = senderAvatar
         self.createdAtStr = createdAtStr
         super.init()
+    }
+    
+    
+    func toggleLike() {
+        onToggleLikePS.onNext(())
     }
 }

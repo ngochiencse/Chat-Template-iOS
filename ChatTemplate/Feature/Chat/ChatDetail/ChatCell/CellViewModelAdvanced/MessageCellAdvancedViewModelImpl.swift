@@ -15,15 +15,27 @@ class MessageCellAdvancedViewModelImpl: NSObject, MessageCellAdvancedViewModel {
     let messageIdBefore: MessageId?
     let createdAt: Date?
     let cell: MessageCellViewModel
+    var item: ChatItemCellViewModel {
+        return cell
+    }
     
     init(messageId: MessageId?, senderId: ChatUserId?, localId: Int?,
-         messageIdBefore: MessageId?, createdAt: Date?, uiViewModel: MessageCellViewModel) {
+         messageIdBefore: MessageId?, createdAt: Date?, cell: MessageCellViewModel) {
         self.messageId = messageId
         self.senderId = senderId
         self.localId = localId
         self.messageIdBefore = messageIdBefore
         self.createdAt = createdAt
-        self.cell = uiViewModel
+        self.cell = cell
         super.init()
+        cell.onToggleLike.subscribe(onNext: { (_) in
+            self.onToggleLike()
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    private func onToggleLike() {
+        cell.isLike.accept(!cell.isLike.value)
+        
+        // TODO: Call api here
     }
 }

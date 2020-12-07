@@ -9,13 +9,13 @@
 import Foundation
 
 class MessageTextCellViewModelImpl: MessageCellViewModelImpl, MessageTextCellViewModel {
-    private(set) var text: String?
+    let attributedText: NSAttributedString?
     override var messageType: MessageCellType {
         return .text
     }
     
-    init(senderAvatar: AvatarImageViewModel?, createdAtStr: String?, text: String?) {
-        self.text = text
+    init(senderAvatar: AvatarImageViewModel?, createdAtStr: String?, attributedText: NSAttributedString?) {
+        self.attributedText = attributedText
         super.init(senderAvatar: senderAvatar, createdAtStr: createdAtStr)
     }
 }
