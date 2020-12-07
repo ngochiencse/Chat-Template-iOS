@@ -1,5 +1,5 @@
 # iOS Chat Template Project
-This is an ios template project for developingg chat functions.  
+This is an ios template project for developing chat functions.  
 
 ## Requirements
 - Swift
