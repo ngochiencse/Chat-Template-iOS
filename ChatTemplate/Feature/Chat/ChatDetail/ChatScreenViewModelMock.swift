@@ -109,6 +109,8 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
         if loadMore == false {
             basicViewModel.showIndicator.accept(true)
         }
+        
+        // TODO: Implement real api here
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
             let newMessages = self.mockData()
             if loadMore == false {
@@ -167,10 +169,6 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
         onSendMessagesStart.onNext(())
     }
     
-    func likeToggle(isLike: Bool, messageId: String) {
-        
-    }
-
     private func handleCompleteMessageOperation(_ operation: MessageOperationMock, onSuccess success:((_ cellViewModel: MessageCellAdvancedViewModel) -> Void)?) {
         let localId = operation.localId
         let remoteIdBefore = operation.remoteIdBefore
