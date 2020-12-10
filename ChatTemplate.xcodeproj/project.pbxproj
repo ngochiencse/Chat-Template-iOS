@@ -796,6 +796,7 @@
 			buildConfigurationList = 0EF83F2524FCA3EE00948E25 /* Build configuration list for PBXNativeTarget "ChatTemplate" */;
 			buildPhases = (
 				B1830B1129A4BE4AED8C17D6 /* [CP] Check Pods Manifest.lock */,
+				0B4F1B192581E12000C7DCA8 /* ShellScript */,
 				0EF83EF724FCA3ED00948E25 /* Sources */,
 				0EF83EF824FCA3ED00948E25 /* Frameworks */,
 				0EF83EF924FCA3ED00948E25 /* Resources */,
@@ -954,6 +955,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChatTemplate/Pods-ChatTemplate-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		0B4F1B192581E12000C7DCA8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint autocorrect --format\n${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
 		68DEDD41527085FBC310CB45 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
