@@ -35,5 +35,6 @@ class MessageCellAdvancedViewModelImpl: NSObject, MessageCellAdvancedViewModel {
 
     private func onToggleLike() {
         cell.isLike.accept(!cell.isLike.value)
+        // TODO: Call api here
     }
 }

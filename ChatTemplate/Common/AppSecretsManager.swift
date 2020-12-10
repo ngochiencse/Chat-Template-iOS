@@ -48,6 +48,7 @@ class AppSecretsManager {
  */
 protocol AppSecrets {
     var secretKey: String { get }
+    // TODO: Define more app secret key here
 
 }
 
@@ -56,6 +57,7 @@ protocol AppSecrets {
  */
 private class AppSecretsStaging: AppSecrets {
     let secretKey: String = "9667048833"
+    // TODO: Specify more app secret value here
 
 }
 
@@ -64,5 +66,6 @@ private class AppSecretsStaging: AppSecrets {
  */
 private class AppSecretsProduct: AppSecrets {
     let secretKey: String = "1669514755"
+    // TODO: Specify more app secret value here
 
 }

@@ -116,6 +116,7 @@ https://hoidulich.net/wp-content/uploads/2019/11/\
         if loadMore == false {
             basicViewModel.showIndicator.accept(true)
         }
+        // TODO: Implement real api here
 
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
             let newMessages = self.mockData()
