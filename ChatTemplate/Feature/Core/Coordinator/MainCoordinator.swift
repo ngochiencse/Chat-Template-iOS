@@ -17,23 +17,8 @@ class MainCoordinator: NSObject, Coordinator {
     }
     
     func start() {
-        let vc: MainTabbarContainerController = MainTabbarContainerController()
-        if let articleViewController: ArticleViewController = vc.content.viewControllers.first(where: { (ele: UIViewController) -> Bool in
-            return ele is ArticleViewController
-        }) as? ArticleViewController {
-            articleViewController.delegate = self
-        }
+        let vc: ChatListViewController = ChatListViewController()
         navigationController.pushViewController(vc, animated: false)
         root.showViewController(navigationController, animated: true)
-    }
-}
-
-extension MainCoordinator: ArticleViewControllerDelegate {
-    func articleViewController(_ articleViewController: ArticleViewController, didSelect article: ArticleInfo) {
-        if let urlString: String = article.url, let vc : WebViewController = WebViewController(urlString: urlString) {
-            vc.title = "Web View"
-            vc.bottomToolBarHidden = true
-            self.navigationController.pushViewController(vc, animated: true)
-        }
     }
 }

@@ -7,19 +7,9 @@
 //
 
 import Foundation
-
-enum SplashScreenNextAction: Int {
-    case tutorialScreen = 0
-    case loginScreen
-    case homeScreen
-}
-
-protocol SplashScreenViewModelDelegate: class {
-    func splashScreen(splashScreen : SplashScreenViewModel, didFinishWithNextAction nextAction: SplashScreenNextAction)
-}
+import RxSwift
 
 protocol SplashScreenViewModel: class {
-    var delegate: SplashScreenViewModelDelegate? { get set }
+    var onFinish: PublishSubject<Void> { get }
     func checkLocalData()
 }
-

@@ -25,10 +25,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.overrideUserInterfaceStyle = .light
         appDelegate.setUp(window)
-
-        if let userInfo = connectionOptions.notificationResponse?.notification.request.content.userInfo {
-            appDelegate.coordinator.didStartAppWithPushContent(userInfo)
-        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -20,17 +20,12 @@ import SwiftDate
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var coordinator: AppCoordinator!
-    var updateDeviceTokenService: UpdateDeviceTokenService!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         if #available(iOS 13, *) { } else {
             window = UIWindow(frame: UIScreen.main.bounds)
             setUp(window)
-
-            if let remoteNotification = launchOptions?[.remoteNotification] as? [String: Any] {
-                coordinator.didStartAppWithPushContent(remoteNotification)
-            }
         }
 
         return true
@@ -73,9 +68,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Print config infos
         Environment.shared.logEnvironmentInfos()
         AppSecretsManager.shared.logAppSecretInfos()
-        
-        // Update device token service
-        setUpUpdateDeviceToken()
     }
 
     func setUpFirebase() {
@@ -122,15 +114,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }).disposed(by: rx.disposeBag)
     }
     
-    func setUpUpdateDeviceToken() {
-        updateDeviceTokenService = UpdateDeviceTokenServiceImpl()
-        NotificationCenter.default.addObserver(self, selector: #selector(handleLoginSuccessNotification), name: .LoginSuccess, object: nil)
-    }
-    
-    @objc func handleLoginSuccessNotification() {
-        updateDeviceTokenService.events.onNext(.loginSuccess)
-    }
-
     @objc fileprivate func handleFingerQuadrupleTap(_ tapRecognizer: UITapGestureRecognizer) {
         #if FLEX_ENABLED
         if tapRecognizer.state == .recognized {
@@ -144,8 +127,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         DDLogDebug("didReceiveRemoteNotification: \(userInfo)")
         
-        coordinator.didReceivePushContent(userInfo, isAppActive: application.applicationState == .active)
-
         completionHandler(UIBackgroundFetchResult.newData)
     }
 
@@ -189,10 +170,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("Firebase registration token: \(fcmToken)")
-        
-        if let fcmToken = fcmToken {
-            updateDeviceTokenService.events.onNext(.receive(fcmToken))
-        }
     }
 }
 

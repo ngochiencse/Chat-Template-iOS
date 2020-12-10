@@ -16,6 +16,7 @@
 		0E461673256E302200D9A9C9 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E46166D256E302200D9A9C9 /* AvatarImageView.swift */; };
 		0E46167C256E3CE700D9A9C9 /* CustomUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E46167B256E3CE700D9A9C9 /* CustomUIView.swift */; };
 		0E461684256E41FD00D9A9C9 /* UIBezierPathUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E461683256E41FD00D9A9C9 /* UIBezierPathUtils.swift */; };
+		0EEFEE502581C21C00DBCF3B /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFEE4F2581C21C00DBCF3B /* MainCoordinator.swift */; };
 		0EF83EFF24FCA3ED00948E25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83EFE24FCA3ED00948E25 /* AppDelegate.swift */; };
 		0EF83F0124FCA3ED00948E25 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F0024FCA3ED00948E25 /* SceneDelegate.swift */; };
 		0EF83F0824FCA3EE00948E25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EF83F0724FCA3EE00948E25 /* Assets.xcassets */; };
@@ -69,34 +70,16 @@
 		0EF83FE924FCA50E00948E25 /* PrefsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F6524FCA50D00948E25 /* PrefsImpl.swift */; };
 		0EF83FEA24FCA50E00948E25 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F6624FCA50D00948E25 /* Enum.swift */; };
 		0EF83FEB24FCA50E00948E25 /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F6724FCA50D00948E25 /* Prefs.swift */; };
-		0EF83FEC24FCA50E00948E25 /* APIMultipleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F6A24FCA50D00948E25 /* APIMultipleViewController.swift */; };
-		0EF83FED24FCA50E00948E25 /* APIMultipleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F6B24FCA50D00948E25 /* APIMultipleViewModel.swift */; };
-		0EF83FEE24FCA50E00948E25 /* APIMultipleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF83F6C24FCA50D00948E25 /* APIMultipleViewController.xib */; };
-		0EF83FEF24FCA50E00948E25 /* APIMultipleViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F6D24FCA50D00948E25 /* APIMultipleViewModelImpl.swift */; };
 		0EF83FF024FCA50E00948E25 /* SplashScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF83F7024FCA50D00948E25 /* SplashScreenViewController.xib */; };
 		0EF83FF124FCA50E00948E25 /* SplashScreenViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F7124FCA50D00948E25 /* SplashScreenViewModelImpl.swift */; };
 		0EF83FF224FCA50E00948E25 /* SplashScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F7224FCA50D00948E25 /* SplashScreenViewModel.swift */; };
 		0EF83FF324FCA50E00948E25 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F7324FCA50D00948E25 /* SplashScreenViewController.swift */; };
-		0EF83FF424FCA50E00948E25 /* TutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F7524FCA50D00948E25 /* TutorialViewModel.swift */; };
-		0EF83FF524FCA50E00948E25 /* TutorialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF83F7624FCA50D00948E25 /* TutorialCell.xib */; };
-		0EF83FF624FCA50E00948E25 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F7724FCA50D00948E25 /* TutorialViewController.swift */; };
-		0EF83FF724FCA50E00948E25 /* TutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF83F7824FCA50D00948E25 /* TutorialViewController.xib */; };
-		0EF83FF824FCA50E00948E25 /* TutorialViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F7924FCA50D00948E25 /* TutorialViewModelImpl.swift */; };
-		0EF83FF924FCA50E00948E25 /* TutorialCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F7A24FCA50D00948E25 /* TutorialCell.swift */; };
-		0EF83FFA24FCA50E00948E25 /* PostArticleFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F7C24FCA50D00948E25 /* PostArticleFormViewModel.swift */; };
-		0EF83FFB24FCA50E00948E25 /* PostArticleFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F7D24FCA50D00948E25 /* PostArticleFormViewController.swift */; };
-		0EF83FFC24FCA50E00948E25 /* PostArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F7E24FCA50D00948E25 /* PostArticleViewController.swift */; };
-		0EF83FFD24FCA50E00948E25 /* PostArticleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF83F7F24FCA50D00948E25 /* PostArticleViewController.xib */; };
-		0EF83FFE24FCA50E00948E25 /* PostArticleFormViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF83F8024FCA50D00948E25 /* PostArticleFormViewController.xib */; };
-		0EF83FFF24FCA50E00948E25 /* PostArticleFormViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F8124FCA50D00948E25 /* PostArticleFormViewModelImpl.swift */; };
 		0EF8400024FCA50E00948E25 /* LoadingIndicatorViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F8424FCA50D00948E25 /* LoadingIndicatorViewModelImpl.swift */; };
 		0EF8400124FCA50E00948E25 /* BasicViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F8524FCA50D00948E25 /* BasicViewModelImpl.swift */; };
 		0EF8400224FCA50E00948E25 /* LoadingIndicatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F8624FCA50D00948E25 /* LoadingIndicatorViewModel.swift */; };
 		0EF8400324FCA50E00948E25 /* BasicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F8724FCA50D00948E25 /* BasicViewModel.swift */; };
 		0EF8400424FCA50E00948E25 /* AppCoordinatorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F8924FCA50D00948E25 /* AppCoordinatorImpl.swift */; };
 		0EF8400524FCA50E00948E25 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F8A24FCA50D00948E25 /* AppCoordinator.swift */; };
-		0EF8400624FCA50E00948E25 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F8B24FCA50D00948E25 /* AuthCoordinator.swift */; };
-		0EF8400724FCA50E00948E25 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F8C24FCA50D00948E25 /* MainCoordinator.swift */; };
 		0EF8400824FCA50E00948E25 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F8D24FCA50D00948E25 /* Coordinator.swift */; };
 		0EF8400924FCA50E00948E25 /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F8F24FCA50D00948E25 /* AlertBuilder.swift */; };
 		0EF8400A24FCA50E00948E25 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F9024FCA50D00948E25 /* AlertModel.swift */; };
@@ -105,29 +88,9 @@
 		0EF8400D24FCA50E00948E25 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F9424FCA50D00948E25 /* BaseViewController.swift */; };
 		0EF8400E24FCA50E00948E25 /* SwitchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F9524FCA50E00948E25 /* SwitchNavigationController.swift */; };
 		0EF8400F24FCA50E00948E25 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F9624FCA50E00948E25 /* BaseNavigationController.swift */; };
-		0EF8401024FCA50E00948E25 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F9824FCA50E00948E25 /* WebViewController.swift */; };
-		0EF8401124FCA50E00948E25 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF83F9924FCA50E00948E25 /* WebViewController.xib */; };
-		0EF8401224FCA50E00948E25 /* MainTabbarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF83F9B24FCA50E00948E25 /* MainTabbarController.xib */; };
-		0EF8401324FCA50E00948E25 /* MainTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83F9C24FCA50E00948E25 /* MainTabbarController.swift */; };
 		0EF8401424FCA50E00948E25 /* RootViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83FA724FCA50E00948E25 /* RootViewModelImpl.swift */; };
 		0EF8401524FCA50E00948E25 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83FA824FCA50E00948E25 /* RootViewController.swift */; };
 		0EF8401624FCA50E00948E25 /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83FA924FCA50E00948E25 /* RootViewModel.swift */; };
-		0EF8401724FCA50E00948E25 /* ArticleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF83FAB24FCA50E00948E25 /* ArticleViewController.xib */; };
-		0EF8401824FCA50E00948E25 /* ArticleTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83FAC24FCA50E00948E25 /* ArticleTableCell.swift */; };
-		0EF8401924FCA50E00948E25 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83FAD24FCA50E00948E25 /* ArticleViewController.swift */; };
-		0EF8401A24FCA50E00948E25 /* ArticleViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83FAE24FCA50E00948E25 /* ArticleViewModelImpl.swift */; };
-		0EF8401B24FCA50E00948E25 /* RoundedUISampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF83FAF24FCA50E00948E25 /* RoundedUISampleViewController.xib */; };
-		0EF8401C24FCA50E00948E25 /* ArticleTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF83FB024FCA50E00948E25 /* ArticleTableCell.xib */; };
-		0EF8401D24FCA50E00948E25 /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83FB124FCA50E00948E25 /* ArticleViewModel.swift */; };
-		0EF8401E24FCA50E00948E25 /* RoundedUISampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83FB224FCA50E00948E25 /* RoundedUISampleViewController.swift */; };
-		0EF8401F24FCA50E00948E25 /* UpdateDeviceTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83FB424FCA50E00948E25 /* UpdateDeviceTokenService.swift */; };
-		0EF8402024FCA50E00948E25 /* UpdateDeviceTokenServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83FB524FCA50E00948E25 /* UpdateDeviceTokenServiceImpl.swift */; };
-		0EF8402124FCA50E00948E25 /* AppCoordinatorServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83FB624FCA50E00948E25 /* AppCoordinatorServiceImpl.swift */; };
-		0EF8402224FCA50E00948E25 /* AppCoordinatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83FB724FCA50E00948E25 /* AppCoordinatorService.swift */; };
-		0EF8402324FCA50E00948E25 /* LoginViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83FB924FCA50E00948E25 /* LoginViewModelImpl.swift */; };
-		0EF8402424FCA50E00948E25 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83FBA24FCA50E00948E25 /* LoginViewModel.swift */; };
-		0EF8402524FCA50E00948E25 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF83FBB24FCA50E00948E25 /* LoginViewController.xib */; };
-		0EF8402624FCA50E00948E25 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF83FBC24FCA50E00948E25 /* LoginViewController.swift */; };
 		0EF8411E24FCB6E300948E25 /* ChatScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF840E424FCB6E300948E25 /* ChatScreenViewController.xib */; };
 		0EF8411F24FCB6E300948E25 /* ChatScreenViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF840E524FCB6E300948E25 /* ChatScreenViewModelMock.swift */; };
 		0EF8412024FCB6E300948E25 /* LoadMoreHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF840E824FCB6E300948E25 /* LoadMoreHeaderFooterView.xib */; };
@@ -202,6 +165,7 @@
 		0E46166D256E302200D9A9C9 /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		0E46167B256E3CE700D9A9C9 /* CustomUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIView.swift; sourceTree = "<group>"; };
 		0E461683256E41FD00D9A9C9 /* UIBezierPathUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathUtils.swift; sourceTree = "<group>"; };
+		0EEFEE4F2581C21C00DBCF3B /* MainCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		0EF83EFB24FCA3ED00948E25 /* ChatTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EF83EFE24FCA3ED00948E25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0EF83F0024FCA3ED00948E25 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -262,34 +226,16 @@
 		0EF83F6524FCA50D00948E25 /* PrefsImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefsImpl.swift; sourceTree = "<group>"; };
 		0EF83F6624FCA50D00948E25 /* Enum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		0EF83F6724FCA50D00948E25 /* Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefs.swift; sourceTree = "<group>"; };
-		0EF83F6A24FCA50D00948E25 /* APIMultipleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMultipleViewController.swift; sourceTree = "<group>"; };
-		0EF83F6B24FCA50D00948E25 /* APIMultipleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMultipleViewModel.swift; sourceTree = "<group>"; };
-		0EF83F6C24FCA50D00948E25 /* APIMultipleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APIMultipleViewController.xib; sourceTree = "<group>"; };
-		0EF83F6D24FCA50D00948E25 /* APIMultipleViewModelImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMultipleViewModelImpl.swift; sourceTree = "<group>"; };
 		0EF83F7024FCA50D00948E25 /* SplashScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashScreenViewController.xib; sourceTree = "<group>"; };
 		0EF83F7124FCA50D00948E25 /* SplashScreenViewModelImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewModelImpl.swift; sourceTree = "<group>"; };
 		0EF83F7224FCA50D00948E25 /* SplashScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewModel.swift; sourceTree = "<group>"; };
 		0EF83F7324FCA50D00948E25 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
-		0EF83F7524FCA50D00948E25 /* TutorialViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewModel.swift; sourceTree = "<group>"; };
-		0EF83F7624FCA50D00948E25 /* TutorialCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialCell.xib; sourceTree = "<group>"; };
-		0EF83F7724FCA50D00948E25 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
-		0EF83F7824FCA50D00948E25 /* TutorialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialViewController.xib; sourceTree = "<group>"; };
-		0EF83F7924FCA50D00948E25 /* TutorialViewModelImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewModelImpl.swift; sourceTree = "<group>"; };
-		0EF83F7A24FCA50D00948E25 /* TutorialCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialCell.swift; sourceTree = "<group>"; };
-		0EF83F7C24FCA50D00948E25 /* PostArticleFormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostArticleFormViewModel.swift; sourceTree = "<group>"; };
-		0EF83F7D24FCA50D00948E25 /* PostArticleFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostArticleFormViewController.swift; sourceTree = "<group>"; };
-		0EF83F7E24FCA50D00948E25 /* PostArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostArticleViewController.swift; sourceTree = "<group>"; };
-		0EF83F7F24FCA50D00948E25 /* PostArticleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostArticleViewController.xib; sourceTree = "<group>"; };
-		0EF83F8024FCA50D00948E25 /* PostArticleFormViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostArticleFormViewController.xib; sourceTree = "<group>"; };
-		0EF83F8124FCA50D00948E25 /* PostArticleFormViewModelImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostArticleFormViewModelImpl.swift; sourceTree = "<group>"; };
 		0EF83F8424FCA50D00948E25 /* LoadingIndicatorViewModelImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorViewModelImpl.swift; sourceTree = "<group>"; };
 		0EF83F8524FCA50D00948E25 /* BasicViewModelImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicViewModelImpl.swift; sourceTree = "<group>"; };
 		0EF83F8624FCA50D00948E25 /* LoadingIndicatorViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorViewModel.swift; sourceTree = "<group>"; };
 		0EF83F8724FCA50D00948E25 /* BasicViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicViewModel.swift; sourceTree = "<group>"; };
 		0EF83F8924FCA50D00948E25 /* AppCoordinatorImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinatorImpl.swift; sourceTree = "<group>"; };
 		0EF83F8A24FCA50D00948E25 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		0EF83F8B24FCA50D00948E25 /* AuthCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
-		0EF83F8C24FCA50D00948E25 /* MainCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		0EF83F8D24FCA50D00948E25 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		0EF83F8F24FCA50D00948E25 /* AlertBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
 		0EF83F9024FCA50D00948E25 /* AlertModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
@@ -298,29 +244,9 @@
 		0EF83F9424FCA50D00948E25 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		0EF83F9524FCA50E00948E25 /* SwitchNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchNavigationController.swift; sourceTree = "<group>"; };
 		0EF83F9624FCA50E00948E25 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
-		0EF83F9824FCA50E00948E25 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		0EF83F9924FCA50E00948E25 /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
-		0EF83F9B24FCA50E00948E25 /* MainTabbarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainTabbarController.xib; sourceTree = "<group>"; };
-		0EF83F9C24FCA50E00948E25 /* MainTabbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabbarController.swift; sourceTree = "<group>"; };
 		0EF83FA724FCA50E00948E25 /* RootViewModelImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewModelImpl.swift; sourceTree = "<group>"; };
 		0EF83FA824FCA50E00948E25 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		0EF83FA924FCA50E00948E25 /* RootViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
-		0EF83FAB24FCA50E00948E25 /* ArticleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleViewController.xib; sourceTree = "<group>"; };
-		0EF83FAC24FCA50E00948E25 /* ArticleTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleTableCell.swift; sourceTree = "<group>"; };
-		0EF83FAD24FCA50E00948E25 /* ArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
-		0EF83FAE24FCA50E00948E25 /* ArticleViewModelImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleViewModelImpl.swift; sourceTree = "<group>"; };
-		0EF83FAF24FCA50E00948E25 /* RoundedUISampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoundedUISampleViewController.xib; sourceTree = "<group>"; };
-		0EF83FB024FCA50E00948E25 /* ArticleTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleTableCell.xib; sourceTree = "<group>"; };
-		0EF83FB124FCA50E00948E25 /* ArticleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
-		0EF83FB224FCA50E00948E25 /* RoundedUISampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedUISampleViewController.swift; sourceTree = "<group>"; };
-		0EF83FB424FCA50E00948E25 /* UpdateDeviceTokenService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateDeviceTokenService.swift; sourceTree = "<group>"; };
-		0EF83FB524FCA50E00948E25 /* UpdateDeviceTokenServiceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateDeviceTokenServiceImpl.swift; sourceTree = "<group>"; };
-		0EF83FB624FCA50E00948E25 /* AppCoordinatorServiceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinatorServiceImpl.swift; sourceTree = "<group>"; };
-		0EF83FB724FCA50E00948E25 /* AppCoordinatorService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinatorService.swift; sourceTree = "<group>"; };
-		0EF83FB924FCA50E00948E25 /* LoginViewModelImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModelImpl.swift; sourceTree = "<group>"; };
-		0EF83FBA24FCA50E00948E25 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		0EF83FBB24FCA50E00948E25 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		0EF83FBC24FCA50E00948E25 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0EF840E424FCB6E300948E25 /* ChatScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatScreenViewController.xib; sourceTree = "<group>"; };
 		0EF840E524FCB6E300948E25 /* ChatScreenViewModelMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatScreenViewModelMock.swift; sourceTree = "<group>"; };
 		0EF840E824FCB6E300948E25 /* LoadMoreHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadMoreHeaderFooterView.xib; sourceTree = "<group>"; };
@@ -611,76 +537,23 @@
 		0EF83F6824FCA50D00948E25 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
-				0EF83F6924FCA50D00948E25 /* APIMultipleDemo */,
-				0EF83F6E24FCA50D00948E25 /* Music */,
 				0EF83F6F24FCA50D00948E25 /* Splash */,
-				0EF83F7424FCA50D00948E25 /* Tutorial */,
-				0EF83F7B24FCA50D00948E25 /* Post */,
 				0EF83F8224FCA50D00948E25 /* Core */,
-				0EF83F9724FCA50E00948E25 /* WebView */,
-				0EF83F9A24FCA50E00948E25 /* Tabbar */,
 				0EF83FA624FCA50E00948E25 /* Root */,
-				0EF83FAA24FCA50E00948E25 /* Article */,
-				0EF83FB324FCA50E00948E25 /* Service */,
-				0EF83FB824FCA50E00948E25 /* Login */,
 				0EF840D324FCB6E300948E25 /* Chat */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
 		};
-		0EF83F6924FCA50D00948E25 /* APIMultipleDemo */ = {
-			isa = PBXGroup;
-			children = (
-				0EF83F6A24FCA50D00948E25 /* APIMultipleViewController.swift */,
-				0EF83F6B24FCA50D00948E25 /* APIMultipleViewModel.swift */,
-				0EF83F6C24FCA50D00948E25 /* APIMultipleViewController.xib */,
-				0EF83F6D24FCA50D00948E25 /* APIMultipleViewModelImpl.swift */,
-			);
-			path = APIMultipleDemo;
-			sourceTree = "<group>";
-		};
-		0EF83F6E24FCA50D00948E25 /* Music */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Music;
-			sourceTree = "<group>";
-		};
 		0EF83F6F24FCA50D00948E25 /* Splash */ = {
 			isa = PBXGroup;
 			children = (
-				0EF83F7024FCA50D00948E25 /* SplashScreenViewController.xib */,
-				0EF83F7124FCA50D00948E25 /* SplashScreenViewModelImpl.swift */,
 				0EF83F7224FCA50D00948E25 /* SplashScreenViewModel.swift */,
+				0EF83F7124FCA50D00948E25 /* SplashScreenViewModelImpl.swift */,
 				0EF83F7324FCA50D00948E25 /* SplashScreenViewController.swift */,
+				0EF83F7024FCA50D00948E25 /* SplashScreenViewController.xib */,
 			);
 			path = Splash;
-			sourceTree = "<group>";
-		};
-		0EF83F7424FCA50D00948E25 /* Tutorial */ = {
-			isa = PBXGroup;
-			children = (
-				0EF83F7524FCA50D00948E25 /* TutorialViewModel.swift */,
-				0EF83F7624FCA50D00948E25 /* TutorialCell.xib */,
-				0EF83F7724FCA50D00948E25 /* TutorialViewController.swift */,
-				0EF83F7824FCA50D00948E25 /* TutorialViewController.xib */,
-				0EF83F7924FCA50D00948E25 /* TutorialViewModelImpl.swift */,
-				0EF83F7A24FCA50D00948E25 /* TutorialCell.swift */,
-			);
-			path = Tutorial;
-			sourceTree = "<group>";
-		};
-		0EF83F7B24FCA50D00948E25 /* Post */ = {
-			isa = PBXGroup;
-			children = (
-				0EF83F7C24FCA50D00948E25 /* PostArticleFormViewModel.swift */,
-				0EF83F7D24FCA50D00948E25 /* PostArticleFormViewController.swift */,
-				0EF83F7E24FCA50D00948E25 /* PostArticleViewController.swift */,
-				0EF83F7F24FCA50D00948E25 /* PostArticleViewController.xib */,
-				0EF83F8024FCA50D00948E25 /* PostArticleFormViewController.xib */,
-				0EF83F8124FCA50D00948E25 /* PostArticleFormViewModelImpl.swift */,
-			);
-			path = Post;
 			sourceTree = "<group>";
 		};
 		0EF83F8224FCA50D00948E25 /* Core */ = {
@@ -710,9 +583,8 @@
 			children = (
 				0EF83F8924FCA50D00948E25 /* AppCoordinatorImpl.swift */,
 				0EF83F8A24FCA50D00948E25 /* AppCoordinator.swift */,
-				0EF83F8B24FCA50D00948E25 /* AuthCoordinator.swift */,
-				0EF83F8C24FCA50D00948E25 /* MainCoordinator.swift */,
 				0EF83F8D24FCA50D00948E25 /* Coordinator.swift */,
+				0EEFEE4F2581C21C00DBCF3B /* MainCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -738,24 +610,6 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		0EF83F9724FCA50E00948E25 /* WebView */ = {
-			isa = PBXGroup;
-			children = (
-				0EF83F9824FCA50E00948E25 /* WebViewController.swift */,
-				0EF83F9924FCA50E00948E25 /* WebViewController.xib */,
-			);
-			path = WebView;
-			sourceTree = "<group>";
-		};
-		0EF83F9A24FCA50E00948E25 /* Tabbar */ = {
-			isa = PBXGroup;
-			children = (
-				0EF83F9C24FCA50E00948E25 /* MainTabbarController.swift */,
-				0EF83F9B24FCA50E00948E25 /* MainTabbarController.xib */,
-			);
-			path = Tabbar;
-			sourceTree = "<group>";
-		};
 		0EF83FA624FCA50E00948E25 /* Root */ = {
 			isa = PBXGroup;
 			children = (
@@ -764,43 +618,6 @@
 				0EF83FA924FCA50E00948E25 /* RootViewModel.swift */,
 			);
 			path = Root;
-			sourceTree = "<group>";
-		};
-		0EF83FAA24FCA50E00948E25 /* Article */ = {
-			isa = PBXGroup;
-			children = (
-				0EF83FAB24FCA50E00948E25 /* ArticleViewController.xib */,
-				0EF83FAC24FCA50E00948E25 /* ArticleTableCell.swift */,
-				0EF83FAD24FCA50E00948E25 /* ArticleViewController.swift */,
-				0EF83FAE24FCA50E00948E25 /* ArticleViewModelImpl.swift */,
-				0EF83FAF24FCA50E00948E25 /* RoundedUISampleViewController.xib */,
-				0EF83FB024FCA50E00948E25 /* ArticleTableCell.xib */,
-				0EF83FB124FCA50E00948E25 /* ArticleViewModel.swift */,
-				0EF83FB224FCA50E00948E25 /* RoundedUISampleViewController.swift */,
-			);
-			path = Article;
-			sourceTree = "<group>";
-		};
-		0EF83FB324FCA50E00948E25 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				0EF83FB424FCA50E00948E25 /* UpdateDeviceTokenService.swift */,
-				0EF83FB524FCA50E00948E25 /* UpdateDeviceTokenServiceImpl.swift */,
-				0EF83FB624FCA50E00948E25 /* AppCoordinatorServiceImpl.swift */,
-				0EF83FB724FCA50E00948E25 /* AppCoordinatorService.swift */,
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		0EF83FB824FCA50E00948E25 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				0EF83FB924FCA50E00948E25 /* LoginViewModelImpl.swift */,
-				0EF83FBA24FCA50E00948E25 /* LoginViewModel.swift */,
-				0EF83FBB24FCA50E00948E25 /* LoginViewController.xib */,
-				0EF83FBC24FCA50E00948E25 /* LoginViewController.swift */,
-			);
-			path = Login;
 			sourceTree = "<group>";
 		};
 		0EF840D324FCB6E300948E25 /* Chat */ = {
@@ -1081,37 +898,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EF83FD324FCA50E00948E25 /* Staging.xcconfig in Resources */,
-				0EF83FEE24FCA50E00948E25 /* APIMultipleViewController.xib in Resources */,
 				0EF83FDA24FCA50E00948E25 /* delete_article_api.php in Resources */,
-				0EF8401124FCA50E00948E25 /* WebViewController.xib in Resources */,
 				0EF8414E24FCD67A00948E25 /* ChatDetailViewPhotoViewController.xib in Resources */,
-				0EF8401224FCA50E00948E25 /* MainTabbarController.xib in Resources */,
 				0EF8415824FCDA4600948E25 /* ChatListViewController.xib in Resources */,
 				0EF83FF024FCA50E00948E25 /* SplashScreenViewController.xib in Resources */,
-				0EF83FFE24FCA50E00948E25 /* PostArticleFormViewController.xib in Resources */,
 				0EF8412A24FCB6E300948E25 /* MessageImageCell.xib in Resources */,
 				0EF83FD424FCA50E00948E25 /* Product.xcconfig in Resources */,
-				0EF83FF524FCA50E00948E25 /* TutorialCell.xib in Resources */,
 				0EF8411E24FCB6E300948E25 /* ChatScreenViewController.xib in Resources */,
 				0EF83FD824FCA50E00948E25 /* api_videos_ranking_sample_response.json in Resources */,
 				0EF83F0B24FCA3EE00948E25 /* LaunchScreen.storyboard in Resources */,
-				0EF8401724FCA50E00948E25 /* ArticleViewController.xib in Resources */,
 				0EF8412E24FCB6E300948E25 /* MessageTextCell.xib in Resources */,
 				0EF83FDB24FCA50E00948E25 /* login_api.php in Resources */,
 				0EF83FD724FCA50E00948E25 /* campaign_and_others_info_get_api.php in Resources */,
 				0EF8412024FCB6E300948E25 /* LoadMoreHeaderFooterView.xib in Resources */,
 				0EF83FD224FCA50E00948E25 /* api_video_detail_response_sample.json in Resources */,
-				0EF8402524FCA50E00948E25 /* LoginViewController.xib in Resources */,
-				0EF83FFD24FCA50E00948E25 /* PostArticleViewController.xib in Resources */,
 				0EF83FDC24FCA50E00948E25 /* api_notifications_sample_response.json in Resources */,
 				0EF8412324FCB6E300948E25 /* ChatTimeCell.xib in Resources */,
-				0EF8401C24FCA50E00948E25 /* ArticleTableCell.xib in Resources */,
 				0EF83F0824FCA3EE00948E25 /* Assets.xcassets in Resources */,
 				0EF83FD924FCA50E00948E25 /* api_top_sample_response.json in Resources */,
 				0EF83FD524FCA50E00948E25 /* api_videos_sample_response.json in Resources */,
 				0EF83FD624FCA50E00948E25 /* GoogleService-Info.plist in Resources */,
-				0EF83FF724FCA50E00948E25 /* TutorialViewController.xib in Resources */,
-				0EF8401B24FCA50E00948E25 /* RoundedUISampleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1241,15 +1047,12 @@
 			files = (
 				0EF83FEB24FCA50E00948E25 /* Prefs.swift in Sources */,
 				0EF8413B24FCB6E300948E25 /* ChatItemsModifierImpl.swift in Sources */,
-				0EF83FF924FCA50E00948E25 /* TutorialCell.swift in Sources */,
 				0EF83FE924FCA50E00948E25 /* PrefsImpl.swift in Sources */,
 				0EF8412924FCB6E300948E25 /* MessageImageCellViewModel.swift in Sources */,
-				0EF8401A24FCA50E00948E25 /* ArticleViewModelImpl.swift in Sources */,
 				0EF8413724FCB6E300948E25 /* ChatScreenViewModel.swift in Sources */,
 				0E461671256E302200D9A9C9 /* AvatarImageViewModel.swift in Sources */,
 				0EF83FE024FCA50E00948E25 /* UIActivityIndicatorUtils.swift in Sources */,
 				0EF83FF224FCA50E00948E25 /* SplashScreenViewModel.swift in Sources */,
-				0EF83FFF24FCA50E00948E25 /* PostArticleFormViewModelImpl.swift in Sources */,
 				0EF8413D24FCB6E300948E25 /* MessageImageOperationMock.swift in Sources */,
 				0EF83FBE24FCA50E00948E25 /* ArticleInfo.swift in Sources */,
 				0EF8413124FCB6E300948E25 /* ChatUser.swift in Sources */,
@@ -1260,25 +1063,18 @@
 				0EF83FCB24FCA50E00948E25 /* Provider.swift in Sources */,
 				0EF83FC524FCA50E00948E25 /* TopTarget.swift in Sources */,
 				0EF83FE624FCA50E00948E25 /* DictionaryUtils.swift in Sources */,
-				0EF8402624FCA50E00948E25 /* LoginViewController.swift in Sources */,
-				0EF8401324FCA50E00948E25 /* MainTabbarController.swift in Sources */,
 				0EF8400E24FCA50E00948E25 /* SwitchNavigationController.swift in Sources */,
 				0EF83FC024FCA50E00948E25 /* PointTarget.swift in Sources */,
-				0EF8400724FCA50E00948E25 /* MainCoordinator.swift in Sources */,
 				0EF8415224FCD78B00948E25 /* ChatDetailViewPhotoViewModel.swift in Sources */,
 				0E461673256E302200D9A9C9 /* AvatarImageView.swift in Sources */,
-				0EF8402324FCA50E00948E25 /* LoginViewModelImpl.swift in Sources */,
 				0EF83FC824FCA50E00948E25 /* ProviderAPIBasic.swift in Sources */,
 				0EF83FE324FCA50E00948E25 /* DateUtils.swift in Sources */,
-				0EF8402424FCA50E00948E25 /* LoginViewModel.swift in Sources */,
 				0EF8413424FCB6E300948E25 /* ChatCell.swift in Sources */,
 				0EF8400924FCA50E00948E25 /* AlertBuilder.swift in Sources */,
 				0EF8414F24FCD67A00948E25 /* ChatDetailViewPhotoViewController.swift in Sources */,
-				0EF8402224FCA50E00948E25 /* AppCoordinatorService.swift in Sources */,
 				0EF8414624FCD43700948E25 /* UIView+Utils.swift in Sources */,
 				0EF8415324FCD78B00948E25 /* ChatDetailViewPhotoViewModelImpl.swift in Sources */,
 				0EF83FE724FCA50E00948E25 /* UINavigationControllerUtils.swift in Sources */,
-				0EF83FFC24FCA50E00948E25 /* PostArticleViewController.swift in Sources */,
 				0E2E2CA32578DDBE00A09E34 /* MessageCellAdvancedViewModel.swift in Sources */,
 				0EF8411F24FCB6E300948E25 /* ChatScreenViewModelMock.swift in Sources */,
 				0EF83FCF24FCA50E00948E25 /* APIDecoder.swift in Sources */,
@@ -1286,7 +1082,6 @@
 				0EF83FCC24FCA50E00948E25 /* TokenRefresher.swift in Sources */,
 				0EF83FCE24FCA50E00948E25 /* ProviderAPIWithRefreshToken.swift in Sources */,
 				0EF8412624FCB6E300948E25 /* MessageCellViewModel.swift in Sources */,
-				0EF83FF424FCA50E00948E25 /* TutorialViewModel.swift in Sources */,
 				0EF83FE424FCA50E00948E25 /* UIViewControllerUtils.swift in Sources */,
 				0E46166F256E302200D9A9C9 /* AvatarButton.swift in Sources */,
 				0EF8400A24FCA50E00948E25 /* AlertModel.swift in Sources */,
@@ -1296,46 +1091,33 @@
 				0EF8415724FCDA4600948E25 /* ChatListViewController.swift in Sources */,
 				0EF83FDD24FCA50E00948E25 /* Constant.swift in Sources */,
 				0EF8413524FCB6E300948E25 /* ChatCellViewModel.swift in Sources */,
-				0EF8402124FCA50E00948E25 /* AppCoordinatorServiceImpl.swift in Sources */,
-				0EF8401F24FCA50E00948E25 /* UpdateDeviceTokenService.swift in Sources */,
 				0EF8413A24FCB6E300948E25 /* ChatItemsModifier.swift in Sources */,
 				0EF83FD124FCA50E00948E25 /* AsyncOperation.swift in Sources */,
 				0EF83FC724FCA50E00948E25 /* APIErrorProcessPlugin.swift in Sources */,
 				0EF8400224FCA50E00948E25 /* LoadingIndicatorViewModel.swift in Sources */,
 				0EF83FCA24FCA50E00948E25 /* DefaultAlamofireManager.swift in Sources */,
 				0EF8413224FCB6E300948E25 /* MessageCell.swift in Sources */,
-				0EF83FEF24FCA50E00948E25 /* APIMultipleViewModelImpl.swift in Sources */,
 				0EF8412524FCB6E300948E25 /* ChatTimeCell.swift in Sources */,
 				0EF83F0124FCA3ED00948E25 /* SceneDelegate.swift in Sources */,
 				0EF8413824FCB6E300948E25 /* InputLayoutViewControllerImpl.swift in Sources */,
-				0EF8401924FCA50E00948E25 /* ArticleViewController.swift in Sources */,
-				0EF8401824FCA50E00948E25 /* ArticleTableCell.swift in Sources */,
-				0EF8401E24FCA50E00948E25 /* RoundedUISampleViewController.swift in Sources */,
-				0EF8401D24FCA50E00948E25 /* ArticleViewModel.swift in Sources */,
 				0EF8412724FCB6E300948E25 /* Message.swift in Sources */,
 				0EF8400D24FCA50E00948E25 /* BaseViewController.swift in Sources */,
 				0EF8401524FCA50E00948E25 /* RootViewController.swift in Sources */,
 				0EF8412D24FCB6E300948E25 /* MessageTextCellViewModel.swift in Sources */,
-				0EF8401024FCA50E00948E25 /* WebViewController.swift in Sources */,
 				0EF83FD024FCA50E00948E25 /* APIOperation.swift in Sources */,
 				0EF83FC224FCA50E00948E25 /* AuthTarget.swift in Sources */,
 				0EF83FCD24FCA50E00948E25 /* ProviderPlain.swift in Sources */,
-				0EF8400624FCA50E00948E25 /* AuthCoordinator.swift in Sources */,
 				0EF8412124FCB6E300948E25 /* LoadMoreHeaderFooterView.swift in Sources */,
 				0EF83FE124FCA50E00948E25 /* StringUtils.swift in Sources */,
 				0EF83FBF24FCA50E00948E25 /* APIError.swift in Sources */,
-				0EF8402024FCA50E00948E25 /* UpdateDeviceTokenServiceImpl.swift in Sources */,
 				0EF83FF124FCA50E00948E25 /* SplashScreenViewModelImpl.swift in Sources */,
-				0EF83FEC24FCA50E00948E25 /* APIMultipleViewController.swift in Sources */,
 				0EF8412224FCB6E300948E25 /* ChatItemTimeCellViewModel.swift in Sources */,
 				0EF83FBD24FCA50E00948E25 /* User.swift in Sources */,
 				0EF8413E24FCB6E300948E25 /* MessageTextOperationMock.swift in Sources */,
 				0EF8400024FCA50E00948E25 /* LoadingIndicatorViewModelImpl.swift in Sources */,
 				0EF8413C24FCB6E300948E25 /* MessageOperationMock.swift in Sources */,
-				0EF83FF824FCA50E00948E25 /* TutorialViewModelImpl.swift in Sources */,
 				0EF8412424FCB6E300948E25 /* ChatItemTimeCellViewModelImpl.swift in Sources */,
 				0EF8400F24FCA50E00948E25 /* BaseNavigationController.swift in Sources */,
-				0EF83FF624FCA50E00948E25 /* TutorialViewController.swift in Sources */,
 				0EF83FDF24FCA50E00948E25 /* Environment.swift in Sources */,
 				0EF83FE824FCA50E00948E25 /* AppSecretsManager.swift in Sources */,
 				0EF8413324FCB6E300948E25 /* MessageCellViewModelImpl.swift in Sources */,
@@ -1355,19 +1137,17 @@
 				0EF8412824FCB6E300948E25 /* MessageImageCell.swift in Sources */,
 				0EF83FC124FCA50E00948E25 /* SampleTarget.swift in Sources */,
 				0EF8412F24FCB6E300948E25 /* MessageTextCellViewModelImpl.swift in Sources */,
+				0EEFEE502581C21C00DBCF3B /* MainCoordinator.swift in Sources */,
 				0E46167C256E3CE700D9A9C9 /* CustomUIView.swift in Sources */,
 				0E461684256E41FD00D9A9C9 /* UIBezierPathUtils.swift in Sources */,
 				0EF8400C24FCA50E00948E25 /* AlertPresentableViewModel.swift in Sources */,
 				0E2E2CA12578DDBE00A09E34 /* MessageCellAdvancedViewModelImpl.swift in Sources */,
 				0EF83FC924FCA50E00948E25 /* TokenRefresherImpl.swift in Sources */,
 				0EF8414924FCD4B100948E25 /* UIScrollView+Utils.swift in Sources */,
-				0EF83FFB24FCA50E00948E25 /* PostArticleFormViewController.swift in Sources */,
-				0EF83FFA24FCA50E00948E25 /* PostArticleFormViewModel.swift in Sources */,
 				0EF8401424FCA50E00948E25 /* RootViewModelImpl.swift in Sources */,
 				0EF8400B24FCA50E00948E25 /* AlertPresentableView.swift in Sources */,
 				0EF8414A24FCD4B100948E25 /* UITableView+Utils.swift in Sources */,
 				0EF8400824FCA50E00948E25 /* Coordinator.swift in Sources */,
-				0EF83FED24FCA50E00948E25 /* APIMultipleViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

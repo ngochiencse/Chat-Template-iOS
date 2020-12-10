@@ -7,25 +7,26 @@
 //
 
 import Foundation
+import RxSwift
 
 class SplashScreenViewModelImpl: SplashScreenViewModel {
-    weak var delegate: SplashScreenViewModelDelegate?
     private var prefs: PrefsImpl
+    let onFinish: PublishSubject<Void> = PublishSubject()
     init(prefs: PrefsImpl = .default) {
         self.prefs = prefs
     }
     func checkLocalData() {
-//        if prefs.getUserInfo()?.accessToken != nil {
-//            self.getUserInfo()
-//        } else {
-            self.finishWithNextAction(.tutorialScreen)
-//        }
+        //        if prefs.getUserInfo()?.accessToken != nil {
+        //            self.getUserInfo()
+        //        } else {
+        finish()
+        //        }
     }
-    
-    fileprivate func finishWithNextAction(_ nextAction: SplashScreenNextAction) {
-        self.delegate?.splashScreen(splashScreen: self, didFinishWithNextAction: nextAction)
+
+    fileprivate func finish() {
+        onFinish.onNext(())
     }
-    
+
     //    func getUserInfo() {
     //        let sv = GetUserInfoService()
     //        sv.progressHudContainer = nil
