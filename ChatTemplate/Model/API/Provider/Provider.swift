@@ -21,14 +21,17 @@ class Provider<Target> where Target: Moya.TargetType {
 }
 
 extension Single where Element: Moya.Response {
-    func handleCommonError(_ error: Error, autoHandleNoInternetConnection: Bool, autoHandleAPIError: Bool, autoHandleAccountSuspendedStop: Bool) -> Single<Element> {
+    func handleCommonError(_ error: Error,
+                           autoHandleNoInternetConnection: Bool,
+                           autoHandleAPIError: Bool,
+                           autoHandleAccountSuspendedStop: Bool) -> Single<Element> {
         guard case MoyaError.underlying(let underlyingError, _) = error else {
             return Single<Element>.error(error)
         }
         // Handle no internet connection automatically if needed
         if case AFError.sessionTaskFailed(error: let sessionError) = underlyingError,
-            let urlError = sessionError as? URLError,
-            urlError.code == URLError.Code.notConnectedToInternet ||
+           let urlError = sessionError as? URLError,
+           urlError.code == URLError.Code.notConnectedToInternet ||
             urlError.code == URLError.Code.timedOut {
             if autoHandleNoInternetConnection == true {
                 NotificationCenter.default.post(name: .AutoHandleNoInternetConnectionError, object: error)
@@ -36,12 +39,11 @@ extension Single where Element: Moya.Response {
             } else {
                 return Single<Element>.error(error)
             }
-        }
-        else if autoHandleAccountSuspendedStop == true,
-            case APIError.serverError(let detail) = underlyingError,
-            ["403006","403001"].contains(detail.code) {
-                NotificationCenter.default.post(name: .AccountSuspendedStop, object: error)
-                return Single<Element>.error(APIError.ignore(error))
+        } else if autoHandleAccountSuspendedStop == true,
+                  case APIError.serverError(let detail) = underlyingError,
+                  ["403006", "403001"].contains(detail.code) {
+            NotificationCenter.default.post(name: .AccountSuspendedStop, object: error)
+            return Single<Element>.error(APIError.ignore(error))
         }
         // Handle api error automatically if needed
         else if autoHandleAPIError == true {
@@ -51,10 +53,17 @@ extension Single where Element: Moya.Response {
             return Single<Element>.error(error)
         }
     }
-    
-    func catchCommonError(autoHandleNoInternetConnection: Bool, autoHandleAPIError: Bool, autoHandleAccountSuspendedStop: Bool) -> PrimitiveSequence<Trait, Element> {
+
+    func catchCommonError(autoHandleNoInternetConnection: Bool,
+                          autoHandleAPIError: Bool,
+                          autoHandleAccountSuspendedStop: Bool) -> PrimitiveSequence<Trait, Element> {
         return catchError {(error) in
-            let catched = self.handleCommonError(error, autoHandleNoInternetConnection: autoHandleNoInternetConnection, autoHandleAPIError: autoHandleAPIError, autoHandleAccountSuspendedStop: autoHandleAccountSuspendedStop) as! PrimitiveSequence<Trait, Element>
+            let catched: PrimitiveSequence<Trait, Element>!
+                = self.handleCommonError(error,
+                                         autoHandleNoInternetConnection: autoHandleNoInternetConnection,
+                                         autoHandleAPIError: autoHandleAPIError,
+                                         autoHandleAccountSuspendedStop: autoHandleAccountSuspendedStop)
+                as? PrimitiveSequence<Trait, Element>
             return catched
         }
     }

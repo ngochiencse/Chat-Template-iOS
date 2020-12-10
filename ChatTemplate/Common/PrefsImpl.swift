@@ -19,7 +19,7 @@ class PrefsImpl: NSObject {
     init(defaults: UserDefaults = UserDefaults.standard) {
         self.defaults = defaults
     }
-    
+
     private func saveCodableCustomObject<T: Encodable>(object: T?, key: String) {
         if let unwrapped = object {
             do {
@@ -33,8 +33,8 @@ class PrefsImpl: NSObject {
         }
         defaults.synchronize()
     }
-    
-    private func loadCodableCustomObjectWithKey<T: Decodable>(key : String, class: T.Type) -> T? {
+
+    private func loadCodableCustomObjectWithKey<T: Decodable>(key: String, class: T.Type) -> T? {
         if let data = defaults.data(forKey: key) {
             do {
                 let decoder = JSONDecoder()
@@ -51,25 +51,25 @@ class PrefsImpl: NSObject {
 
 extension PrefsImpl: PrefsUserInfo {
     func getUserInfo() -> User? {
-        let userInfo : User? = loadCodableCustomObjectWithKey(key: "user", class: User.self)
+        let userInfo: User? = loadCodableCustomObjectWithKey(key: "user", class: User.self)
         return userInfo
     }
 
-    func saveUserInfo(_ user : User?) {
+    func saveUserInfo(_ user: User?) {
         saveCodableCustomObject(object: user, key: "user")
     }
 }
 
 extension PrefsImpl: PrefsShowTutorial {
-    public func setShowTutorial(showTutorial : Bool) {
+    public func setShowTutorial(showTutorial: Bool) {
         defaults.set(showTutorial, forKey: "showTutorial")
         defaults.synchronize()
     }
-    
+
     public func isShowTutorial() -> Bool {
-        var showTutorial : Bool
-        if let boolObject = defaults.object(forKey: "showTutorial") {
-            showTutorial = boolObject as! Bool
+        var showTutorial: Bool
+        if let boolObject = defaults.object(forKey: "showTutorial") as? Bool {
+            showTutorial = boolObject
         } else {
             showTutorial = false
         }
@@ -77,11 +77,11 @@ extension PrefsImpl: PrefsShowTutorial {
     }
 }
 
-extension PrefsImpl: PrefsAccessToken {    
+extension PrefsImpl: PrefsAccessToken {
     public func getAccessToken() -> String? {
         return defaults.string(forKey: "accessToken")
     }
-    
+
     public func saveAccessToken(_ accessToken: String?) {
         accessTokenQueue.sync {
             if let unwrapped = accessToken {
@@ -98,7 +98,7 @@ extension PrefsImpl: PrefsRefreshToken {
     public func getRefreshToken() -> String? {
         return defaults.string(forKey: "refreshToken")
     }
-    
+
     public func saveRefreshToken(_ refreshToken: String?) {
         refreshTokenQueue.sync {
             if let unwrapped = refreshToken {

@@ -13,10 +13,10 @@ import RxCocoa
 class MessageOperationMock: AsyncOperation {
     let localId: Int
     let remoteIdBefore: MessageId
-    
+
     var remoteId: MessageId?
     var error: Error?
-    
+
     init(localId: Int, remoteIdBefore: MessageId) {
         self.localId = localId
         self.remoteIdBefore = remoteIdBefore

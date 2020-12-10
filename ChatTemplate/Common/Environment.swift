@@ -9,12 +9,12 @@
 import Foundation
 import CocoaLumberjack
 
-enum EnvironmentType : String {
-    case staging = "staging"
-    case product = "product"
+enum EnvironmentType: String {
+    case staging
+    case product
 }
 
-enum PlistKey : String, CaseIterable {
+enum PlistKey: String, CaseIterable {
     case environmentType
     case apiHost
     case apiPath
@@ -22,9 +22,9 @@ enum PlistKey : String, CaseIterable {
 
 class Environment: NSObject {
     static let shared: Environment = Environment()
-    
+
     fileprivate var infoDict: [String: Any] = Bundle.main.infoDictionary!
-    
+
     func logEnvironmentInfos() {
         // Print environment values
         var string: String = ""
@@ -43,22 +43,32 @@ class Environment: NSObject {
             string += "\n" + lineString
         }
         DDLogDebug("Environment init with following values: \(string)")
-        
+
     }
-    
+
     func configuration(_ key: PlistKey) -> String {
         let value: Any? = infoDict[key.rawValue]
         let result: String? = value as? String
-        assert(result != nil, String(format: "Value for environment config key \"%@\" does not exist or is invalid. Please check info.plist if the key exist and configuration file is selected in project build configuration.", key.rawValue))
+        assert(result != nil,
+               String(format: "Value for environment config key \"" +
+                        key.rawValue +
+                        """
+                        \" does not exist or is invalid. Please check info.plist if the key exist\
+                        and configuration file is selected in project build configuration.
+                        """))
         return result!
     }
-    
+
     var environmentType: EnvironmentType {
-        get {
-            let string = self.configuration(.environmentType)
-            let value = EnvironmentType(rawValue: string)
-            assert(value != nil, String(format: "Value for environment config key \"%@\" does not exist or is invalid. Please check info.plist if the key exist and configuration file is selected in project build configuration.", PlistKey.environmentType.rawValue))
-            return value!
-        }
+        let string = self.configuration(.environmentType)
+        let value = EnvironmentType(rawValue: string)
+        assert(value != nil, String(format: "Value for environment config key \"" +
+                                        PlistKey.environmentType.rawValue +
+                                        """
+                                            \" does not exist or is invalid. Please check \
+                                            info.plist if the key exist and configuration \
+                                            file is selected in project build configuration.
+                                            """))
+        return value!
     }
 }

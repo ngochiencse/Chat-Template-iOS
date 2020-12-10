@@ -13,7 +13,7 @@ class MessageTextCellViewModelImpl: MessageCellViewModelImpl, MessageTextCellVie
     override var messageType: MessageCellType {
         return .text
     }
-    
+
     init(senderAvatar: AvatarImageViewModel?, createdAtStr: String?, attributedText: NSAttributedString?) {
         self.attributedText = attributedText
         super.init(senderAvatar: senderAvatar, createdAtStr: createdAtStr)

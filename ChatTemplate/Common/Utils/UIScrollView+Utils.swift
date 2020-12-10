@@ -13,7 +13,7 @@ extension UIScrollView {
     var isScrollPositionAtBottom: Bool {
         return contentOffset.y >= (contentSize.height - bounds.size.height)
     }
-    
+
     func scrollToBottomByContentOffset(animated: Bool) {
         let newY = max(contentSize.height - bounds.height, 0)
         setContentOffset(CGPoint(x: 0, y: newY), animated: animated)

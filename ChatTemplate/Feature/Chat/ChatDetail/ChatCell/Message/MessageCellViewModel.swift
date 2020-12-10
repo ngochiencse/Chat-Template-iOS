@@ -17,7 +17,7 @@ enum MessageDisplaySide {
 
 protocol MessageCellViewModel: ChatItemCellViewModel {
     var messageType: MessageCellType { get }
-    
+
     var createdAtStr: String? { get }
     var senderAvatar: AvatarImageViewModel? { get }
     var displaySide: BehaviorRelay<MessageDisplaySide> { get }

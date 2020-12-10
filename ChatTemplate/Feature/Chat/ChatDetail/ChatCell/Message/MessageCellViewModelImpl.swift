@@ -18,9 +18,9 @@ class MessageCellViewModelImpl: NSObject, MessageCellViewModel {
     var itemType: ChatItemType {
         return .message
     }
-    
+
     let createdAtStr: String?
-    
+
     let isSenderAvatarImageHidden: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     let isSenderAvatarSpaceHidden: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     let roundCorners: BehaviorRelay<UIRectCorner> = BehaviorRelay(value: [.topLeft, .topRight, .bottomRight])
@@ -38,8 +38,7 @@ class MessageCellViewModelImpl: NSObject, MessageCellViewModel {
         self.createdAtStr = createdAtStr
         super.init()
     }
-    
-    
+
     func toggleLike() {
         onToggleLikePS.onNext(())
     }

@@ -11,7 +11,7 @@ import UIKit
 
 extension UIViewController {
     static func topMostController() -> UIViewController? {
-        var topController : UIViewController? = UIApplication.shared.keyWindow?.rootViewController
+        var topController: UIViewController? = UIApplication.shared.keyWindow?.rootViewController
         while topController?.presentedViewController != nil {
             topController = topController?.presentedViewController
         }

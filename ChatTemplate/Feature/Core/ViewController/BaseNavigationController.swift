@@ -8,14 +8,14 @@
 
 import UIKit
 
-class BaseNavigationController: UINavigationController {    
+class BaseNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.setUp()
     }
-    
+
     fileprivate func setUp() {
         // Custom navigation bar title
         let titleTextColor: UIColor = UIColor(red: 120/255.0, green: 132/255.0, blue: 158/255.0, alpha: 1.0)
@@ -23,7 +23,7 @@ class BaseNavigationController: UINavigationController {
             .foregroundColor: titleTextColor,
             .font: UIFont.systemFont(ofSize: 20)
         ]
-        
+
         // Custom navigation bar background
         self.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationBar.shadowImage = UIImage()
@@ -46,16 +46,15 @@ class BaseNavigationController: UINavigationController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
-    // MARK: - Navigation
+     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
 
 }

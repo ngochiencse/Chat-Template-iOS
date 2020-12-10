@@ -17,21 +17,22 @@ class MessageTextOperationMock: MessageOperationMock {
         self.text = text
         super.init(localId: localId, remoteIdBefore: remoteIdBefore)
     }
-    
-    override func main() {        
-        disposable = Single.just(String(localId)).delay(.seconds(1), scheduler: MainScheduler.instance).subscribe {[weak self] (event) in
-            guard let self = self else { return }
-            switch event {
-            case .success(let value):
-                self.remoteId = value
-            case .error(let error):
-                self.error = error
+
+    override func main() {
+        disposable = Single.just(String(localId)).delay(.seconds(1), scheduler: MainScheduler.instance)
+            .subscribe {[weak self] (event) in
+                guard let self = self else { return }
+                switch event {
+                case .success(let value):
+                    self.remoteId = value
+                case .error(let error):
+                    self.error = error
+                }
+                self.state = .isFinished
             }
-            self.state = .isFinished
-        }
         disposable?.disposed(by: rx.disposeBag)
     }
-    
+
     override func cancel() {
         disposable?.dispose()
     }

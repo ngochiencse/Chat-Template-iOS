@@ -17,16 +17,18 @@ class MessageBackgroundView: UIView {
     }
     var roundedCornerRadius: CGFloat = 16
     var unroundedCornerRadius: CGFloat = 6
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layer.cornerRadius = unroundedCornerRadius
         roundCorners(corners: corners, radius: roundedCornerRadius)
     }
-    
+
     func roundCorners(corners: UIRectCorner, radius: CGFloat) {
         layer.mask = nil
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let path = UIBezierPath(roundedRect: bounds,
+                                byRoundingCorners: corners,
+                                cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()
         mask.path = path.cgPath
         layer.mask = mask

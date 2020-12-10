@@ -43,7 +43,7 @@ extension AuthTarget: TargetType {
         let baseURL: URL = URL(string: host + path)!
         return baseURL
     }
-    
+
     var path: String {
         switch self {
         case .createUserWithEmail:
@@ -64,11 +64,11 @@ extension AuthTarget: TargetType {
             return "refresh-token"
         }
     }
-    
+
     var method: Moya.Method {
         return .post
     }
-    
+
     var task: Task {
         switch self {
         case .createUserWithEmail(authCode: let authCode, mailAddress: let mailAddress, password: let password):
@@ -82,16 +82,34 @@ extension AuthTarget: TargetType {
             }
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         case .createUserWithOtherServices(service: let service, token: let token):
-            return .requestParameters(parameters: ["authorization_service": service.rawValue, "token": token], encoding: JSONEncoding.default)
+            return .requestParameters(parameters: [
+                                        "authorization_service": service.rawValue,
+                                        "token": token], encoding: JSONEncoding.default)
         case .sendAuthCode(mailAddress: let mailAddress):
-            return .requestParameters(parameters: ["mail_address": mailAddress], encoding: JSONEncoding.default)
+            return .requestParameters(parameters: [
+                "mail_address": mailAddress
+            ], encoding: JSONEncoding.default)
         case .sendAuthCodeForMailRegister(mailAddress: let mailAddress):
-             return .requestParameters(parameters: ["mail_address": mailAddress], encoding: JSONEncoding.default)
+            return .requestParameters(parameters: [
+                "mail_address": mailAddress
+            ], encoding: JSONEncoding.default)
         case .confirmAuthCode(mailAddress: let mailAddress, authCode: let authCode):
-            return .requestParameters(parameters: ["mail_address": mailAddress, "auth_code": authCode], encoding: JSONEncoding.default)
-        case .changePassword(newPassword: let newPassword, mailAddress: let mailAddress, authCode: let authCode):
-            return .requestParameters(parameters: ["new_password": newPassword, "mail_address": mailAddress, "auth_code": authCode], encoding: JSONEncoding.default)
-        case .login(mailAddress: let mailAddress, password: let password, service: let service, token: let token):
+            return .requestParameters(parameters: [
+                "mail_address": mailAddress,
+                "auth_code": authCode
+            ], encoding: JSONEncoding.default)
+        case .changePassword(newPassword: let newPassword,
+                             mailAddress: let mailAddress,
+                             authCode: let authCode):
+            return .requestParameters(parameters: [
+                "new_password": newPassword,
+                "mail_address": mailAddress,
+                "auth_code": authCode
+            ], encoding: JSONEncoding.default)
+        case .login(mailAddress: let mailAddress,
+                    password: let password,
+                    service: let service,
+                    token: let token):
             var parameters: [String: Any] = [:]
             if let mailAddress = mailAddress {
                 parameters["mail_address"] = mailAddress
@@ -112,7 +130,7 @@ extension AuthTarget: TargetType {
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         }
     }
-    
+
     var sampleData: Data {
         switch self {
         case .createUserWithEmail:
@@ -173,19 +191,19 @@ extension AuthTarget: TargetType {
             """.utf8Encoded
         }
     }
-    
+
     private func dataFromResource(name: String) -> Data {
         guard let url = Bundle.main.url(forResource: name, withExtension: nil),
-            let data = try? Data(contentsOf: url) else {
-                return Data()
+              let data = try? Data(contentsOf: url) else {
+            return Data()
         }
         return data
     }
-    
+
     var headers: [String: String]? {
         return ["Content-type": "application/json"]
     }
-    
+
     var validationType: ValidationType {
         return .successCodes
     }

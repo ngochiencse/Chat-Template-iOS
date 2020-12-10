@@ -20,16 +20,19 @@ struct APIErrorProcessPlugin: PluginType {
             return .failure(processError(error))
         }
     }
-    
+
     func processError(_ error: MoyaError) -> MoyaError {
         do {
-            if let detail = try error.response?.map(APIErrorDetail.self, atKeyPath: "error", using: JSONDecoder(), failsOnEmptyData: true) {
+            if let detail = try error.response?.map(APIErrorDetail.self,
+                                                    atKeyPath: "error",
+                                                    using: JSONDecoder(),
+                                                    failsOnEmptyData: true) {
                 DDLogError("Error content: \(String(describing: detail))")
                 return MoyaError.underlying(APIError.serverError(detail), error.response)
             } else {
                 return error
             }
-        } catch (let parseError) {
+        } catch let parseError {
             DDLogError("Parse error json failed: \(String(describing: parseError))")
             if let string = try? error.response?.mapString() {
                 DDLogError("Error content: \(string)")

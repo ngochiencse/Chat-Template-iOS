@@ -14,11 +14,11 @@ extension BasicViewPresentableView where Self: UIViewController {
     var alertViewModel: AlertPresentableViewModel {
         return basicViewModel
     }
-    
+
     var loadingIndicatorViewModel: LoadingIndicatorViewModel {
         return basicViewModel
     }
-    
+
     func bindToBasicObserve() {
         bindToAlerts()
         bindToLoadingIndicator()

@@ -22,10 +22,10 @@ protocol ChatItemCellViewModel: class {
 
 func isMessageAndSameSender(_ objA: ChatItemAdvancedViewModel?, _ objB: ChatItemAdvancedViewModel?) -> Bool {
     if let messageA = objA as? MessageCellAdvancedViewModel,
-        let messageB = objB as? MessageCellAdvancedViewModel,
-        messageA.senderId == messageB.senderId {
+       let messageB = objB as? MessageCellAdvancedViewModel,
+       messageA.senderId == messageB.senderId {
         return true
     }
-    
+
     return false
 }

@@ -12,41 +12,44 @@ import RxCocoa
 
 class MessageTextCell: MessageCell {
     @IBOutlet weak var tvContent: UITextView!
-    
+
     override var viewModel: ChatItemCellViewModel? {
         willSet {
             unbindFromViewModel()
         }
-        
+
         didSet {
             if viewModel != nil && (viewModel is MessageTextCellViewModel) == false {
-                fatalError("Wrong viewModel type! Current is:\(String(describing: type(of: viewModel))). Must be: MessageTextCellViewModel")
+                fatalError("Wrong viewModel type! Current is:" +
+                            String(describing: type(of: viewModel)) +
+                            ". Must be: MessageTextCellViewModel")
             }
-            
+
             let viewModel = self.viewModel as? MessageTextCellViewModel
             displayWithViewModel(viewModel)
             bindToViewModel()
         }
     }
     private var disposables: [Disposable] = []
-    
+
     private func displayWithViewModel(_ viewModel: MessageTextCellViewModel?) {
         self.tvContent.attributedText = viewModel?.attributedText
     }
-    
+
     private func bindToViewModel() {
         guard let viewModel = self.viewModel as? MessageCellViewModel else { return }
-    
+
         do {
-            let disposable = viewModel.displaySide.observeOn(MainScheduler.instance).subscribe(onNext: {[weak self] (displaySide) in
-                guard let self = self else { return }
-                
-                if displaySide == .right {
-                    self.tvContent.transform = CGAffineTransform(scaleX: -1, y: 1)
-                } else {
-                    self.tvContent.transform = CGAffineTransform.identity
-                }
-            })
+            let disposable = viewModel.displaySide.observeOn(MainScheduler.instance)
+                .subscribe(onNext: {[weak self] (displaySide) in
+                    guard let self = self else { return }
+
+                    if displaySide == .right {
+                        self.tvContent.transform = CGAffineTransform(scaleX: -1, y: 1)
+                    } else {
+                        self.tvContent.transform = CGAffineTransform.identity
+                    }
+                })
             disposable.disposed(by: rx.disposeBag)
             disposables.append(disposable)
         }

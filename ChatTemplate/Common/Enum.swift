@@ -9,7 +9,7 @@
 import Foundation
 
 // Just sample. You can delete and add you real code here
-enum UserType: Int  {
+enum UserType: Int {
     case normal = 1
     case admin = 2
 }

@@ -22,7 +22,7 @@ enum APIError: Error {
 struct APIErrorDetail: Error, Codable {
     let code: String
     let message: String?
-    
+
     var localizedDescription: String {
         return message ?? ""
     }

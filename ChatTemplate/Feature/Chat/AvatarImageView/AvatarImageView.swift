@@ -21,34 +21,34 @@ class AvatarImageView: UIImageView {
         }
     }
     var disposables: [Disposable] = []
-        
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
     }
-    
+
     override init(image: UIImage?) {
         super.init(image: image)
         setUp()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setUp()
     }
-    
+
     func setUp() {
         isUserInteractionEnabled = true
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOn))
         addGestureRecognizer(tap)
-        
+
         contentMode = .scaleAspectFill
     }
-    
+
     @objc private func didTapOn() {
         viewModel?.didTapOnImageView()
     }
-    
+
     func bindToViewModel() {
         guard let viewModel = viewModel else { return }
         do {
@@ -68,7 +68,7 @@ class AvatarImageView: UIImageView {
             disposables.append(disposable)
         }
     }
-    
+
     func unbindFromViewModel() {
         disposables.forEach { (ele) in
             ele.dispose()

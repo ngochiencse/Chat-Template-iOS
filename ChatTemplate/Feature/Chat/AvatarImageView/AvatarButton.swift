@@ -22,17 +22,17 @@ class AvatarButton: RoundedButton {
         }
     }
     var disposables: [Disposable] = []
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
     }
-        
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setUp()
     }
-    
+
     func setUp() {
         imageView?.contentMode = .scaleAspectFill
     }
@@ -56,7 +56,7 @@ class AvatarButton: RoundedButton {
             disposables.append(disposable)
         }
     }
-    
+
     func unbindFromViewModel() {
         disposables.forEach { (ele) in
             ele.dispose()
