@@ -11,7 +11,8 @@ import Moya
 import RxSwift
 
 /**
- Provide network api with network logger and error proccessing plugin (`APIErrorProcessPlugin`), also with auto handle api error.
+ Provide network api with network logger and error proccessing plugin (`APIErrorProcessPlugin`),
+ also with auto handle api error.
  */
 class ProviderAPIBasic<Target>: Provider<Target> where Target: Moya.TargetType {
     let provider: MoyaProvider<Target>
@@ -19,7 +20,8 @@ class ProviderAPIBasic<Target>: Provider<Target> where Target: Moya.TargetType {
     let autoHandleNoInternetConnection: Bool
     /**
      Init Provider, similiar to Moya.
-     - Parameter autoHandleAPIError: If `true` then any error thrown will be handled automatically, and will be transformed into `APIError.ignore`
+     - Parameter autoHandleAPIError: If `true` then any error thrown will be handled automatically,
+     and will be transformed into `APIError.ignore`
      */
     init(autoHandleNoInternetConnection: Bool = true,
          autoHandleAPIError: Bool = true,

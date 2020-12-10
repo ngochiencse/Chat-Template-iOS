@@ -34,9 +34,12 @@ class ProviderAPIWithRefreshToken<Target>: Provider<Target> where Target: Moya.T
     /**
      Init Provider, similiar to Moya.
      - Parameter prefs: Access token storage
-     - Parameter autoHandleAccessTokenExpired: If `true` then errors which caused the app to auto logout will be handled automatically, and will be transformed into `APIError.ignore`
-     - Parameter autoHandleAccountSuspendedStop: If `true` then errors which caused the app to auto logout will be handled automatically, and will be transformed into `APIError.ignore`
-     - Parameter autoHandleAPIError: If `true` then any error thrown will be handled automatically, and will be transformed into `APIError.ignore`
+     - Parameter autoHandleAccessTokenExpired: If `true` then errors which caused the app to auto
+     logout will be handled automatically, and will be transformed into `APIError.ignore`
+     - Parameter autoHandleAccountSuspendedStop: If `true` then errors which caused the app to auto
+     logout will be handled automatically, and will be transformed into `APIError.ignore`
+     - Parameter autoHandleAPIError: If `true` then any error thrown will be handled automatically,
+     and will be transformed into `APIError.ignore`
      */
     init(prefs: PrefsAccessToken & PrefsRefreshToken = PrefsImpl.default,
          autoHandleAccountSuspendedStop: Bool = true,

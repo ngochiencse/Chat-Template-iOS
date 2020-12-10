@@ -30,7 +30,10 @@ class MessageImageOperationMock: MessageOperationMock {
                 guard let self = self else { return }
                 switch event {
                 case .success(let messageId):
-                    self.remoteImageUrl = "https://hoidulich.net/wp-content/uploads/2019/11/71118571_400051820571391_381023500722296458_n-1067x800.jpg"
+                    self.remoteImageUrl = """
+                                            https://hoidulich.net/wp-content/uploads\
+                                            /2019/11/71118571_400051820571391_381023500722296458_n-1067x800.jpg
+                                            """
                     self.remoteId = messageId
                     self.remoteImageSize = self.image.size
                 case .error(let error):
