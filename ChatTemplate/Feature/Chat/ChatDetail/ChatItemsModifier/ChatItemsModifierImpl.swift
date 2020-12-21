@@ -12,15 +12,15 @@ class ChatItemsModifierImpl: NSObject, ChatItemsModifier {
     func checkAndInsertTimeIfNeeded(_ chatItemDetails: [ChatItemAdvancedViewModel],
                                     insertTimeAtHead: Bool) -> [ChatItemAdvancedViewModel] {
         var result: [ChatItemAdvancedViewModel] = Array(chatItemDetails)
-        for i in 0..<chatItemDetails.count {
-            let currentObject = chatItemDetails[i]
-            
-            let nextObject = (i + 1 < chatItemDetails.count) ? chatItemDetails[i + 1] : nil
-            
+        for index in 0..<chatItemDetails.count {
+            let currentObject = chatItemDetails[index]
+
+            let nextObject = (index + 1 < chatItemDetails.count) ? chatItemDetails[index + 1] : nil
+
             guard let currentMessage = currentObject as? MessageCellAdvancedViewModel else {
                 continue
             }
-            if i == 0 {
+            if index == 0 {
                 result.insert(ChatItemTimeCellViewModelImpl(time: currentMessage.createdAt), at: 0)
                 continue
             }
@@ -33,35 +33,35 @@ class ChatItemsModifierImpl: NSObject, ChatItemsModifier {
             guard let nextTime = nextMessage.createdAt else {
                 continue
             }
-            
+
             guard currentTime.compare(.isSameDay(nextTime)) == false else {
                 continue
             }
-            
+
             if let insertIndex = result.firstIndex(where: { (element) -> Bool in
                 return (element === nextMessage)
             }) {
                 result.insert(ChatItemTimeCellViewModelImpl(time: nextTime), at: insertIndex)
             }
         }
-        
+
         if insertTimeAtHead == true, let message = result.first as? MessageCellAdvancedViewModel {
             result.insert(ChatItemTimeCellViewModelImpl(time: message.createdAt), at: 0)
         }
-        
+
         return result
     }
-    
+
     func updateMessageBlockPosition(_ chatItemDetails: [ChatItemAdvancedViewModel]) {
-        for i in 0..<chatItemDetails.count {
-            let currentObject = chatItemDetails[i]
-            let prevObject = (i - 1 < chatItemDetails.count && i - 1 >= 0) ? chatItemDetails[i - 1] : nil
-            let nextObject = (i + 1 < chatItemDetails.count) ? chatItemDetails[i + 1] : nil
-            
+        for index in 0..<chatItemDetails.count {
+            let currentObject = chatItemDetails[index]
+            let prevObject = (index - 1 < chatItemDetails.count && index - 1 >= 0) ? chatItemDetails[index - 1] : nil
+            let nextObject = (index + 1 < chatItemDetails.count) ? chatItemDetails[index + 1] : nil
+
             guard let currentMessage = currentObject as? MessageCellAdvancedViewModel else {
                 continue
             }
-            
+
             let sameSenderWithPrevious = isMessageAndSameSender(prevObject, currentMessage)
             let sameSenderWithNext = isMessageAndSameSender(nextObject, currentMessage)
 

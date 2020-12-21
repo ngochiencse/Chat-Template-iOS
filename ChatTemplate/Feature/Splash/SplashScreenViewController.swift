@@ -34,7 +34,7 @@ class SplashScreenViewController: BaseViewController {
     }
 
     func bindToViewModel() {
-        viewModel.onFinish.observeOn(MainScheduler.instance).subscribe(onNext: {[weak self] (action) in
+        viewModel.onFinish.observeOn(MainScheduler.instance).subscribe(onNext: {[weak self] (_) in
             guard let self = self else { return }
             self.delegate?.splashScreenDidFinish(splashScreen: self)
         }).disposed(by: rx.disposeBag)

@@ -32,7 +32,7 @@ class APIOperation<T>: AsyncOperation {
         }
         disposable?.disposed(by: rx.disposeBag)
     }
-    
+
     override func cancel() {
         disposable?.dispose()
     }

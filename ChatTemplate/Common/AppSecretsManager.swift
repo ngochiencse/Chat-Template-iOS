@@ -14,26 +14,24 @@ import CocoaLumberjack
  */
 class AppSecretsManager {
     static let shared: AppSecretsManager = AppSecretsManager()
-    
+
     private(set) var environment: Environment
     private(set) var content: AppSecrets
-    
+
     init(environment: Environment = .shared) {
         self.environment = environment
         let type: EnvironmentType = self.environment.environmentType
         switch type {
         case .staging:
             self.content = AppSecretsStaging()
-            break
         case .product:
             self.content = AppSecretsProduct()
-            break
         }
     }
-    
+
     func logAppSecretInfos() {
         var string: String = ""
-        var infos: Dictionary<String, String> = Dictionary()
+        var infos: [String: String] = Dictionary()
         infos["secretKey"] = self.content.secretKey
         for key: String in infos.keys {
             if let value: String = infos[key] {
@@ -50,24 +48,24 @@ class AppSecretsManager {
  */
 protocol AppSecrets {
     var secretKey: String { get }
-    
     // TODO: Define more app secret key here
+
 }
 
 /**
  Value specification for app secret for staging development environment
  */
-fileprivate class AppSecretsStaging: AppSecrets {
+private class AppSecretsStaging: AppSecrets {
     let secretKey: String = "9667048833"
-    
     // TODO: Specify more app secret value here
+
 }
 
 /**
  Value specification for app secret for product development environment
  */
-fileprivate class AppSecretsProduct: AppSecrets {
+private class AppSecretsProduct: AppSecrets {
     let secretKey: String = "1669514755"
-    
     // TODO: Specify more app secret value here
+
 }

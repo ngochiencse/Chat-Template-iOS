@@ -20,41 +20,42 @@ extension Notification.Name {
 
 /**
  Root view controller of an application.
- 
+
  Basically this is a container which will switch and display application content.
  */
 class RootViewController: SwitchNavigationController, AlertPresentableView {
     weak var delegate: RootViewControllerDelegate?
-    
+
     var alertViewModel: AlertPresentableViewModel {
         return viewModel
     }
-    
+
     let viewModel: RootViewModel
-        
+
     init(viewModel: RootViewModel = RootViewModelImpl(prefs: PrefsImpl.default)) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-        
+
     override func viewDidLoad() {
         super.viewDidLoad()
         bindToAlertsTop()
         setUpObserver()
     }
-    
+
     /**
-     This binding is not like normal bind which has been implemented in AlertPresentableView. It'll present an alert on top most controller instead of current view controller.
+     This binding is not like normal bind which has been implemented in AlertPresentableView.
+     It'll present an alert on top most controller instead of current view controller.
      */
     func bindToAlertsTop() {
         viewModel.isAccessTokenExpired.distinctUntilChanged().observeOn(MainScheduler.instance)
             .filter({ (value: Bool) -> Bool in
                 return (value == true)
-            }).subscribe(onNext: {[weak self] (value: Bool) in
+            }).subscribe(onNext: {[weak self] (_: Bool) in
                 self?.viewModel.clearLocalData()
 
                 let alert = UIAlertController(title: nil, message: "Access token expired", preferredStyle: .alert)
@@ -63,8 +64,8 @@ class RootViewController: SwitchNavigationController, AlertPresentableView {
                     self?.delegate?.rootViewControllerOnLogoutEvent(self)
                 }))
 
-                let topController : UIViewController? = self?.topMostController()
-                
+                let topController: UIViewController? = self?.topMostController()
+
                 // Priority of access token expired alert will be highest, so other alert will be dismissed.
                 if let _: UIAlertController = topController?.presentedViewController as? UIAlertController {
                     topController?.dismiss(animated: true, completion: {
@@ -74,22 +75,23 @@ class RootViewController: SwitchNavigationController, AlertPresentableView {
                     topController?.present(alert, animated: true, completion: nil)
                 }
             }).disposed(by: rx.disposeBag)
-        
-        alertViewModel.alertModel.observeOn(MainScheduler.instance).subscribe(onNext: {[weak self] (model: AlertModel?) in
-            guard let model = model else {
-                return
-            }
 
-            let alert = AlertBuilder.buildAlertController(for: model)
-            let topController : UIViewController? = self?.topMostController()
-            topController?.present(alert, animated: true, completion: nil)
-        }).disposed(by: rx.disposeBag)
+        alertViewModel.alertModel.observeOn(MainScheduler.instance)
+            .subscribe(onNext: {[weak self] (model: AlertModel?) in
+                guard let model = model else {
+                    return
+                }
+
+                let alert = AlertBuilder.buildAlertController(for: model)
+                let topController: UIViewController? = self?.topMostController()
+                topController?.present(alert, animated: true, completion: nil)
+            }).disposed(by: rx.disposeBag)
     }
-    
+
     func topMostController() -> UIViewController? {
-        var topMostController : UIViewController? = self
+        var topMostController: UIViewController? = self
         while topMostController?.presentedViewController != nil {
-            if let _ = topMostController?.presentedViewController as? UIAlertController {
+            if let presentViewController = topMostController?.presentedViewController as? UIAlertController {
                 break
             } else {
                 topMostController = topMostController?.presentedViewController
@@ -97,21 +99,17 @@ class RootViewController: SwitchNavigationController, AlertPresentableView {
         }
         return topMostController
     }
-    
+
     private func setUpObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(logOut), name: .LogOut, object: nil)
     }
-    
-    private func removeObserver() {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
+
     @objc func logOut() {
         viewModel.clearLocalData()
         delegate?.rootViewControllerOnLogoutEvent(self)
     }
 
     deinit {
-        removeObserver()
+        NotificationCenter.default.removeObserver(self)
     }
 }

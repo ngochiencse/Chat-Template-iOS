@@ -18,7 +18,7 @@ class MessageCellAdvancedViewModelImpl: NSObject, MessageCellAdvancedViewModel {
     var item: ChatItemCellViewModel {
         return cell
     }
-    
+
     init(messageId: MessageId?, senderId: ChatUserId?, localId: Int?,
          messageIdBefore: MessageId?, createdAt: Date?, cell: MessageCellViewModel) {
         self.messageId = messageId
@@ -32,10 +32,9 @@ class MessageCellAdvancedViewModelImpl: NSObject, MessageCellAdvancedViewModel {
             self.onToggleLike()
         }).disposed(by: rx.disposeBag)
     }
-    
+
     private func onToggleLike() {
         cell.isLike.accept(!cell.isLike.value)
-        
         // TODO: Call api here
     }
 }

@@ -12,9 +12,9 @@ struct AlertModel {
     struct ActionModel {
         var title: String?
         var style: UIAlertAction.Style
-        var handler: ((UIAlertAction) -> ())?
+        var handler: ((UIAlertAction) -> Void)?
     }
-    
+
     var actionModels = [ActionModel]()
     var title: String?
     var message: String?
@@ -23,6 +23,11 @@ struct AlertModel {
 
 extension AlertModel {
     init(message: String) {
-        self.init(actionModels: [AlertModel.ActionModel(title: "OK", style: .default, handler: nil)], title: nil, message: message, prefferedStyle: .alert)
+        self.init(actionModels: [AlertModel.ActionModel(title: "OK",
+                                                        style: .default,
+                                                        handler: nil)],
+                  title: nil,
+                  message: message,
+                  prefferedStyle: .alert)
     }
 }

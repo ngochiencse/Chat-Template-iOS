@@ -12,14 +12,14 @@ class ChatItemTimeCellViewModelImpl: NSObject, ChatItemTimeCellViewModel {
     var itemType: ChatItemType {
         return .time
     }
-    
+
     let time: Date?
     init(time: Date?) {
         self.time = time
         super.init()
     }
-    
+
     var item: ChatItemCellViewModel {
         return self
-   }
+    }
 }

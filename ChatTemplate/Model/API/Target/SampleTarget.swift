@@ -9,7 +9,7 @@
 import Foundation
 import Moya
 
-///**
+//**
 // Error when calling api
 // */
 //enum APIError: Error {
@@ -34,7 +34,7 @@ extension SampleTarget: TargetType {
         let baseURL: URL = URL(string: host + path)!
         return baseURL
     }
-    
+
     public var path: String {
         switch self {
         case .articleList:
@@ -49,7 +49,7 @@ extension SampleTarget: TargetType {
             return "update-token"
         }
     }
-    
+
     public var method: Moya.Method {
         switch self {
         case .articleList:
@@ -64,36 +64,42 @@ extension SampleTarget: TargetType {
             return .post
         }
     }
-    
+
     public var task: Task {
         switch self {
         case .articleList(limit: let limit, offset: let offset):
-             return .requestParameters(parameters: ["limit": limit, "offset": offset], encoding: URLEncoding.default)
-         case .deleteArticle:
+            return .requestParameters(parameters: ["limit": limit, "offset": offset], encoding: URLEncoding.default)
+        case .deleteArticle:
             return .requestPlain
         case .login(let email, let password):
-            return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
+            return .requestParameters(parameters: ["email": email, "password": password],
+                                      encoding: JSONEncoding.default)
         case .post(let title, let content, let image):
             var formData: [MultipartFormData] = []
             formData.append(MultipartFormData(provider: .data(title.utf8Encoded), name: "title"))
             formData.append(MultipartFormData(provider: .data(content.utf8Encoded), name: "content"))
             let imageData = image.jpegData(compressionQuality: 0.7)!
-            formData.append(MultipartFormData(provider: .data(imageData), name: "image", fileName: "image.jpeg", mimeType: "image/jpeg"))
+            formData.append(MultipartFormData(provider: .data(imageData),
+                                              name: "image",
+                                              fileName: "image.jpeg",
+                                              mimeType: "image/jpeg"))
             return .uploadMultipart(formData)
         case .updateDeviceToken(let fcmToken):
             return .requestParameters(parameters: ["token": fcmToken], encoding: JSONEncoding.default)
         }
     }
-    
+
     public var sampleData: Data {
         switch self {
         case .articleList:
             return dataFromResource(name: "campaign_and_others_info_get_api.php")
-        case .deleteArticle(_):
+        case .deleteArticle:
             return "".utf8Encoded
         case .login:
             return """
-                    {"access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"}
+                    {"access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NT\
+                    Y3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIy\
+                    fQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"}
                     """.utf8Encoded
         case .post:
             return "".utf8Encoded
@@ -101,19 +107,19 @@ extension SampleTarget: TargetType {
             return "".utf8Encoded
         }
     }
-    
+
     private func dataFromResource(name: String) -> Data {
         guard let url = Bundle.main.url(forResource: name, withExtension: nil),
-            let data = try? Data(contentsOf: url) else {
-                return Data()
+              let data = try? Data(contentsOf: url) else {
+            return Data()
         }
         return data
     }
-    
+
     public var headers: [String: String]? {
         return ["Content-type": "application/json"]
     }
-    
+
     public var validationType: ValidationType {
         return .successCodes
     }

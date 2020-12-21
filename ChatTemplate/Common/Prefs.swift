@@ -12,15 +12,15 @@ import RxCocoa
 
 protocol PrefsUserInfo: class {
     func getUserInfo() -> User?
-    func saveUserInfo(_ userInfo : User?)
+    func saveUserInfo(_ userInfo: User?)
 }
 
 protocol PrefsShowTutorial: class {
-    func setShowTutorial(showTutorial : Bool)
+    func setShowTutorial(showTutorial: Bool)
     func isShowTutorial() -> Bool
 }
 
-protocol PrefsAccessToken: class {    
+protocol PrefsAccessToken: class {
     func getAccessToken() -> String?
     func saveAccessToken(_ accessToken: String?)
 }

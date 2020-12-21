@@ -15,7 +15,7 @@ class CustomUIView: UIView {
             layoutSubviews()
         }
     }
-    
+
     var colorBorder: UIColor? = nil {
         didSet {
             borderLayer?.strokeColor = colorBorder?.cgColor
@@ -31,7 +31,7 @@ class CustomUIView: UIView {
         super.layoutSubviews()
         layer.cornerRadius = 6
     }
-    
+
     func roundCorners(topLeft: CGFloat = 0, topRight: CGFloat = 0, bottomLeft: CGFloat = 0, bottomRight: CGFloat = 0) {
         layer.mask = nil
         borderLayer?.removeFromSuperlayer()
@@ -39,13 +39,22 @@ class CustomUIView: UIView {
         let topRightRadius = CGSize(width: topRight, height: topRight)
         let bottomLeftRadius = CGSize(width: bottomLeft, height: bottomLeft)
         let bottomRightRadius = CGSize(width: bottomRight, height: bottomRight)
-        let maskPath = UIBezierPath(shouldRoundRect: bounds, topLeftRadius: topLeftRadius, topRightRadius: topRightRadius, bottomLeftRadius: bottomLeftRadius, bottomRightRadius: bottomRightRadius)
+        let maskPath = UIBezierPath(shouldRoundRect: bounds,
+                                    topLeftRadius: topLeftRadius,
+                                    topRightRadius: topRightRadius,
+                                    bottomLeftRadius: bottomLeftRadius,
+                                    bottomRightRadius: bottomRightRadius)
         let shape = CAShapeLayer()
         shape.path = maskPath.cgPath
         layer.mask = shape
-        
+
+        guard let layer = layer.mask as? CAShapeLayer,
+              let path = (layer).path
+        else {
+            return
+        }
         borderLayer = CAShapeLayer()
-        borderLayer!.path = (layer.mask! as! CAShapeLayer).path! // Reuse the Bezier path
+        borderLayer!.path = path // Reuse the Bezier path
         borderLayer!.strokeColor = colorBorder?.cgColor
         borderLayer!.fillColor = UIColor.clear.cgColor
         borderLayer!.lineWidth = widthBorder ?? 0

@@ -18,15 +18,17 @@ class MessageImageCell: MessageCell {
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
 
     private var disposables: [Disposable] = []
-    
+
     override var viewModel: ChatItemCellViewModel? {
         willSet {
             unbindFromViewModel()
         }
-        
+
         didSet {
             if viewModel != nil && (viewModel is MessageImageCellViewModel) == false {
-                fatalError("Wrong viewModel type! Current is:\(String(describing: type(of: viewModel))). Must be: MessageImageCellViewModel")
+                fatalError("Wrong viewModel type! Current is:" +
+                            String(describing: type(of: viewModel)) +
+                            ". Must be: MessageImageCellViewModel")
             }
 
             refreshDisplay()
@@ -37,27 +39,34 @@ class MessageImageCell: MessageCell {
     private func bindToViewModel() {
         guard let viewModel = self.viewModel as? MessageImageCellViewModel else { return }
         do {
-            let disposable = Observable.combineLatest(viewModel.uploadingImage.asObservable(), viewModel.imageUrl.asObservable())
-                .observeOn(MainScheduler.instance).subscribe(onNext: {[weak self] (values) in
+            let disposable = Observable.combineLatest(viewModel.uploadingImage.asObservable(),
+                                                      viewModel.imageUrl.asObservable())
+                .observeOn(MainScheduler.instance)
+                .subscribe(onNext: {[weak self] (_) in
                     guard let self = self else { return }
                     self.refreshDisplay()
                 })
             disposable.disposed(by: rx.disposeBag)
             disposables.append(disposable)
         }
-        
+
         do {
-            let disposable = viewModel.displaySide.observeOn(MainScheduler.instance).subscribe(onNext: {[weak self] (displaySide) in
-                guard let self = self else { return }
-                
-                self.indicatorView.transform = displaySide == .right ? CGAffineTransform(scaleX: -1, y: 1) : CGAffineTransform.identity
-                self.messageImage.transform = displaySide == .right ? CGAffineTransform(scaleX: -1, y: 1) : CGAffineTransform.identity
-            })
+            let disposable = viewModel.displaySide.observeOn(MainScheduler.instance)
+                .subscribe(onNext: {[weak self] (displaySide) in
+                    guard let self = self else { return }
+
+                    self.indicatorView.transform = displaySide == .right ?
+                        CGAffineTransform(scaleX: -1, y: 1) :
+                        CGAffineTransform.identity
+                    self.messageImage.transform = displaySide == .right ?
+                        CGAffineTransform(scaleX: -1, y: 1) :
+                        CGAffineTransform.identity
+                })
             disposable.disposed(by: rx.disposeBag)
             disposables.append(disposable)
         }
     }
-    
+
     private func refreshDisplay() {
         guard let viewModel = viewModel as? MessageImageCellViewModel else { return }
         let image: UIImage? = viewModel.uploadingImage.value
@@ -66,7 +75,8 @@ class MessageImageCell: MessageCell {
         if let urlStringUnwrapped = imageUrlString, let url: URL = URL(string: urlStringUnwrapped) {
             self.messageImage.sd_setImage(with: url, placeholderImage: viewModel.uploadingImage.value)
             let originImageSize: CGSize = viewModel.imageSize ?? .zero
-            let displaySize: CGSize = calculateImageSizeForChat(width: originImageSize.width, height:originImageSize.height)
+            let displaySize: CGSize = calculateImageSizeForChat(width: originImageSize.width,
+                                                                height: originImageSize.height)
             self.heightImageView.constant = displaySize.height
             self.widthImageView.constant = displaySize.width
             self.blurView.isHidden = true
@@ -75,7 +85,8 @@ class MessageImageCell: MessageCell {
         } else {
             self.messageImage.sd_cancelCurrentImageLoad()
             let originImageSize: CGSize = image?.size ?? .zero
-            let displaySize: CGSize = calculateImageSizeForChat(width: originImageSize.width, height: originImageSize.height)
+            let displaySize: CGSize = calculateImageSizeForChat(width: originImageSize.width,
+                                                                height: originImageSize.height)
             self.heightImageView.constant = displaySize.height
             self.widthImageView.constant = displaySize.width
             self.messageImage.image = image
@@ -84,14 +95,14 @@ class MessageImageCell: MessageCell {
             self.indicatorView.isHidden = false
         }
     }
-    
+
     private func unbindFromViewModel() {
         disposables.forEach { (ele) in
             ele.dispose()
         }
         disposables.removeAll()
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -102,8 +113,8 @@ class MessageImageCell: MessageCell {
 
         // Configure the view for the selected state
     }
-    
-    func calculateImageSizeForChat(width: CGFloat, height: CGFloat) -> CGSize{
+
+    func calculateImageSizeForChat(width: CGFloat, height: CGFloat) -> CGSize {
         if width >= height {
             let newWidth: CGFloat = UIScreen.main.bounds.width * 2 / 3
             let ratio: CGFloat = max(CGFloat(height) / CGFloat(width), 0.25)

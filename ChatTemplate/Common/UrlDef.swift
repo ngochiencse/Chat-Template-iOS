@@ -8,14 +8,14 @@
 
 import Foundation
 
-enum WebviewUrlDef : String, CaseIterable {
+enum WebviewUrlDef: String, CaseIterable {
     case terms = "termsofservice.html"
     case policies = "privacy.html"
     case resetPassword = "resetPassword"
-    
+
     func urlString() -> String {
         let host: String = Environment.shared.configuration(.apiHost)
-        let urlString : String = host + self.rawValue
+        let urlString: String = host + self.rawValue
         return urlString
     }
 }

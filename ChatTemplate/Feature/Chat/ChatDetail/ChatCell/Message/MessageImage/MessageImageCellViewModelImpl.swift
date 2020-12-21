@@ -15,11 +15,11 @@ class MessageImageCellViewModelImpl: MessageCellViewModelImpl, MessageImageCellV
     let imageSize: CGSize?
     let uploadingImage: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
     let imageUrl: BehaviorRelay<String?> = BehaviorRelay(value: nil)
-    
+
     override var messageType: MessageCellType {
         return .image
     }
-        
+
     init(senderAvatar: AvatarImageViewModel?, createdAtStr: String?, imageSize: CGSize?) {
         self.imageSize = imageSize
         super.init(senderAvatar: senderAvatar, createdAtStr: createdAtStr)

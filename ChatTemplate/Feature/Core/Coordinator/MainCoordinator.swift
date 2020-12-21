@@ -15,10 +15,10 @@ class MainCoordinator: NSObject, Coordinator {
         self.root = root
         super.init()
     }
-    
+
     func start() {
-        let vc: ChatListViewController = ChatListViewController()
-        navigationController.pushViewController(vc, animated: false)
+        let viewController: ChatListViewController = ChatListViewController()
+        navigationController.pushViewController(viewController, animated: false)
         root.showViewController(navigationController, animated: true)
     }
 }

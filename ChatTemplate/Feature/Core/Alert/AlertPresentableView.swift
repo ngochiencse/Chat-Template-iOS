@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-protocol AlertPresentableView {    
+protocol AlertPresentableView {
     var alertViewModel: AlertPresentableViewModel { get }
 }
 
@@ -19,15 +19,16 @@ extension AlertPresentableView where Self: UIViewController {
     func bindToAlerts() {
         bindToAlertViewModel(alertViewModel)
     }
-    
+
     func bindToAlertViewModel(_ alertViewModel: AlertPresentableViewModel) {
-        alertViewModel.alertModel.observeOn(MainScheduler.instance).subscribe(onNext: {[weak self] (model: AlertModel?) in
-            guard let model = model else {
-                return
-            }
-            
-            let alert = AlertBuilder.buildAlertController(for: model)
-            self?.present(alert, animated: true, completion: nil)
-        }).disposed(by: rx.disposeBag)
+        alertViewModel.alertModel.observeOn(MainScheduler.instance)
+            .subscribe(onNext: {[weak self] (model: AlertModel?) in
+                guard let model = model else {
+                    return
+                }
+
+                let alert = AlertBuilder.buildAlertController(for: model)
+                self?.present(alert, animated: true, completion: nil)
+            }).disposed(by: rx.disposeBag)
     }
 }

@@ -18,18 +18,18 @@ class ChatListViewController: BaseViewController {
 
     @IBAction func goToChatScreen(_ sender: Any) {
         let viewModel: ChatScreenViewModel = ChatScreenViewModelMock()
-        let vc: ChatScreenViewController = ChatScreenViewController(viewModel: viewModel)
-        navigationController?.pushViewController(vc, animated: true)
+        let viewController: ChatScreenViewController = ChatScreenViewController(viewModel: viewModel)
+        navigationController?.pushViewController(viewController, animated: true)
     }
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    /*
+     // MARK: - Navigation
+
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
 
 }

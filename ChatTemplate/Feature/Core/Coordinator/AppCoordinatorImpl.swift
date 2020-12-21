@@ -19,32 +19,32 @@ class AppCoordinatorImpl: NSObject, AppCoordinator {
     private(set) var currentFlow: BehaviorRelay<AppFlow?> = BehaviorRelay(value: nil)
     private(set) var currentItem: Any?
     private(set) var binding: Disposable?
-    
+
     init(window: UIWindow?) {
         self.window = window
         root = RootViewController()
         super.init()
     }
-    
+
     func switchFlow(to appFlow: AppFlow, animated: Bool) {
         switch appFlow {
         case .splash:
-            let vc: SplashScreenViewController = SplashScreenViewController()
-            vc.delegate = self
-            root.showViewController(vc, animated: animated)
-            currentItem = vc
+            let viewController: SplashScreenViewController = SplashScreenViewController()
+            viewController.delegate = self
+            root.showViewController(viewController, animated: animated)
+            currentItem = viewController
         case .main:
             let main = MainCoordinator(root: root)
             main.start()
             currentItem = main
         }
-        
+
         currentFlow.accept(appFlow)
     }
 
     func start() {
         switchFlow(to: .splash, animated: true)
-        
+
         window?.rootViewController = root
         window?.makeKeyAndVisible()
     }

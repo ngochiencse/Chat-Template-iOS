@@ -114,6 +114,7 @@ PODS:
   - SnapKit (5.0.1)
   - SVPullToRefresh (0.4.1)
   - SwiftDate (5.1.0)
+  - SwiftLint (0.41.0)
   - Tatsi (1.2.1)
   - Toast-Swift (5.0.1)
   - TPKeyboardAvoiding (1.3.5)
@@ -138,6 +139,7 @@ DEPENDENCIES:
   - SnapKit (~> 5.0.0)
   - SVPullToRefresh (from `https://github.com/hienphambravesoft/SVPullToRefresh.git`)
   - SwiftDate (~> 5.0)
+  - SwiftLint
   - Tatsi
   - Toast-Swift (~> 5.0.1)
   - TPKeyboardAvoiding
@@ -177,6 +179,7 @@ SPEC REPOS:
     - SDWebImage
     - SnapKit
     - SwiftDate
+    - SwiftLint
     - Tatsi
     - Toast-Swift
     - TPKeyboardAvoiding
@@ -224,10 +227,11 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   SwiftDate: 6329e58969a2de31cea7f1ee1143b247693196e7
+  SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
   Tatsi: 12ac525e0e8477645d707d4f356f85cb60182f80
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   TPKeyboardAvoiding: d55b3ea7b362540af8fcf36aa3ed2e87bf210cc6
 
-PODFILE CHECKSUM: 896527efa66af6f954df752b9e107222634e1938
+PODFILE CHECKSUM: 37a8c8ca8b6e019869b3c26f117ed68c6d78c0a7
 
 COCOAPODS: 1.10.0

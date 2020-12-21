@@ -11,7 +11,8 @@ import Moya
 import RxSwift
 
 /**
- Provide network api with network logger and error proccessing plugin (`APIErrorProcessPlugin`), also with auto handle api error.
+ Provide network api with network logger and error proccessing plugin (`APIErrorProcessPlugin`),
+ also with auto handle api error.
  */
 class ProviderAPIBasic<Target>: Provider<Target> where Target: Moya.TargetType {
     let provider: MoyaProvider<Target>
@@ -19,7 +20,8 @@ class ProviderAPIBasic<Target>: Provider<Target> where Target: Moya.TargetType {
     let autoHandleNoInternetConnection: Bool
     /**
      Init Provider, similiar to Moya.
-        - Parameter autoHandleAPIError: If `true` then any error thrown will be handled automatically, and will be transformed into `APIError.ignore`
+     - Parameter autoHandleAPIError: If `true` then any error thrown will be handled automatically,
+     and will be transformed into `APIError.ignore`
      */
     init(autoHandleNoInternetConnection: Bool = true,
          autoHandleAPIError: Bool = true,
@@ -37,7 +39,9 @@ class ProviderAPIBasic<Target>: Provider<Target> where Target: Moya.TargetType {
         var mutablePlugins: [PluginType] = plugins
         mutablePlugins.append(errorProcessPlugin)
         #if DEBUG
-        mutablePlugins.append(NetworkLoggerPlugin(configuration: NetworkLoggerPlugin.Configuration(logOptions: .verbose)))
+        mutablePlugins.append(
+            NetworkLoggerPlugin(configuration: NetworkLoggerPlugin.Configuration(logOptions: .verbose))
+        )
         #endif
 
         provider = MoyaProvider(endpointClosure: endpointClosure,
@@ -47,8 +51,11 @@ class ProviderAPIBasic<Target>: Provider<Target> where Target: Moya.TargetType {
                                 plugins: mutablePlugins,
                                 trackInflights: trackInflights)
     }
-    
+
     override func request(_ token: Target) -> Single<Response> {
-        return provider.rx.request(token).catchCommonError(autoHandleNoInternetConnection: autoHandleNoInternetConnection, autoHandleAPIError: autoHandleAPIError, autoHandleAccountSuspendedStop: false)
+        return provider.rx.request(token)
+            .catchCommonError(autoHandleNoInternetConnection: autoHandleNoInternetConnection,
+                              autoHandleAPIError: autoHandleAPIError,
+                              autoHandleAccountSuspendedStop: false)
     }
 }

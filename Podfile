@@ -28,6 +28,7 @@ def pods
   pod 'RSKGrowingTextView'
   pod 'Tatsi'
   pod 'Toast-Swift', '~> 5.0.1'
+  pod 'SwiftLint'
 end
 
 target 'ChatTemplate' do
