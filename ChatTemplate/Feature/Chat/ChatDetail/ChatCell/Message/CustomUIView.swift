@@ -48,17 +48,13 @@ class CustomUIView: UIView {
         shape.path = maskPath.cgPath
         layer.mask = shape
 
-        guard let layer = layer.mask as? CAShapeLayer,
-              let path = (layer).path
-        else {
-            return
-        }
-        borderLayer = CAShapeLayer()
-        borderLayer!.path = path // Reuse the Bezier path
-        borderLayer!.strokeColor = colorBorder?.cgColor
-        borderLayer!.fillColor = UIColor.clear.cgColor
-        borderLayer!.lineWidth = widthBorder ?? 0
-        borderLayer!.frame = self.bounds
-        layer.addSublayer(borderLayer!)
+        let borderLayer = CAShapeLayer()
+        borderLayer.path = (layer.mask as? CAShapeLayer)?.path // Reuse the Bezier path
+        borderLayer.strokeColor = colorBorder?.cgColor
+        borderLayer.fillColor = UIColor.clear.cgColor
+        borderLayer.lineWidth = widthBorder ?? 0
+        borderLayer.frame = bounds
+        layer.addSublayer(borderLayer)
+        self.borderLayer = borderLayer
     }
 }
