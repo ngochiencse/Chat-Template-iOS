@@ -21,7 +21,6 @@ private let CHATTIMECELLHEIGHT: CGFloat = 40
 private let messageTextReuseId: String = String(describing: MessageTextCell.self)
 private let messageImageReuseId: String = String(describing: MessageImageCell.self)
 private let chatTimeReuseId: String = String(describing: ChatTimeCell.self)
-private let loadMoreReuseId = String(describing: LoadMoreHeaderFooterView.self)
 
 class ChatScreenViewController: BaseViewController {
     let viewModel: ChatScreenViewModel
@@ -128,14 +127,6 @@ class ChatScreenViewController: BaseViewController {
         ]
         for cellReuseId: String in cellReuseIds {
             tableView.register(UINib(nibName: cellReuseId, bundle: nil), forCellReuseIdentifier: cellReuseId)
-        }
-
-        let headerFooterReuseIds: [String] = [
-            loadMoreReuseId
-        ]
-        for headerFooterReuseId: String in headerFooterReuseIds {
-            tableView.register(UINib(nibName: headerFooterReuseId, bundle: nil),
-                               forHeaderFooterViewReuseIdentifier: headerFooterReuseId)
         }
 
         let footer: UIView = UIView()
