@@ -17,24 +17,10 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
     let basicViewModel: BasicViewModel
     let itemsModifier: ChatItemsModifier
     var chatItems: [ChatItemCellViewModel] {
-        return chatItemsDetail.map { (ele) -> ChatItemCellViewModel in
-            if let unwrapped = ele as? MessageCellAdvancedViewModel {
-                return unwrapped.cell
-            } else {
-                guard let unwrapped = ele as? ChatItemTimeCellViewModel else {
-                    return ChatItemTimeCellViewModelImpl(time: nil)
-                }
-                return unwrapped
-            }
-        }
+        return chatItemsBR.value
     }
-    var chatItemsDetail: [Any] {
-        var chatItems: [ChatItemAdvancedViewModel] = messagesRemote + messagesSending
-        chatItems = itemsModifier.checkAndInsertTimeIfNeeded(messagesRemote + messagesSending,
-                                                             insertTimeAtHead: !showsInfiniteScrolling.value)
-        itemsModifier.updateMessageBlockPosition(chatItems)
-        return chatItems
-    }
+    private let chatItemsBR: BehaviorRelay<[ChatItemCellViewModel]> = BehaviorRelay(value: [])
+    private let chatItemsDetailBR: BehaviorRelay<[Any]> = BehaviorRelay(value: [])
 
     private(set) var showsInfiniteScrolling: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     let didFinishLoadFirstTime: PublishSubject<Void> = PublishSubject()
@@ -45,8 +31,8 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
     var onUpdateMessagesFinish: PublishSubject<Void> = PublishSubject()
 
     private(set) var isLoading: Bool = false
-    private var messagesRemote: [MessageCellAdvancedViewModel] = []
-    private var messagesSending: [MessageCellAdvancedViewModel] = []
+    private let messagesRemoteBR: BehaviorRelay<[MessageCellAdvancedViewModel]> = BehaviorRelay(value: [])
+    private let messagesSendingBR: BehaviorRelay<[MessageCellAdvancedViewModel]> = BehaviorRelay(value: [])
 
     let userOtherId: ChatUserId = "8"
     let userMeId: ChatUserId = "19"
@@ -61,7 +47,40 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
         self.basicViewModel = basicViewModel
         self.itemsModifier = itemsModifier
         super.init()
+        bindToEvents()
         //        simulateReceiveMessages()
+    }
+
+    private func bindToEvents() {
+        Observable.combineLatest(messagesRemoteBR.asObservable(),
+                                 messagesSendingBR.asObservable(),
+                                 showsInfiniteScrolling.asObservable())
+            .map {[weak self] (values) -> [Any] in
+                guard let self = self else {
+                    return []
+                }
+                let (messagesRemote, messagesSending, showsInfiniteScrolling) = values
+                var chatItems: [ChatItemAdvancedViewModel] = messagesRemote + messagesSending
+                chatItems = self.itemsModifier.checkAndInsertTimeIfNeeded(messagesRemote + messagesSending,
+                                                                          insertTimeAtHead: !showsInfiniteScrolling)
+                self.itemsModifier.updateMessageBlockPosition(chatItems)
+                return chatItems
+            }
+            .bind(to: chatItemsDetailBR).disposed(by: rx.disposeBag)
+
+        chatItemsDetailBR.map { (chatItemsDetail) -> [ChatItemCellViewModel] in
+            return chatItemsDetail.map { (ele) -> ChatItemCellViewModel in
+                if let unwrapped = ele as? MessageCellAdvancedViewModel {
+                    return unwrapped.cell
+                } else {
+                    guard let unwrapped = ele as? ChatItemTimeCellViewModel else {
+                        return ChatItemTimeCellViewModelImpl(time: nil)
+                    }
+                    return unwrapped
+                }
+            }
+        }.bind(to: chatItemsBR).disposed(by: rx.disposeBag)
+
     }
 
     private func simulateReceiveMessages() {
@@ -70,6 +89,8 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
 
         timerText = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) {[weak self] _ in
             guard let self = self else { return }
+            var messagesRemote = self.messagesRemoteBR.value
+
             let cell: MessageCellViewModel =
                 MessageTextCellViewModelImpl(senderAvatar: otherAvatar,
                                              createdAtStr: Date().toFormat("hh:mm"),
@@ -81,12 +102,15 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
                                                  messageIdBefore: nil,
                                                  createdAt: Date(),
                                                  cell: cell)
-            self.messagesRemote.append(message)
+            messagesRemote.append(message)
+            self.messagesRemoteBR.accept(messagesRemote)
             self.onReceiveMessages.onNext(())
         }
 
         timerImage = Timer.scheduledTimer(withTimeInterval: 7, repeats: true) {[weak self] _ in
             guard let self = self else { return }
+            var messagesRemote = self.messagesRemoteBR.value
+
             let cell: MessageImageCellViewModel =
                 MessageImageCellViewModelImpl(senderAvatar: otherAvatar,
                                               createdAtStr: Date().toFormat("hh:mm"),
@@ -104,8 +128,8 @@ https://hoidulich.net/wp-content/uploads/2019/11/\
                                                  createdAt: Date(),
                                                  cell: cell)
 
-            self.messagesRemote.append(message)
-
+            messagesRemote.append(message)
+            self.messagesRemoteBR.accept(messagesRemote)
             self.onReceiveMessages.onNext(())
         }
     }
@@ -118,12 +142,14 @@ https://hoidulich.net/wp-content/uploads/2019/11/\
         }
         // TODO: Implement real api here
 
+        var messagesRemote = messagesRemoteBR.value
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
             let newMessages = self.mockData()
             if loadMore == false {
-                self.messagesRemote.removeAll()
+                messagesRemote.removeAll()
             }
-            self.messagesRemote.insert(contentsOf: newMessages, at: 0)
+            messagesRemote.insert(contentsOf: newMessages, at: 0)
+            self.messagesRemoteBR.accept(messagesRemote)
             self.showsInfiniteScrolling.accept(true)
             self.basicViewModel.showIndicator.accept(false)
             self.isLoading = false
@@ -140,8 +166,8 @@ https://hoidulich.net/wp-content/uploads/2019/11/\
         let cleanedText: String = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard cleanedText.isEmpty == false else { return }
 
-        guard let remoteIdBefore = messagesRemote.last?.messageId else { return }
-        let localId: Int = (messagesSending.last?.localId ?? 0) + 1
+        guard let remoteIdBefore = messagesRemoteBR.value.last?.messageId else { return }
+        let localId: Int = (messagesSendingBR.value.last?.localId ?? 0) + 1
 
         // Set up view model
         let cell: MessageCellViewModel = MessageTextCellViewModelImpl(senderAvatar: nil,
@@ -160,7 +186,7 @@ https://hoidulich.net/wp-content/uploads/2019/11/\
                                              createdAt: Date(),
                                              cell: cell)
 
-        messagesSending.append(message)
+        messagesSendingBR.accept(messagesSendingBR.value + [message])
 
         // Set up operation
         let operation = MessageTextOperationMock(text: cleanedText, localId: localId, remoteIdBefore: remoteIdBefore)
@@ -182,20 +208,24 @@ https://hoidulich.net/wp-content/uploads/2019/11/\
         let localId = operation.localId
         let remoteIdBefore = operation.remoteIdBefore
 
-        if let cellViewModel = self.messagesSending.first(where: { (ele) -> Bool in
+        var messagesSending = messagesSendingBR.value
+        if let cellViewModel = messagesSending.first(where: { (ele) -> Bool in
             return (ele.localId == localId && ele.messageIdBefore == remoteIdBefore)
         }) {
-            self.messagesSending.removeAll { (ele) -> Bool in
+            messagesSending.removeAll { (ele) -> Bool in
                 return (ele.localId == localId && ele.messageIdBefore == remoteIdBefore)
             }
+            messagesSendingBR.accept(messagesSending)
             if let error = operation.error {
                 self.onSendMessagesFinish.onError(error)
             } else {
-                if let index = self.messagesRemote.lastIndex(where: { (ele) -> Bool in
+                var messagesRemote = messagesRemoteBR.value
+                if let index = messagesRemote.lastIndex(where: { (ele) -> Bool in
                     return (ele.messageId == remoteIdBefore)
                 }) {
-                    self.messagesRemote.insert(cellViewModel, at: index + 1)
+                    messagesRemote.insert(cellViewModel, at: index + 1)
                 }
+                messagesRemoteBR.accept(messagesRemote)
                 success?(cellViewModel)
                 self.onSendMessagesFinish.onNext(())
             }
@@ -203,8 +233,8 @@ https://hoidulich.net/wp-content/uploads/2019/11/\
     }
 
     func sendImage(_ image: UIImage) {
-        guard let remoteIdBefore = messagesRemote.last?.messageId else { return }
-        let localId: Int = (messagesSending.last?.localId ?? 0) + 1
+        guard let remoteIdBefore = messagesRemoteBR.value.last?.messageId else { return }
+        let localId: Int = (messagesSendingBR.value.last?.localId ?? 0) + 1
 
         // Set up view model
         let cell: MessageImageCellViewModel = MessageImageCellViewModelImpl(senderAvatar: nil,
@@ -223,7 +253,7 @@ https://hoidulich.net/wp-content/uploads/2019/11/\
                                              createdAt: Date(),
                                              cell: cell)
 
-        messagesSending.append(message)
+        messagesSendingBR.accept(messagesSendingBR.value + [message])
 
         // Set up operation
         let operation = MessageImageOperationMock(image: image, localId: localId, remoteIdBefore: remoteIdBefore)
