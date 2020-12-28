@@ -306,97 +306,64 @@ extension ChatScreenViewModelMock {
             let otherAvatar: AvatarImageViewModel = AvatarImageViewModelImpl()
             otherAvatar.avatarUrlStr.accept("https://i.pinimg.com/236x/9f/80/ad/9f80ad4b76f76d54cc4e84bc1b0028bc.jpg")
             do {
-                let cell: MessageTextCellViewModel =
-                    MessageTextCellViewModelImpl(senderAvatar: nil,
-                                                 createdAtStr: createdAt.toFormat("hh:mm"),
-                                                 attributedText: attributedText(from:
-                                                                                    """
-                                                                        Lovely girls, they were very communicative\
-                                                                        nand left the place clean.\
-                                                                        nI'd definitely recommend them as guests!
-                                                                        """))
                 let message: MessageCellAdvancedViewModel =
-                    MessageCellAdvancedViewModelImpl(messageId: "1",
-                                                     senderId: self.userMeId,
-                                                     localId: nil,
-                                                     messageIdBefore: nil,
-                                                     createdAt: createdAt,
-                                                     cell: cell)
+                    self.cellMessageText(createdAt: createdAt,
+                                         text:
+                                            """
+                                            Lovely girls, they were very communicative\
+                                            and left the place clean.\
+                                            I'd definitely recommend them as guests!
+                                            """,
+                                         messageId: "1",
+                                         senderId: userMeId,
+                                         senderAvatar: nil)
+                newMessages.append(message)
+            }
+
+            do {
+                let message: MessageCellAdvancedViewModel = self.cellMessageText(createdAt: createdAt,
+                                                                                 text: "Good!",
+                                                                                 messageId: "2",
+                                                                                 senderId: nil,
+                                                                                 senderAvatar: otherAvatar)
                 newMessages.append(message)
             }
             do {
-                let cell: MessageTextCellViewModel =
-                    MessageTextCellViewModelImpl(senderAvatar: otherAvatar,
-                                                 createdAtStr: createdAt.toFormat("hh:mm"),
-                                                 attributedText: attributedText(from: "Good!"))
                 let message: MessageCellAdvancedViewModel =
-                    MessageCellAdvancedViewModelImpl(messageId: "2",
-                                                     senderId: self.userOtherId,
-                                                     localId: nil,
-                                                     messageIdBefore: nil,
-                                                     createdAt: createdAt,
-                                                     cell: cell)
+                    self.cellMessageText(createdAt: createdAt,
+                                         text: "Glad you enjoy it ^^! https://ssd.userbenchmark.com/",
+                                         messageId: "3",
+                                         senderId: nil,
+                                         senderAvatar: otherAvatar)
                 newMessages.append(message)
             }
             do {
-                let cell: MessageTextCellViewModel =
-                    MessageTextCellViewModelImpl(senderAvatar: otherAvatar,
-                                                 createdAtStr: createdAt.toFormat("hh:mm"),
-                                                 attributedText:
-                                                    attributedText(
-                                                        from: "Glad you enjoy it ^^! https://ssd.userbenchmark.com/"))
                 let message: MessageCellAdvancedViewModel =
-                    MessageCellAdvancedViewModelImpl(messageId: "3",
-                                                     senderId: self.userOtherId,
-                                                     localId: nil,
-                                                     messageIdBefore: nil,
-                                                     createdAt: createdAt,
-                                                     cell: cell)
+                    self.cellMessageImage(createdAt: createdAt,
+                                          imageSize: CGSize(width: 1067, height: 800),
+                                          imageUrl: """
+                                                    https://hoidulich.net/wp-content/uploads/2019/11/71118571\
+                                                    _400051820571391_381023500722296458_n-1067x800.jpg
+                                                    """,
+                                          messageId: "4",
+                                          senderId: userMeId,
+                                          senderAvatar: nil)
                 newMessages.append(message)
             }
             do {
-                let cell: MessageImageCellViewModel =
-                    MessageImageCellViewModelImpl(senderAvatar: nil,
-                                                  createdAtStr: Date().toFormat("hh:mm"),
-                                                  imageSize: CGSize(width: 1067, height: 800))
-                cell.imageUrl.accept("""
-https://hoidulich.net/wp-content/uploads/2019/11/71118571_400051820571391_381023500722296458_n-1067x800.jpg
-""")
-                let message: MessageCellAdvancedViewModel =
-                    MessageCellAdvancedViewModelImpl(messageId: "4",
-                                                     senderId: self.userMeId,
-                                                     localId: nil,
-                                                     messageIdBefore: nil,
-                                                     createdAt: createdAt,
-                                                     cell: cell)
+                let message: MessageCellAdvancedViewModel = self.cellMessageText(createdAt: createdAt,
+                                                                                 text: "Here is a picture of us ^^",
+                                                                                 messageId: "5",
+                                                                                 senderId: userMeId,
+                                                                                 senderAvatar: nil)
                 newMessages.append(message)
             }
             do {
-                let cell: MessageTextCellViewModel =
-                    MessageTextCellViewModelImpl(senderAvatar: nil,
-                                                 createdAtStr: createdAt.toFormat("hh:mm"),
-                                                 attributedText: attributedText(from: "Here is a picture of us ^^"))
-                let message: MessageCellAdvancedViewModel =
-                    MessageCellAdvancedViewModelImpl(messageId: "5",
-                                                     senderId: self.userMeId,
-                                                     localId: nil,
-                                                     messageIdBefore: nil,
-                                                     createdAt: createdAt,
-                                                     cell: cell)
-                newMessages.append(message)
-            }
-            do {
-                let cell: MessageTextCellViewModel =
-                    MessageTextCellViewModelImpl(senderAvatar: nil,
-                                                 createdAtStr: createdAt.toFormat("hh:mm"),
-                                                 attributedText: attributedText(from: "Oh it was so beautiful!"))
-                let message: MessageCellAdvancedViewModel =
-                    MessageCellAdvancedViewModelImpl(messageId: "6",
-                                                     senderId: self.userMeId,
-                                                     localId: nil,
-                                                     messageIdBefore: nil,
-                                                     createdAt: createdAt,
-                                                     cell: cell)
+                let message: MessageCellAdvancedViewModel = self.cellMessageText(createdAt: createdAt,
+                                                                                 text: "Oh it was so beautiful!",
+                                                                                 messageId: "6",
+                                                                                 senderId: nil,
+                                                                                 senderAvatar: otherAvatar)
                 newMessages.append(message)
             }
         }
@@ -407,6 +374,47 @@ https://hoidulich.net/wp-content/uploads/2019/11/71118571_400051820571391_381023
             ele.cell.isSenderAvatarSpaceHidden.accept(isMyMessage)
             ele.cell.isButtonLikeHidden.accept(isMyMessage)
         }
+        newMessages = newMessages.shuffled()
         return newMessages
+    }
+
+    private func cellMessageText(createdAt: Date?,
+                                 text: String?,
+                                 messageId: MessageId,
+                                 senderId: ChatUserId?,
+                                 senderAvatar: AvatarImageViewModel?) -> MessageCellAdvancedViewModel {
+        let cell: MessageTextCellViewModel =
+            MessageTextCellViewModelImpl(senderAvatar: nil,
+                                         createdAtStr: createdAt?.toFormat("hh:mm"),
+                                         attributedText: attributedText(from: text))
+        let message: MessageCellAdvancedViewModel =
+            MessageCellAdvancedViewModelImpl(messageId: messageId,
+                                             senderId: senderId,
+                                             localId: nil,
+                                             messageIdBefore: nil,
+                                             createdAt: createdAt,
+                                             cell: cell)
+        return message
+    }
+
+    private func cellMessageImage(createdAt: Date?,
+                                  imageSize: CGSize,
+                                  imageUrl: String?,
+                                  messageId: MessageId,
+                                  senderId: ChatUserId?,
+                                  senderAvatar: AvatarImageViewModel?) -> MessageCellAdvancedViewModel {
+        let cell: MessageImageCellViewModel =
+            MessageImageCellViewModelImpl(senderAvatar: senderAvatar,
+                                          createdAtStr: createdAt?.toFormat("hh:mm"),
+                                          imageSize: imageSize)
+        cell.imageUrl.accept(imageUrl)
+        let message: MessageCellAdvancedViewModel =
+            MessageCellAdvancedViewModelImpl(messageId: messageId,
+                                             senderId: senderId,
+                                             localId: nil,
+                                             messageIdBefore: nil,
+                                             createdAt: createdAt,
+                                             cell: cell)
+        return message
     }
 }
