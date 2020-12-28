@@ -43,73 +43,58 @@ class MessageCell: ChatCell {
         senderAvatar.viewModel = viewModel.senderAvatar
 
         do {
+            displayRoundCorners(viewModel.roundCorners.value)
+
             let disposable = viewModel.roundCorners.observeOn(MainScheduler.instance)
                 .subscribe(onNext: {[weak self] (roundCorners) in
                     guard let self = self else { return }
-                    let topLeft: CGFloat = (roundCorners.contains(.topLeft) == true) ? 16 : 6
-                    let topRight: CGFloat = (roundCorners.contains(.topRight) == true) ? 16 : 6
-                    let bottomLeft: CGFloat = (roundCorners.contains(.bottomLeft) == true) ? 16 : 6
-                    let bottomRight: CGFloat = (roundCorners.contains(.bottomRight) == true) ? 16 : 6
-                    DispatchQueue.main.async {
-                        self.background?.roundCorners(topLeft: topLeft,
-                                                      topRight: topRight,
-                                                      bottomLeft: bottomLeft,
-                                                      bottomRight: bottomRight)
-                    }
+                    self.displayRoundCorners(roundCorners)
                 })
             disposable.disposed(by: rx.disposeBag)
             disposables.append(disposable)
         }
 
         do {
-            if let leftConstraintBackground = leftConstraintBackground {
-                let disposable = Observable.combineLatest(viewModel.isSenderAvatarSpaceHidden.asObservable(),
-                                                          viewModel.displaySide.asObservable())
-                    .map { (values) -> CGFloat in
-                        let (isSenderAvatarSpaceHidden, displaySide) = values
-                        if displaySide == .left {
-                            return (isSenderAvatarSpaceHidden == true) ? 24 : 56
-                        } else {
-                            return 24
-                        }
-                    }.bind(to: leftConstraintBackground.rx.constant)
-                disposable.disposed(by: rx.disposeBag)
-                disposables.append(disposable)
-            }
+            displayLeftConstraintBackground(viewModel.isSenderAvatarSpaceHidden.value,
+                                            viewModel.displaySide.value)
+
+            let disposable = Observable.combineLatest(viewModel.isSenderAvatarSpaceHidden.asObservable(),
+                                                      viewModel.displaySide.asObservable())
+                .skip(1)
+                .subscribe(onNext: {[weak self] (_) in
+                    guard let self = self else { return }
+                    self.displayLeftConstraintBackground(viewModel.isSenderAvatarSpaceHidden.value,
+                                                         viewModel.displaySide.value)
+                }, onError: nil, onCompleted: nil, onDisposed: nil)
+
+            disposable.disposed(by: rx.disposeBag)
+            disposables.append(disposable)
         }
 
         do {
-            if let avatarContainer = senderAvatar.superview {
-                let disposable = viewModel.isSenderAvatarImageHidden.bind(to: avatarContainer.rx.isHidden)
-                disposable.disposed(by: rx.disposeBag)
-                disposables.append(disposable)
-            }
+            displaySenderAvatarImageHidden(viewModel.isSenderAvatarImageHidden.value)
+
+            let disposable = viewModel.isSenderAvatarImageHidden
+                .skip(1)
+                .subscribe(onNext: {[weak self] (isSenderAvatarImageHidden) in
+                    guard let self = self else { return }
+                    self.displaySenderAvatarImageHidden(isSenderAvatarImageHidden)
+                }, onError: nil, onCompleted: nil, onDisposed: nil)
+            disposable.disposed(by: rx.disposeBag)
+            disposables.append(disposable)
         }
 
         createdTimeLabel.text = viewModel.createdAtStr
 
         do {
+
+            self.displayMessageSide(viewModel.displaySide.value)
+
             let disposable = viewModel.displaySide.observeOn(MainScheduler.instance)
+                .skip(1)
                 .subscribe(onNext: {[weak self] (displaySide) in
                     guard let self = self else { return }
-                    if displaySide == .right {
-                        self.contentView.layer.setAffineTransform(CGAffineTransform(scaleX: -1, y: 1))
-                        self.background?.backgroundColor = .white
-                        self.background?.colorBorder = UIColor(red: 192/255, green: 192/255, blue: 192/255, alpha: 1)
-                        self.background?.widthBorder = 1
-                        self.background?.setNeedsDisplay()
-                        self.createdTimeLabel.transform = CGAffineTransform(scaleX: -1, y: 1)
-                    } else {
-                        self.contentView.layer.setAffineTransform(CGAffineTransform.identity)
-                        self.background?.backgroundColor = UIColor(red: 243/255,
-                                                                   green: 243/255,
-                                                                   blue: 243/255,
-                                                                   alpha: 1)
-                        self.background?.colorBorder = nil
-                        self.background?.widthBorder = nil
-                        self.background?.setNeedsDisplay()
-                        self.createdTimeLabel.transform = CGAffineTransform.identity
-                    }
+                    self.displayMessageSide(displaySide)
                 })
             disposable.disposed(by: rx.disposeBag)
             disposables.append(disposable)
@@ -128,6 +113,53 @@ class MessageCell: ChatCell {
             let disposable = viewModel.isButtonLikeHidden.bind(to: btnHeart.rx.isHidden)
             disposable.disposed(by: rx.disposeBag)
             disposables.append(disposable)
+        }
+    }
+
+    private func displayRoundCorners(_ roundCorners: UIRectCorner) {
+        let topLeft: CGFloat = (roundCorners.contains(.topLeft) == true) ? 16 : 6
+        let topRight: CGFloat = (roundCorners.contains(.topRight) == true) ? 16 : 6
+        let bottomLeft: CGFloat = (roundCorners.contains(.bottomLeft) == true) ? 16 : 6
+        let bottomRight: CGFloat = (roundCorners.contains(.bottomRight) == true) ? 16 : 6
+        self.background?.topLeft = topLeft
+        self.background?.topRight = topRight
+        self.background?.bottomLeft = bottomLeft
+        self.background?.bottomRight = bottomRight
+        self.background?.refreshDisplayRoundCorners()
+    }
+
+    private func displayLeftConstraintBackground(_ isSenderAvatarSpaceHidden: Bool, _ displaySide: MessageDisplaySide) {
+        let constant: CGFloat
+        if displaySide == .left {
+            constant = (isSenderAvatarSpaceHidden == true) ? 24 : 56
+        } else {
+            constant = 24
+        }
+        leftConstraintBackground?.constant = constant
+    }
+
+    private func displaySenderAvatarImageHidden(_ isSenderAvatarImageHidden: Bool) {
+        senderAvatar.superview?.isHidden = isSenderAvatarImageHidden
+    }
+
+    private func displayMessageSide(_ displaySide: MessageDisplaySide) {
+        if displaySide == .right {
+            self.contentView.layer.setAffineTransform(CGAffineTransform(scaleX: -1, y: 1))
+            self.background?.backgroundColor = .white
+            self.background?.colorBorder = UIColor(red: 192/255, green: 192/255, blue: 192/255, alpha: 1)
+            self.background?.widthBorder = 1
+            self.background?.setNeedsDisplay()
+            self.createdTimeLabel.transform = CGAffineTransform(scaleX: -1, y: 1)
+        } else {
+            self.contentView.layer.setAffineTransform(CGAffineTransform.identity)
+            self.background?.backgroundColor = UIColor(red: 243/255,
+                                                       green: 243/255,
+                                                       blue: 243/255,
+                                                       alpha: 1)
+            self.background?.colorBorder = nil
+            self.background?.widthBorder = nil
+            self.background?.setNeedsDisplay()
+            self.createdTimeLabel.transform = CGAffineTransform.identity
         }
     }
 

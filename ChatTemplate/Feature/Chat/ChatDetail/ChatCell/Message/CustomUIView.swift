@@ -26,13 +26,24 @@ class CustomUIView: UIView {
             borderLayer?.lineWidth = widthBorder ?? 0
         }
     }
+
+    var topLeft: CGFloat = 0
+    var topRight: CGFloat = 0
+    var bottomLeft: CGFloat = 0
+    var bottomRight: CGFloat = 0
+
     private var borderLayer: CAShapeLayer?
     override func layoutSubviews() {
         super.layoutSubviews()
-        layer.cornerRadius = 6
+        refreshDisplayRoundCorners()
     }
 
-    func roundCorners(topLeft: CGFloat = 0, topRight: CGFloat = 0, bottomLeft: CGFloat = 0, bottomRight: CGFloat = 0) {
+    func refreshDisplayRoundCorners() {
+        roundCorners(topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight)
+    }
+
+    private func roundCorners(topLeft: CGFloat = 0, topRight: CGFloat = 0,
+                              bottomLeft: CGFloat = 0, bottomRight: CGFloat = 0) {
         layer.mask = nil
         borderLayer?.removeFromSuperlayer()
         let topLeftRadius = CGSize(width: topLeft, height: topLeft)

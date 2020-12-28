@@ -40,18 +40,25 @@ class MessageTextCell: MessageCell {
         guard let viewModel = self.viewModel as? MessageCellViewModel else { return }
 
         do {
-            let disposable = viewModel.displaySide.observeOn(MainScheduler.instance)
+            self.displayMessageSide(viewModel.displaySide.value)
+
+            let disposable = viewModel.displaySide
+                .skip(1).observeOn(MainScheduler.instance)
                 .subscribe(onNext: {[weak self] (displaySide) in
                     guard let self = self else { return }
 
-                    if displaySide == .right {
-                        self.tvContent.transform = CGAffineTransform(scaleX: -1, y: 1)
-                    } else {
-                        self.tvContent.transform = CGAffineTransform.identity
-                    }
+                    self.displayMessageSide(displaySide)
                 })
             disposable.disposed(by: rx.disposeBag)
             disposables.append(disposable)
+        }
+    }
+
+    private func displayMessageSide(_ displaySide: MessageDisplaySide) {
+        if displaySide == .right {
+            self.tvContent.transform = CGAffineTransform(scaleX: -1, y: 1)
+        } else {
+            self.tvContent.transform = CGAffineTransform.identity
         }
     }
 

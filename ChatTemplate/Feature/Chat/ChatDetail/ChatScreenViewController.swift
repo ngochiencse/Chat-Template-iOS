@@ -344,6 +344,14 @@ extension ChatScreenViewController: UITableViewDataSource {
 }
 
 extension ChatScreenViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let itemViewModel: ChatItemCellViewModel = viewModel.chatItems[indexPath.row]
+        guard let cell: ChatCell = cell as? ChatCell else {
+            return
+        }
+        cell.viewModel = itemViewModel
+    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let itemViewModel: ChatItemCellViewModel = viewModel.chatItems[indexPath.row]
         switch itemViewModel.itemType {
