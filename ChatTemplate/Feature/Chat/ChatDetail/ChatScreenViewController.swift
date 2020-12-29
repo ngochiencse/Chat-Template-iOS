@@ -109,8 +109,6 @@ class ChatScreenViewController: BaseViewController {
             ])
         }
 
-        tableView.keyboardDismissMode = .onDrag
-
         guard let growingTextView: RSKGrowingTextView = textView as? RSKGrowingTextView else {
             return
         }
@@ -311,31 +309,22 @@ extension ChatScreenViewController: UITableViewDataSource {
         let cell: ChatCell
         switch itemViewModel.itemType {
         case .message:
-            guard let messageViewModel: MessageCellViewModel = itemViewModel as? MessageCellViewModel else {
-                return UITableViewCell()
-            }
+            let messageViewModel: MessageCellViewModel! = itemViewModel as? MessageCellViewModel
             switch messageViewModel.messageType {
             case .text:
-                guard let cellText = tableView.dequeueReusableCell(withIdentifier: messageTextReuseId,
-                                                                   for: indexPath) as? MessageTextCell else {
-                    return UITableViewCell()
-                }
+                let cellText: MessageTextCell! = tableView.dequeueReusableCell(withIdentifier: messageTextReuseId,
+                                                                               for: indexPath) as? MessageTextCell
                 cellText.delegate = self
                 cell = cellText
             case .image:
-                guard let imageCell = tableView.dequeueReusableCell(withIdentifier: messageImageReuseId,
-                                                                    for: indexPath) as? MessageImageCell else {
-                    return UITableViewCell()
-                }
+                let imageCell: MessageImageCell! = tableView.dequeueReusableCell(withIdentifier: messageImageReuseId,
+                                                                                 for: indexPath) as? MessageImageCell
                 imageCell.delegate = self
                 cell = imageCell
             }
         case .time:
-
-            guard let timeCell = tableView.dequeueReusableCell(withIdentifier: chatTimeReuseId,
-                                                               for: indexPath) as? ChatCell else {
-                return UITableViewCell()
-            }
+            let timeCell: ChatCell! = tableView.dequeueReusableCell(withIdentifier: chatTimeReuseId,
+                                                                    for: indexPath) as? ChatCell
             cell = timeCell
         }
         cell.viewModel = itemViewModel
@@ -373,6 +362,10 @@ extension ChatScreenViewController: UITableViewDelegate {
         if scrollView.contentOffset.y <= scrollView.contentInset.top - scrollView.contentInset.bottom {
             viewModel.getMessages(loadMore: true)
         }
+    }
+
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        textView.resignFirstResponder()
     }
 }
 
