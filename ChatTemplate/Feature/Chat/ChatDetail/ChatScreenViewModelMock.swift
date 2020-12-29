@@ -28,7 +28,6 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
     let onSendMessagesStart: PublishSubject<Void> = PublishSubject()
     let onSendMessagesFinish: PublishSubject<Void> = PublishSubject()
     let onReceiveMessages: PublishSubject<Void> = PublishSubject()
-    var onUpdateMessagesFinish: PublishSubject<Void> = PublishSubject()
 
     private(set) var isLoading: Bool = false
     private let messagesRemoteBR: BehaviorRelay<[MessageCellAdvancedViewModel]> = BehaviorRelay(value: [])
@@ -41,6 +40,9 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
 
     private var timerText: Timer?
     private var timerImage: Timer?
+
+    private let maxPages: Int = 3
+    private var currentPage: Int = 0
 
     init(basicViewModel: BasicViewModel = BasicViewModelImpl(),
          itemsModifier: ChatItemsModifier = ChatItemsModifierImpl()) {
@@ -143,14 +145,21 @@ https://hoidulich.net/wp-content/uploads/2019/11/\
         // TODO: Implement real api here
 
         var messagesRemote = messagesRemoteBR.value
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-            let newMessages = self.mockData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
+            guard let self = self else { return }
+            let newMessages: [MessageCellAdvancedViewModel]
+            if self.currentPage < self.maxPages {
+                newMessages = self.mockData()
+                self.currentPage += 1
+            } else {
+                newMessages = []
+            }
             if loadMore == false {
                 messagesRemote.removeAll()
             }
             messagesRemote.insert(contentsOf: newMessages, at: 0)
             self.messagesRemoteBR.accept(messagesRemote)
-            self.showsInfiniteScrolling.accept(true)
+            self.showsInfiniteScrolling.accept(newMessages.count > 0)
             self.basicViewModel.showIndicator.accept(false)
             self.isLoading = false
 
@@ -351,7 +360,7 @@ extension ChatScreenViewModelMock {
             }
 
             do {
-                let message: MessageCellAdvancedViewModel = self.cellMessageText(createdAt: createdAt,
+                let message: MessageCellAdvancedViewModel = self.cellMessageText(createdAt: createdAt - 1.days,
                                                                                  text: "Good!",
                                                                                  messageId: "2",
                                                                                  senderId: nil,
