@@ -22,7 +22,6 @@ class ChatItemsModifierImpl: NSObject, ChatItemsModifier {
             }
             if index == 0 {
                 result.insert(ChatItemTimeCellViewModelImpl(time: currentMessage.createdAt), at: 0)
-                continue
             }
             guard let nextMessage = nextObject as? MessageCellAdvancedViewModel else {
                 continue
