@@ -136,7 +136,8 @@ class ChatScreenViewController: BaseViewController {
         tableView.dataSource = self
         tableView.delegate = self
 
-        tableView.rowHeight = 44
+        // Must include this line to make sure contentSize is calculated correctly
+        tableView.estimatedRowHeight = 0
 
         tableView.allowsSelection = false
 
