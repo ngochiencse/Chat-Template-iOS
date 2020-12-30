@@ -50,7 +50,7 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
         self.itemsModifier = itemsModifier
         super.init()
         bindToEvents()
-        //        simulateReceiveMessages()
+        simulateReceiveMessages()
     }
 
     private func bindToEvents() {
@@ -423,7 +423,7 @@ extension ChatScreenViewModelMock {
                                  senderId: ChatUserId?,
                                  senderAvatar: AvatarImageViewModel?) -> MessageCellAdvancedViewModel {
         let cell: MessageTextCellViewModel =
-            MessageTextCellViewModelImpl(senderAvatar: nil,
+            MessageTextCellViewModelImpl(senderAvatar: senderAvatar,
                                          createdAtStr: createdAt?.toFormat("hh:mm"),
                                          attributedText: attributedText(from: text))
         let message: MessageCellAdvancedViewModel =

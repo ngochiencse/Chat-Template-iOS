@@ -45,7 +45,7 @@ class MessageCell: ChatCell {
         do {
             displayRoundCorners(viewModel.roundCorners.value)
 
-            let disposable = viewModel.roundCorners.observeOn(MainScheduler.instance)
+            let disposable = viewModel.roundCorners.skip(1).observeOn(MainScheduler.instance)
                 .subscribe(onNext: {[weak self] (roundCorners) in
                     guard let self = self else { return }
                     self.displayRoundCorners(roundCorners)
@@ -76,6 +76,7 @@ class MessageCell: ChatCell {
 
             let disposable = viewModel.isSenderAvatarImageHidden
                 .skip(1)
+                .observeOn(MainScheduler.instance)
                 .subscribe(onNext: {[weak self] (isSenderAvatarImageHidden) in
                     guard let self = self else { return }
                     self.displaySenderAvatarImageHidden(isSenderAvatarImageHidden)
@@ -88,10 +89,10 @@ class MessageCell: ChatCell {
 
         do {
 
-            self.displayMessageSide(viewModel.displaySide.value)
+            displayMessageSide(viewModel.displaySide.value)
 
-            let disposable = viewModel.displaySide.observeOn(MainScheduler.instance)
-                .skip(1)
+            let disposable = viewModel.displaySide.skip(1)
+                .observeOn(MainScheduler.instance)
                 .subscribe(onNext: {[weak self] (displaySide) in
                     guard let self = self else { return }
                     self.displayMessageSide(displaySide)
@@ -101,16 +102,27 @@ class MessageCell: ChatCell {
         }
 
         do {
-            let disposable = viewModel.isLike.map { (isLike) -> UIImage? in
-                let imageName: String = (isLike == true) ? "icon16HeartSolidColoured" : "heart"
-                return UIImage(named: imageName)
-            }.bind(to: btnHeart.rx.image(for: .normal))
+            displayButtonLikeImage(viewModel.isLike.value)
+
+            let disposable = viewModel.isLike.skip(1)
+                .observeOn(MainScheduler.instance)
+                .subscribe(onNext: {[weak self] (isLike) in
+                    guard let self = self else { return }
+                    self.displayButtonLikeImage(isLike)
+                })
             disposable.disposed(by: rx.disposeBag)
             disposables.append(disposable)
         }
 
         do {
-            let disposable = viewModel.isButtonLikeHidden.bind(to: btnHeart.rx.isHidden)
+            displayButtonLikeHidden(viewModel.isButtonLikeHidden.value)
+
+            let disposable = viewModel.isButtonLikeHidden
+                .observeOn(MainScheduler.instance)
+                .subscribe(onNext: {[weak self] (isButtonLikeHidden) in
+                    guard let self = self else { return }
+                    self.displayButtonLikeHidden(isButtonLikeHidden)
+                })
             disposable.disposed(by: rx.disposeBag)
             disposables.append(disposable)
         }
@@ -161,6 +173,16 @@ class MessageCell: ChatCell {
             self.background?.setNeedsDisplay()
             self.createdTimeLabel.transform = CGAffineTransform.identity
         }
+    }
+
+    private func displayButtonLikeImage(_ isLike: Bool) {
+        let imageName: String = (isLike == true) ? "icon16HeartSolidColoured" : "heart"
+        let image: UIImage? = UIImage(named: imageName)
+        btnHeart.setImage(image, for: .normal)
+    }
+
+    private func displayButtonLikeHidden(_ isButtonLikeHidden: Bool) {
+        btnHeart.isHidden = isButtonLikeHidden
     }
 
     private func unbindFromViewModel() {

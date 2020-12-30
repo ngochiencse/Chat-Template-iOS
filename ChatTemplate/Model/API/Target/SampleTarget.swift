@@ -9,14 +9,14 @@
 import Foundation
 import Moya
 
-//**
+// **
 // Error when calling api
 // */
-//enum APIError: Error {
+// enum APIError: Error {
 //    case ignore(error: Error)
 //    case accessTokenExpired
 //    case parseError
-//}
+// }
 
 public enum SampleTarget {
     case articleList(limit: Int, offset: Int)

@@ -270,9 +270,9 @@ extension ChatScreenViewController: TatsiPickerViewControllerDelegate {
 }
 
 extension ChatScreenViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    //get image from source type
+    // get image from source type
     private func getImage(fromSourceType sourceType: UIImagePickerController.SourceType) {
-        //Check is source type available
+        // Check is source type available
         if UIImagePickerController.isSourceTypeAvailable(sourceType) {
 
             let imagePickerController = UIImagePickerController()
