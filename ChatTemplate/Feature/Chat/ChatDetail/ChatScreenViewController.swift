@@ -209,7 +209,10 @@ class ChatScreenViewController: BaseViewController {
 
         viewModel.onReceiveMessages.observeOn(MainScheduler.instance).subscribe(onNext: {[weak self] (_) in
             guard let self = self else { return }
-            let isScrollAtBottom: Bool = self.tableView.isScrollPositionAtBottom
+            let isScrolling = self.tableView.layer.animation(forKey: "bounds") != nil
+            let isScrollAtBottom: Bool = (isScrolling == false && self.tableView.isDragging == false &&
+                                            self.tableView.contentOffset.y >=
+                                            self.tableView.contentSize.height - self.tableView.bounds.height * 1.5)
             UIView.setAnimationsEnabled(false)
             self.tableView.reloadData()
             self.tableView.layoutIfNeeded()
