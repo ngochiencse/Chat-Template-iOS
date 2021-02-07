@@ -1,101 +1,96 @@
 PODS:
   - Alamofire (5.4.1)
-  - BSTabbarController (1.1.1)
   - CocoaLumberjack/Core (3.7.0)
   - CocoaLumberjack/Swift (3.7.0):
     - CocoaLumberjack/Core
-  - Eureka (5.3.2)
-  - Firebase/Analytics (7.3.0):
+  - Firebase/Analytics (7.5.0):
     - Firebase/Core
-  - Firebase/Core (7.3.0):
+  - Firebase/Core (7.5.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 7.3.0)
-  - Firebase/CoreOnly (7.3.0):
-    - FirebaseCore (= 7.3.0)
-  - Firebase/Messaging (7.3.0):
+    - FirebaseAnalytics (= 7.5.0)
+  - Firebase/CoreOnly (7.5.0):
+    - FirebaseCore (= 7.5.0)
+  - Firebase/Messaging (7.5.0):
     - Firebase/CoreOnly
-    - FirebaseMessaging (~> 7.3.0)
-  - FirebaseAnalytics (7.3.0):
+    - FirebaseMessaging (~> 7.5.0)
+  - FirebaseAnalytics (7.5.0):
     - FirebaseCore (~> 7.0)
     - FirebaseInstallations (~> 7.0)
-    - GoogleAppMeasurement (= 7.3.0)
+    - GoogleAppMeasurement (= 7.5.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
     - GoogleUtilities/MethodSwizzler (~> 7.0)
     - GoogleUtilities/Network (~> 7.0)
     - "GoogleUtilities/NSData+zlib (~> 7.0)"
-    - nanopb (~> 2.30906.0)
-  - FirebaseCore (7.3.0):
-    - FirebaseCoreDiagnostics (~> 7.0)
+    - nanopb (~> 2.30907.0)
+  - FirebaseCore (7.5.0):
+    - FirebaseCoreDiagnostics (~> 7.4)
     - GoogleUtilities/Environment (~> 7.0)
     - GoogleUtilities/Logger (~> 7.0)
-  - FirebaseCoreDiagnostics (7.3.0):
+  - FirebaseCoreDiagnostics (7.5.0):
     - GoogleDataTransport (~> 8.0)
     - GoogleUtilities/Environment (~> 7.0)
     - GoogleUtilities/Logger (~> 7.0)
-    - nanopb (~> 2.30906.0)
-  - FirebaseInstallations (7.3.0):
+    - nanopb (~> 2.30907.0)
+  - FirebaseInstallations (7.5.0):
     - FirebaseCore (~> 7.0)
     - GoogleUtilities/Environment (~> 7.0)
     - GoogleUtilities/UserDefaults (~> 7.0)
     - PromisesObjC (~> 1.2)
-  - FirebaseInstanceID (7.3.0):
+  - FirebaseInstanceID (7.5.0):
     - FirebaseCore (~> 7.0)
     - FirebaseInstallations (~> 7.0)
     - GoogleUtilities/Environment (~> 7.0)
     - GoogleUtilities/UserDefaults (~> 7.0)
-  - FirebaseMessaging (7.3.0):
+  - FirebaseMessaging (7.5.0):
     - FirebaseCore (~> 7.0)
     - FirebaseInstanceID (~> 7.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
     - GoogleUtilities/Environment (~> 7.0)
     - GoogleUtilities/Reachability (~> 7.0)
     - GoogleUtilities/UserDefaults (~> 7.0)
-  - FLEX (4.3.0)
-  - FSPagerView (0.8.3)
-  - GoogleAppMeasurement (7.3.0):
+  - FLEX (4.4.0)
+  - GoogleAppMeasurement (7.5.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
     - GoogleUtilities/MethodSwizzler (~> 7.0)
     - GoogleUtilities/Network (~> 7.0)
     - "GoogleUtilities/NSData+zlib (~> 7.0)"
-    - nanopb (~> 2.30906.0)
-  - GoogleDataTransport (8.1.0):
-    - nanopb (~> 2.30906.0)
-  - GoogleUtilities/AppDelegateSwizzler (7.1.1):
+    - nanopb (~> 2.30907.0)
+  - GoogleDataTransport (8.2.0):
+    - nanopb (~> 2.30907.0)
+  - GoogleUtilities/AppDelegateSwizzler (7.2.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (7.1.1):
+  - GoogleUtilities/Environment (7.2.2):
     - PromisesObjC (~> 1.2)
-  - GoogleUtilities/Logger (7.1.1):
+  - GoogleUtilities/Logger (7.2.2):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (7.1.1):
+  - GoogleUtilities/MethodSwizzler (7.2.2):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (7.1.1):
+  - GoogleUtilities/Network (7.2.2):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (7.1.1)"
-  - GoogleUtilities/Reachability (7.1.1):
+  - "GoogleUtilities/NSData+zlib (7.2.2)"
+  - GoogleUtilities/Reachability (7.2.2):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (7.1.1):
+  - GoogleUtilities/UserDefaults (7.2.2):
     - GoogleUtilities/Logger
-  - ImageRow (4.0.0):
-    - Eureka (~> 5.0)
   - MBProgressHUD (1.1.0)
   - Moya/Core (14.0.0):
     - Alamofire (~> 5.0)
   - Moya/RxSwift (14.0.0):
     - Moya/Core
     - RxSwift (~> 5.0)
-  - nanopb (2.30906.0):
-    - nanopb/decode (= 2.30906.0)
-    - nanopb/encode (= 2.30906.0)
-  - nanopb/decode (2.30906.0)
-  - nanopb/encode (2.30906.0)
+  - nanopb (2.30907.0):
+    - nanopb/decode (= 2.30907.0)
+    - nanopb/encode (= 2.30907.0)
+  - nanopb/decode (2.30907.0)
+  - nanopb/encode (2.30907.0)
   - "NSObject+Rx (5.1.0)":
     - RxSwift (~> 5.1)
   - PromisesObjC (1.2.12)
-  - RoundedUI (1.1.3)
+  - RoundedUI (1.1.12)
   - RSKGrowingTextView (6.0.3):
     - RSKPlaceholderTextView (= 6.0.3)
   - RSKPlaceholderTextView (6.0.3)
@@ -108,26 +103,20 @@ PODS:
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
-  - SDWebImage (5.10.2):
-    - SDWebImage/Core (= 5.10.2)
-  - SDWebImage/Core (5.10.2)
+  - SDWebImage (5.10.4):
+    - SDWebImage/Core (= 5.10.4)
+  - SDWebImage/Core (5.10.4)
   - SnapKit (5.0.1)
-  - SVPullToRefresh (0.4.1)
   - SwiftDate (5.1.0)
   - SwiftLint (0.42.0)
   - Tatsi (1.2.1)
   - Toast-Swift (5.0.1)
-  - TPKeyboardAvoiding (1.3.5)
 
 DEPENDENCIES:
-  - BSTabbarController
   - CocoaLumberjack/Swift
-  - Eureka
   - Firebase/Analytics
   - Firebase/Messaging
   - FLEX
-  - FSPagerView
-  - ImageRow (~> 4.0)
   - MBProgressHUD (~> 1.1.0)
   - Moya/RxSwift (~> 14.0)
   - "NSObject+Rx"
@@ -137,21 +126,15 @@ DEPENDENCIES:
   - RxCocoa
   - SDWebImage
   - SnapKit (~> 5.0.0)
-  - SVPullToRefresh (from `https://github.com/hienphambravesoft/SVPullToRefresh.git`)
   - SwiftDate (~> 5.0)
   - SwiftLint
   - Tatsi
   - Toast-Swift (~> 5.0.1)
-  - TPKeyboardAvoiding
 
 SPEC REPOS:
-  "https://bsvframeworks@bitbucket.org/bravesoftvietnam/cocoapods-specs.git":
-    - BSTabbarController
-    - RoundedUI
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - Alamofire
     - CocoaLumberjack
-    - Eureka
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -160,16 +143,15 @@ SPEC REPOS:
     - FirebaseInstanceID
     - FirebaseMessaging
     - FLEX
-    - FSPagerView
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
-    - ImageRow
     - MBProgressHUD
     - Moya
     - nanopb
     - "NSObject+Rx"
     - PromisesObjC
+    - RoundedUI
     - RSKGrowingTextView
     - RSKPlaceholderTextView
     - RxBiBinding
@@ -182,56 +164,40 @@ SPEC REPOS:
     - SwiftLint
     - Tatsi
     - Toast-Swift
-    - TPKeyboardAvoiding
-
-EXTERNAL SOURCES:
-  SVPullToRefresh:
-    :git: https://github.com/hienphambravesoft/SVPullToRefresh.git
-
-CHECKOUT OPTIONS:
-  SVPullToRefresh:
-    :commit: 2c7ecfc1800f5187462a927f1e4469f9cf5efe3a
-    :git: https://github.com/hienphambravesoft/SVPullToRefresh.git
 
 SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
-  BSTabbarController: 659ed50cb3c0620534ed3abda65ddd18e3d5e026
   CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
-  Eureka: 1c2b8b5892bfb0e972d0fe05f8c09fd89f8625ec
-  Firebase: 26223c695fe322633274198cb19dca8cb7e54416
-  FirebaseAnalytics: 2580c2d62535ae7b644143d48941fcc239ea897a
-  FirebaseCore: 4d3c72622ce0e2106aaa07bb4b2935ba2c370972
-  FirebaseCoreDiagnostics: d50e11039e5984d92c8a512be2395f13df747350
-  FirebaseInstallations: 971df89b48ae5ee4cc2bf6935f3857a525d28550
-  FirebaseInstanceID: 5ccdee6a84e6b4bb5316de0a8cd88bc749ba490d
-  FirebaseMessaging: 68d1bcb14880189558a8ae57167abe0b7e417232
-  FLEX: 58820af8881284bdd44e36141c607b8199cca45d
-  FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
-  GoogleAppMeasurement: 8d3c0aeede16ab7764144b5a4ca8e1d4323841b7
-  GoogleDataTransport: 116c84c4bdeb76be2a7a46de51244368f9794eab
-  GoogleUtilities: 3dc4ff0d5e4840e2fa8eef0889620e8c33d4218c
-  ImageRow: e65b2e1a33f89062bf2a553a2aad61d975eb7428
+  Firebase: fd5e4d2b756292c6e7ee6faac1eb320225d6e97e
+  FirebaseAnalytics: 00b7f74571d346ee1ffb9bf0a2e6f2ffff222bcc
+  FirebaseCore: 06a2b68af8901f2244eb989419eb89edc3789b4d
+  FirebaseCoreDiagnostics: 35685db68b11fe7d19d2d8b557fd7e3a56ac81cc
+  FirebaseInstallations: a46ae59915f0931e18814164849cd0354bea24ed
+  FirebaseInstanceID: 47fcb3b70d6349cfd471f430b01bbd01a7698e8f
+  FirebaseMessaging: a2a23671eb281b1eed38b155af8549b335a4a38b
+  FLEX: 0592c011c6dfbfdb94a5e24f2d4a9dbff0c6026d
+  GoogleAppMeasurement: 65a1071e5f52f63ab03d0a4d814a54fd762d885a
+  GoogleDataTransport: 1024b1a4dfbd7a0e92cb20d7e0a6f1fb66b449a4
+  GoogleUtilities: 31c5b01f978a70c6cff2afc6272b3f1921614b43
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
-  nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
+  nanopb: 59221d7f958fb711001e6a449489542d92ae113e
   "NSObject+Rx": fa6bbcc1ab1faa06b01466bc09b1e0692bbc5946
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
-  RoundedUI: a8690198379a3d5f639630ddb1adbfb9c8c79e86
+  RoundedUI: 0d9a7805f08a88434406f5a5a44facdc5d1e3b5e
   RSKGrowingTextView: 0718482ee121892b1eb9fe72e9eebd3ef46b81f0
   RSKPlaceholderTextView: fc8c8932546298ec9d5e5572284aa42adb87b066
   RxBiBinding: 6cc627d9e0dfa0b2ce8470cd7e539f3cb100f782
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
-  SDWebImage: b969dcfc02c40a5da71eac0b03b8f1a0c794a86f
+  SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   SwiftDate: 6329e58969a2de31cea7f1ee1143b247693196e7
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
   Tatsi: 12ac525e0e8477645d707d4f356f85cb60182f80
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
-  TPKeyboardAvoiding: d55b3ea7b362540af8fcf36aa3ed2e87bf210cc6
 
-PODFILE CHECKSUM: 37a8c8ca8b6e019869b3c26f117ed68c6d78c0a7
+PODFILE CHECKSUM: 5c5ff2a7db7c03eed55de80de03560df17cbf2d5
 
 COCOAPODS: 1.10.0
