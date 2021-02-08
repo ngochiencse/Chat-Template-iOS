@@ -14,6 +14,7 @@ import RxCocoa
 import Tatsi
 import SDWebImage
 import RSKGrowingTextView
+import RxBiBinding
 
 private let LOADMORECELLHEIGHT: CGFloat = 40
 private let CHATTIMECELLHEIGHT: CGFloat = 40
@@ -73,7 +74,6 @@ class ChatScreenViewController: BaseViewController {
         navigationBarHidden = true
         setUpChatScreen()
         bindToViewModel()
-        bindingMessage()
         viewModel.getMessages(loadMore: false)
     }
 
@@ -141,11 +141,23 @@ class ChatScreenViewController: BaseViewController {
         tableView.estimatedRowHeight = 0
 
         tableView.allowsSelection = false
+    }
 
-        tableView.isHidden = true
+    private func reloadDataWithoutAnimation() {
+        UIView.setAnimationsEnabled(false)
+        self.tableView.reloadData()
+        self.tableView.layoutIfNeeded()
+        UIView.setAnimationsEnabled(true)
     }
 
     func bindToViewModel() {
+        bindShowsInfiniteScrolling()
+        bindReloadData()
+        bindText()
+        bindOthers()
+    }
+
+    func bindShowsInfiniteScrolling() {
         viewModel.showsInfiniteScrolling.observeOn(MainScheduler.instance)
             .subscribe(onNext: {[weak self] (showsInfiniteScrolling) in
                 guard let self = self else { return }
@@ -167,64 +179,40 @@ class ChatScreenViewController: BaseViewController {
                     self.tableView.tableHeaderView = header
                 }
             }).disposed(by: rx.disposeBag)
+    }
 
-        viewModel.didFinishLoadFirstTime.observeOn(MainScheduler.instance).subscribe(onNext: {[weak self] (_) in
+    func bindReloadData() {
+        viewModel.onReloadData.observeOn(MainScheduler.instance).subscribe(onNext: {[weak self] (values) in
             guard let self = self else { return }
-            UIView.setAnimationsEnabled(false)
-            self.tableView.reloadData()
-            self.tableView.layoutIfNeeded()
-            UIView.setAnimationsEnabled(true)
-            DispatchQueue.main.async(execute: {
-                self.tableView.scrollToBottomByContentOffset(animated: false)
-                self.tableView.isHidden = false
-            })
-        }).disposed(by: rx.disposeBag)
-
-        viewModel.didFinishLoadMore.observeOn(MainScheduler.instance).subscribe(onNext: {[weak self] (_) in
-            guard let self = self else { return }
-            var contentOffset: CGPoint = self.tableView.contentOffset
-            let bottomSpace: CGFloat = self.tableView.contentSize.height - contentOffset.y
-            UIView.setAnimationsEnabled(false)
-            self.tableView.reloadData()
-            self.tableView.layoutIfNeeded()
-            UIView.setAnimationsEnabled(true)
-            contentOffset.y = max(self.tableView.contentSize.height - bottomSpace, 0)
-            self.tableView.setContentOffset(contentOffset, animated: false)
+            guard let (scrollAction, animated) = values else {
+                self.reloadDataWithoutAnimation()
+                return
+            }
+            switch scrollAction {
+            case .forceScrollToBottom:
+                self.reloadDataWithoutAnimation()
+                self.tableView.scrollToBottomByContentOffset(animated: animated)
+            case .keepBottomSpace:
+                var contentOffset: CGPoint = self.tableView.contentOffset
+                let bottomSpace: CGFloat = self.tableView.contentSize.height - contentOffset.y
+                self.reloadDataWithoutAnimation()
+                contentOffset.y = max(self.tableView.contentSize.height - bottomSpace, 0)
+                self.tableView.setContentOffset(contentOffset, animated: animated)
+            case .recoverScrollToBottom:
+                let isScrolling = self.tableView.layer.animation(forKey: "bounds") != nil
+                let isScrollAtBottom: Bool = (isScrolling == false && self.tableView.isDragging == false &&
+                                                self.tableView.contentOffset.y >=
+                                                self.tableView.contentSize.height - self.tableView.bounds.height * 1.5)
+                self.reloadDataWithoutAnimation()
+                if isScrollAtBottom {
+                    self.tableView.scrollToBottomByContentOffset(animated: animated)
+                }
+            }
         }).disposed(by: rx.disposeBag)
     }
 
-    func bindingMessage() {
-        viewModel.onSendMessagesStart.observeOn(MainScheduler.instance).subscribe(onNext: {[weak self] (_) in
-            guard let self = self else { return }
-            UIView.setAnimationsEnabled(false)
-            self.tableView.reloadData()
-            self.tableView.layoutIfNeeded()
-            UIView.setAnimationsEnabled(true)
-            DispatchQueue.main.async(execute: {
-                self.tableView.scrollToBottomByContentOffset(animated: true)
-                self.tableView.isHidden = false
-            })
-        }).disposed(by: rx.disposeBag)
-        viewModel.onSendMessagesFinish.observeOn(MainScheduler.instance).subscribe(onError: {[weak self] (_) in
-            self?.tableView.reloadData()
-        }).disposed(by: rx.disposeBag)
-
-        viewModel.onReceiveMessages.observeOn(MainScheduler.instance).subscribe(onNext: {[weak self] (_) in
-            guard let self = self else { return }
-            let isScrolling = self.tableView.layer.animation(forKey: "bounds") != nil
-            let isScrollAtBottom: Bool = (isScrolling == false && self.tableView.isDragging == false &&
-                                            self.tableView.contentOffset.y >=
-                                            self.tableView.contentSize.height - self.tableView.bounds.height * 1.5)
-            UIView.setAnimationsEnabled(false)
-            self.tableView.reloadData()
-            self.tableView.layoutIfNeeded()
-            UIView.setAnimationsEnabled(true)
-            DispatchQueue.main.async(execute: {
-                if isScrollAtBottom {
-                    self.tableView.scrollToBottomByContentOffset(animated: true)
-                }
-            })
-        }).disposed(by: rx.disposeBag)
+    func bindText() {
+        (textView.rx.text <-> viewModel.text).disposed(by: rx.disposeBag)
 
         textView.rx.text.observeOn(MainScheduler.instance).subscribe(onNext: {[weak self] (text) in
             guard let self = self else { return }
@@ -233,13 +221,16 @@ class ChatScreenViewController: BaseViewController {
         }).disposed(by: rx.disposeBag)
     }
 
+    func bindOthers() {
+        viewModel.isTableViewHidden.bind(to: tableView.rx.isHidden).disposed(by: rx.disposeBag)
+    }
+
     @IBAction func backButtonClicked(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
 
     @IBAction func sendButtonClicked(_ sender: Any) {
-        viewModel.sendText(textView.text)
-        textView.text = nil
+        viewModel.sendText()
         NotificationCenter.default.post(name: UITextView.textDidChangeNotification, object: textView)
     }
 

@@ -23,15 +23,13 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
     private let chatItemsDetailBR: BehaviorRelay<[Any]> = BehaviorRelay(value: [])
 
     private(set) var showsInfiniteScrolling: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    let didFinishLoadFirstTime: PublishSubject<Void> = PublishSubject()
-    let didFinishLoadMore: PublishSubject<Void> = PublishSubject()
-    let onSendMessagesStart: PublishSubject<Void> = PublishSubject()
-    let onSendMessagesFinish: PublishSubject<Void> = PublishSubject()
-    let onReceiveMessages: PublishSubject<Void> = PublishSubject()
+    let onReloadData: PublishSubject<(ScrollActionAfterReloadData, Bool)?> = PublishSubject()
 
     private(set) var isLoading: Bool = false
     private let messagesRemoteBR: BehaviorRelay<[MessageCellAdvancedViewModel]> = BehaviorRelay(value: [])
     private let messagesSendingBR: BehaviorRelay<[MessageCellAdvancedViewModel]> = BehaviorRelay(value: [])
+    let isTableViewHidden: BehaviorRelay<Bool> = BehaviorRelay(value: true)
+    let text: BehaviorRelay<String?> = BehaviorRelay(value: nil)
 
     let userOtherId: ChatUserId = "8"
     let userMeId: ChatUserId = "19"
@@ -50,7 +48,7 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
         self.itemsModifier = itemsModifier
         super.init()
         bindToEvents()
-        simulateReceiveMessages()
+        //        simulateReceiveMessages()
     }
 
     private func bindToEvents() {
@@ -106,7 +104,7 @@ class ChatScreenViewModelMock: NSObject, ChatScreenViewModel {
                                                  cell: cell)
             messagesRemote.append(message)
             self.messagesRemoteBR.accept(messagesRemote)
-            self.onReceiveMessages.onNext(())
+            self.onReloadData.onNext((.recoverScrollToBottom, true))
         }
 
         timerImage = Timer.scheduledTimer(withTimeInterval: 7, repeats: true) {[weak self] _ in
@@ -132,7 +130,7 @@ https://hoidulich.net/wp-content/uploads/2019/11/\
 
             messagesRemote.append(message)
             self.messagesRemoteBR.accept(messagesRemote)
-            self.onReceiveMessages.onNext(())
+            self.onReloadData.onNext((.recoverScrollToBottom, true))
         }
     }
 
@@ -164,15 +162,17 @@ https://hoidulich.net/wp-content/uploads/2019/11/\
             self.isLoading = false
 
             if loadMore == true {
-                self.didFinishLoadMore.onNext(())
+                self.onReloadData.onNext((.keepBottomSpace, false))
             } else {
-                self.didFinishLoadFirstTime.onNext(())
+                self.onReloadData.onNext((.forceScrollToBottom, false))
             }
+
+            self.isTableViewHidden.accept(false)
         }
     }
 
-    func sendText(_ text: String) {
-        let cleanedText: String = text.trimmingCharacters(in: .whitespacesAndNewlines)
+    func sendText() {
+        let cleanedText: String = text.value?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         guard cleanedText.isEmpty == false else { return }
 
         guard let remoteIdBefore = messagesRemoteBR.value.last?.messageId else { return }
@@ -208,7 +208,8 @@ https://hoidulich.net/wp-content/uploads/2019/11/\
         }
         queue.addOperation(operation)
 
-        onSendMessagesStart.onNext(())
+        text.accept(nil)
+        onReloadData.onNext((.forceScrollToBottom, true))
     }
 
     private func handleCompleteMessageOperation(_ operation: MessageOperationMock,
@@ -226,7 +227,7 @@ https://hoidulich.net/wp-content/uploads/2019/11/\
             }
             messagesSendingBR.accept(messagesSending)
             if let error = operation.error {
-                self.onSendMessagesFinish.onError(error)
+                // TODO: Handle show error if needed
             } else {
                 var messagesRemote = messagesRemoteBR.value
                 if let index = messagesRemote.lastIndex(where: { (ele) -> Bool in
@@ -236,7 +237,8 @@ https://hoidulich.net/wp-content/uploads/2019/11/\
                 }
                 messagesRemoteBR.accept(messagesRemote)
                 success?(cellViewModel)
-                self.onSendMessagesFinish.onNext(())
+
+                self.onReloadData.onNext(nil)
             }
         }
     }
@@ -277,7 +279,7 @@ https://hoidulich.net/wp-content/uploads/2019/11/\
         }
         queue.addOperation(operation)
 
-        onSendMessagesStart.onNext(())
+        self.onReloadData.onNext((.forceScrollToBottom, true))
     }
 
     func sendImages(_ assets: [PHAsset]) {
