@@ -1,20 +1,12 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-source 'https://github.com/CocoaPods/Specs.git'
-source 'https://bsvframeworks@bitbucket.org/bravesoftvietnam/cocoapods-specs.git'
-
 def pods
   # Common
   pod 'SDWebImage'
   pod 'FLEX', :configurations => ['Debug']
-  pod 'TPKeyboardAvoiding'
-  pod 'SVPullToRefresh', :git => 'https://github.com/hienphambravesoft/SVPullToRefresh.git'
-  pod 'BSTabbarController'
   pod 'CocoaLumberjack/Swift'
   pod 'MBProgressHUD', '~> 1.1.0'
-  pod 'Eureka'
-  pod 'ImageRow', '~> 4.0'
   pod 'RoundedUI'
   pod 'SnapKit', '~> 5.0.0'
   pod 'Moya/RxSwift', '~> 14.0'
@@ -24,7 +16,6 @@ def pods
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
   pod 'SwiftDate', '~> 5.0'
-  pod 'FSPagerView'
   pod 'RSKGrowingTextView'
   pod 'Tatsi'
   pod 'Toast-Swift', '~> 5.0.1'
